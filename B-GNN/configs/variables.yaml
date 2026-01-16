@@ -1,0 +1,26 @@
+## GNN 项目配置文件
+## 被 `data_preprocessing.py` 读取。包含训练集/测试集切分、滑窗参数和数据路径等。
+
+
+gnn_training:
+  # 训练集占比（备用，data_preprocessing 中当前使用固定天数，但保留此字段以便未来切换）
+  train_ratio: 0.7
+
+  # 如果需要使用按天数切分（data_preprocessing.py 中当前默认使用固定天数），可在此配置
+  train_days: 3688
+  test_days: 205
+
+  # 滑动窗口参数
+  lookback: 100      # 回溯天数（用于构造节点特征）
+  horizon: 10        # 预测天数（用于构造目标）
+
+  # 路径配置（可根据实际环境调整）
+  raw_dir: "E:/Machine_Learning_ETF/GNN/raw"   # 原始 xlsx 文件所在目录
+  output_dir: "E:/Machine_Learning_ETF/GNN/1"  # 处理后数据保存目录
+
+  # 特征/目标列索引（基于 data_preprocessing 的约定）
+  feature_start_col: 2    # 第3列（0-based index）
+  feature_end_col: 37     # 到第38列（包含，0-based index）
+  target_col: 37          # 目标列索引（对数收益率，0-based index）
+
+# 其他全局或扩展配置可在此处添加
