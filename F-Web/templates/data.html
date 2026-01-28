@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股票数据处理系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <!-- 返回首页按钮 -->
+    <a href="{{ url_for('index') }}" class="back-home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        返回首页
+    </a>
+
+    <div class="container">
+        <!-- 标题区域 -->
+        <header class="header">
+            <h1 class="title">
+                <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+                股票数据处理系统
+            </h1>
+            <p class="subtitle">智能化股票技术指标计算平台</p>
+        </header>
+
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 左侧：股票选择面板 -->
+            <div class="panel stock-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <svg class="panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                        股票选择
+                    </h2>
+                </div>
+
+                <!-- 搜索栏 -->
+                <div class="search-container">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="搜索股票代码或名称...">
+                </div>
+
+                <!-- 已选股票显示 -->
+                <div class="selected-stocks" id="selectedStocks">
+                    <div class="selected-header">
+                        <span>已选择: <span id="selectedCount">0</span> 只股票</span>
+                        <button class="btn-clear" id="clearBtn">清空</button>
+                    </div>
+                    <div class="selected-tags" id="selectedTags"></div>
+                </div>
+
+                <!-- 股票列表 -->
+                <div class="stock-list" id="stockList">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>加载股票列表中...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：参数设置和处理面板 -->
+            <div class="panel settings-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <svg class="panel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
+                        </svg>
+                        参数设置
+                    </h2>
+                </div>
+
+                <div class="settings-content">
+                    <!-- 日期选择 -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                            开始日期
+                        </label>
+                        <input type="date" id="startDate" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                            结束日期
+                        </label>
+                        <input type="date" id="endDate" class="form-input" required>
+                    </div>
+
+                    <!-- 指标参数 -->
+                    <div class="divider"></div>
+                    <h3 class="section-title">技术指标参数</h3>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            ATR周期
+                            <span class="tooltip">
+                                <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 16v-4M12 8h.01" />
+                                </svg>
+                                <span class="tooltip-text">平均真实波幅计算周期，默认14日</span>
+                            </span>
+                        </label>
+                        <input type="number" id="atrPeriod" class="form-input" value="14" min="1" max="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            RSI周期
+                            <span class="tooltip">
+                                <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 16v-4M12 8h.01" />
+                                </svg>
+                                <span class="tooltip-text">相对强弱指数计算周期，默认14日</span>
+                            </span>
+                        </label>
+                        <input type="number" id="rsiPeriod" class="form-input" value="14" min="1" max="100">
+                    </div>
+
+                    <!-- 处理按钮 -->
+                    <button class="btn-process" id="processBtn">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                        开始处理数据
+                    </button>
+
+                    <!-- 进度显示 -->
+                    <div class="progress-container" id="progressContainer" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">处理中...</p>
+                    </div>
+
+                    <!-- 结果显示 -->
+                    <div class="result-container" id="resultContainer" style="display: none;">
+                        <div class="result-icon-wrapper">
+                            <svg class="result-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                        </div>
+                        <h3 class="result-title">处理完成</h3>
+                        <p class="result-message" id="resultMessage"></p>
+                        <div class="result-files" id="resultFiles"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast通知 -->
+    <div class="toast" id="toast">
+        <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>
