@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <!-- 导航栏 -->
+    <!-- 导航区-->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -21,14 +21,16 @@
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active">首页</a></li>
                 <li><a href="#features" class="nav-link">功能</a></li>
-                <li><a href="#technology" class="nav-link">技术</a></li>
+                <li><a href="#technology" class="nav-link">技术架构</a></li>
                 <li><a href="#team" class="nav-link">团队</a></li>
-                <li><a href="{{ url_for('data_page') }}" class="nav-btn">开始使用</a></li>
+                <li><a href="{{ url_for('data_page') }}" class="nav-btn">数据处理</a></li>
+                <li><a href="{{ url_for('train_page') }}" class="nav-btn">股票预测</a></li>
+                <li><a href="{{ url_for('risk_page') }}" class="nav-btn">风险控制</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- 英雄区 -->
+    <!-- 英雄区-->
     <section id="home" class="hero">
         <div class="hero-background">
             <div class="hero-shape shape-1"></div>
@@ -49,7 +51,19 @@
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
-                    立即体验
+                    数据处理
+                </a>
+                <a href="{{ url_for('train_page') }}" class="btn btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    </svg>
+                    股票预测
+                </a>
+                <a href="{{ url_for('risk_page') }}" class="btn btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    风险控制
                 </a>
                 <a href="#features" class="btn btn-secondary">
                     <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -65,18 +79,18 @@
                     <div class="stat-label">支持股票</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">7种</div>
+                    <div class="stat-number">7</div>
                     <div class="stat-label">技术指标</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">实时</div>
                     <div class="stat-label">数据更新</div>
                 </div>
-            </div>
-        </div>
+                    </div>
+                </div>
     </section>
 
-    <!-- 功能特性 -->
+    <!-- 功能特�?-->
     <section id="features" class="features">
         <div class="container">
             <div class="section-header">
@@ -92,7 +106,7 @@
                         </svg>
                     </div>
                     <h3 class="feature-title">智能搜索</h3>
-                    <p class="feature-description">支持按代码、名称、行业等多维度搜索，快速定位目标股票</p>
+                    <p class="feature-description">支持按代码、名称、行业等多维度搜索，快速定位目标股</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -104,7 +118,7 @@
                         </svg>
                     </div>
                     <h3 class="feature-title">批量处理</h3>
-                    <p class="feature-description">同时选择多只股票进行批量分析，自动生成组合数据</p>
+                    <p class="feature-description">同时选择多只股票进行批量分析，自动生成组合数</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -114,7 +128,7 @@
                         </svg>
                     </div>
                     <h3 class="feature-title">技术指标</h3>
-                    <p class="feature-description">MTM、MA、EMA、ATR、RSI、MACD等7大类专业技术指标</p>
+                    <p class="feature-description">MTM、MA、EMA、ATR、RSI、MACD等大类专业技术指标</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -159,7 +173,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">技术架构</h2>
-                <p class="section-subtitle">前沿技术栈驱动高效数据处理</p>
+                    <p class="section-subtitle">前沿技术栈驱动高效数据处理</p>
             </div>
             <div class="tech-grid">
                 <div class="tech-category">
@@ -189,22 +203,22 @@
             </div>
             <div class="tech-features">
                 <div class="tech-feature">
-                    <div class="tech-feature-icon">⚡</div>
-                    <h4>高性能计算</h4>
-                    <p>优化的算法确保快速处理大量数据</p>
-                </div>
-                <div class="tech-feature">
-                    <div class="tech-feature-icon">🎯</div>
-                    <h4>精准指标</h4>
-                    <p>基于金融工程的标准化计算方法</p>
-                </div>
-                <div class="tech-feature">
-                    <div class="tech-feature-icon">🔄</div>
-                    <h4>实时同步</h4>
-                    <p>对接Tushare获取最新市场数据</p>
+                    <div class="tech-feature-icon"></div>
+                        <h4>高性能计算</h4>
+                        <p>优化的算法确保快速处理大量数据</p>
+                    </div>
+                    <div class="tech-feature">
+                        <div class="tech-feature-icon">🎯</div>
+                        <h4>精准指标</h4>
+                        <p>基于金融工程的标准化计算方法</p>
+                    </div>
+                    <div class="tech-feature">
+                        <div class="tech-feature-icon">🔄</div>
+                        <h4>实时同步</h4>
+                        <p>对接Tushare获取最新市场数据</p>
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- 团队介绍 -->
@@ -235,7 +249,7 @@
                         </svg>
                     </div>
                     <h3>所属机构</h3>
-                    <p>华南理工大学<br>计算机科学与工程学院</p>
+                        <p>华南理工大学<br>计算机科学与工程学院</p>
                 </div>
                 <div class="team-card">
                     <div class="team-icon">
@@ -244,14 +258,14 @@
                         </svg>
                     </div>
                     <h3>项目状态</h3>
-                    <p>2025年创新创业项目<br>持续迭代优化中</p>
+                        <p>2025年创新创业项目<br>持续迭代优化中</p>
                 </div>
             </div>
             <div class="team-description">
                 <p>
                     本项目由华南理工大学学生团队开发，致力于将前沿的机器学习技术应用于金融量化分析领域。
                     团队成员涵盖计算机科学、数据科学、金融工程等多个专业背景，结合LSTM、Transformer、GNN等
-                    深度学习模型，构建了完整的股票数据处理与预测系统。
+                    深度学习模型，构建了完整的股票数据处理与预测系统
                 </p>
             </div>
         </div>
@@ -261,13 +275,27 @@
     <section class="cta">
         <div class="cta-content">
             <h2 class="cta-title">准备好开始了吗？</h2>
-            <p class="cta-subtitle">立即体验智能股票数据分析系统</p>
-            <a href="{{ url_for('data_page') }}" class="btn btn-cta">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                </svg>
-                开始使用
-            </a>
+            <p class="cta-subtitle">立即体验智能股票数据分析与模型训练系统</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="{{ url_for('data_page') }}" class="btn btn-cta">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    </svg>
+                    数据处理
+                </a>
+                <a href="{{ url_for('train_page') }}" class="btn btn-cta">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    </svg>
+                    股票预测
+                </a>
+                <a href="{{ url_for('risk_page') }}" class="btn btn-cta">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    风险控制
+                </a>
+            </div>
         </div>
     </section>
 
@@ -290,21 +318,23 @@
                 <div class="footer-links">
                     <div class="footer-column">
                         <h4>快速链接</h4>
-                        <ul>
-                            <li><a href="#home">首页</a></li>
-                            <li><a href="#features">功能特性</a></li>
-                            <li><a href="#technology">技术架构</a></li>
-                            <li><a href="{{ url_for('data_page') }}">数据处理</a></li>
-                        </ul>
+                            <ul>
+                                <li><a href="#home">首页</a></li>
+                                <li><a href="#features">功能特点</a></li>
+                                <li><a href="#technology">技术架构</a></li>
+                                <li><a href="{{ url_for('data_page') }}">数据处理</a></li>
+                                <li><a href="{{ url_for('train_page') }}">股价预测</a></li>
+                                <li><a href="{{ url_for('risk_page') }}">风险控制</a></li>
+                            </ul>
                     </div>
                     <div class="footer-column">
                         <h4>技术支持</h4>
-                        <ul>
-                            <li><a href="#">使用文档</a></li>
-                            <li><a href="#">API接口</a></li>
-                            <li><a href="#">常见问题</a></li>
-                            <li><a href="#">联系我们</a></li>
-                        </ul>
+                            <ul>
+                                <li><a href="#">使用文档</a></li>
+                                <li><a href="#">API接口</a></li>
+                                <li><a href="#">常见问题</a></li>
+                                <li><a href="#">联系我们</a></li>
+                            </ul>
                     </div>
                     <div class="footer-column">
                         <h4>关于项目</h4>

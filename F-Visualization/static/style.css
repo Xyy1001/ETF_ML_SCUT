@@ -89,6 +89,47 @@ body {
     height: 20px;
 }
 
+/* 顶部导航 */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: rgba(15, 15, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: var(--primary-gradient);
+    border-color: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.nav-link svg {
+    width: 18px;
+    height: 18px;
+}
+
 /* 背景动画效果 */
 body::before {
     content: '';

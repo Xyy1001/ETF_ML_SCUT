@@ -1,6 +1,16 @@
 """
-优化预期效果：20只股票未来10天的收益然后分别取均值得到收益预测向量μ
+数据预处理脚本
+1. 获取多资产组合的日线数据
+2. 计算相关技术指标并填入表格中，包括：
+   - 动量指标（MTM）：MTM(5), MTM(10), MTM(20)
+   - 移动平均线（MA）：MA(5), MA(10), MA(20)
+   - 指数移动平均线（EMA）：EMA(5), EMA(10), EMA(20)
+   - 真实波幅（TR）和平均真实波幅（ATR）
+   - 相对强弱指数（RSI）：u, d, au, ad, rs, rsi
+   - MACD指标体系：ma_12, ma_26, ema_12, ema_26, dif, dif_ma_9, dea, macd
+   - 成交量变动率
 """
+
 
 # ################1.获取并预处理数据
 from re import split
@@ -12,7 +22,7 @@ import math
 import warnings
 # warnings.filterwarnings('ignore')
 
-loaded = dotenv.load_dotenv(dotenv_path="ETF/.env")
+loaded = dotenv.load_dotenv(dotenv_path=".env")
 API_KEY = os.getenv("TUSHARE_TOKEN")
 print(API_KEY)
 
