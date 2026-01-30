@@ -327,13 +327,13 @@ python app.py
 
 ### 👨‍💼 项目成员
 
-| 成员名 | 角色 | 专业背景 | 负责方向 |
-|:---:|:---:|:---|:---|
-| **江远腾** | 项目负责人 | 金融科技 | 系统架构、回测引擎 |
-| **葛林嵩** | 核心成员 | 金融+计算机 | LSTM+Transformer模型 |
-| **许莹予** | 核心成员 | 软件工程+管理 | Web系统、前端开发 |
-| **李昂** | 成员 | 金融学 | 数据分析、策略优化 |
-| **应镇徽** | 成员 | 金融科技 | GNN模型、风险管理 |
+| 成员名 | 角色 | 专业背景 |
+|:---:|:---:|:---|
+| **江远腾** | 项目负责人 | 金融科技 |
+| **葛林嵩** | 核心成员 | 金融+计算机 |
+| **许莹予** | 核心成员 | 软件工程+管理 |
+| **李昂** | 核心成员 | 金融学 |
+| **应镇徽** | 核心成员 | 金融科技 |
 
 ---
 
@@ -441,44 +441,10 @@ scikit-learn>=1.3.0
 4. 实际投资需谨慎，建议咨询专业人士
 5. 使用者自行承担由此产生的一切后果
 
----
-
-## 📞 联系与支持
-
-| 类型 | 信息 |
-|:---:|:---|
-| 📧 **邮箱** | scut-etf-ml@example.com |
-| 🐛 **问题反馈** | [提交Issue](https://github.com/your-repo/issues) |
-| 📚 **文档** | [Wiki页面](https://github.com/your-repo/wiki) |
-| 💬 **讨论** | [Discussion版块](https://github.com/your-repo/discussions) |
-
----
-
-## 📄 许可证
-
-MIT License - 详见 [LICENSE](LICENSE) 文件
-
----
-
-## 📚 引用文献
-
-如果您在研究中使用了本项目，请引用：
-
-```bibtex
-@software{etf_ml_2025,
-  author = {Jiang Yuanteng and others},
-  title = {ML-ETF Optimizer: An Intelligent Portfolio Optimization System},
-  year = {2025},
-  institution = {South China University of Technology}
-}
 ```
 
----
+🌟 如果本项目对您有帮助，欢迎Star支持！
 
-<div align="center">
+Made with ❤️ by ETF-ML Team
 
-### 🌟 如果本项目对您有帮助，欢迎Star支持！
-
-**Made with ❤️ by ETF-ML Team**
-
-</div>
+```
