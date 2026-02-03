@@ -15,14 +15,10 @@ jobs:
       - name: Display Python Version
         run: python --version
   job2:
-    name: 2-Checkout TiDB Version
+    name: 2-Checkout File List
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Set up TiDB v5.3.0
-        uses: pingcap/tidb-action@v1.0.0
-        with:
-          tidb-version: v5.3.0
-      - name: Display TiDB Version
-        run: tidb-server --version
+      - name: List Files in Repository
+        run: ls -R
