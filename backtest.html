@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>回测分析 | ETF-ML</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="static/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .backtest-container {
@@ -127,11 +127,11 @@
                     <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                 </svg><span class="logo-text">ETF-ML</span></div>
             <ul class="nav-menu">
-                <li><a href="{{ url_for('index') }}" class="nav-link">首页</a></li>
-                <li><a href="{{ url_for('data_page') }}" class="nav-link">数据展示</a></li>
-                <li><a href="{{ url_for('models_page') }}" class="nav-link">模型展示</a></li>
-                <li><a href="{{ url_for('backtest_page') }}" class="nav-link active">回测分析</a></li>
-                <li><a href="{{ url_for('ai_page') }}" class="nav-btn">AI助手</a></li>
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="data.html" class="nav-link">数据展示</a></li>
+                <li><a href="models.html" class="nav-link">模型展示</a></li>
+                <li><a href="backtest.html" class="nav-link active">回测分析</a></li>
+                <li><a href="ai.html" class="nav-btn">AI助手</a></li>
             </ul>
         </div>
     </nav>
@@ -273,7 +273,7 @@
         });
     </script>
     <div id="mascot-widget"></div>
-    <script src="{{ url_for('static', filename='mascot.js') }}"></script>
+    <script src="static/mascot.js"></script>
 </body>
 
 </html>
