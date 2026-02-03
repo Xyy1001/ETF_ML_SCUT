@@ -96,10 +96,10 @@ function setupFeatureCards() {
         card.addEventListener('click', function () {
             const page = this.getAttribute('data-page');
             const urlMap = {
-                'data_page': '/data',
-                'models_page': '/models',
-                'backtest_page': '/backtest',
-                'ai_page': '/ai'
+                'data_page': 'data.html',
+                'models_page': 'models.html',
+                'backtest_page': 'backtest.html',
+                'ai_page': 'ai.html'
             };
 
             if (urlMap[page]) {

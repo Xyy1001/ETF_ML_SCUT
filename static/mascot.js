@@ -38,7 +38,7 @@
                     </form>
                 </div>
                 <div class="mascot-quick-links">
-                    <a href="/ai" class="mascot-ai-link">🤖 前往专业AI助手</a>
+                    <a href="ai.html" class="mascot-ai-link">🤖 前往专业AI助手</a>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
             // 动态加载样式
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = '/static/mascot.css';
+            link.href = 'static/mascot.css';
             document.head.appendChild(link);
 
             // 设置事件监听
