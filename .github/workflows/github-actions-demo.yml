@@ -3,9 +3,9 @@ run-name: ${{ github.actor }} 正在测试网站交互功能
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, web ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, web ]
   workflow_dispatch:  # 允许手动触发
 
 jobs:
