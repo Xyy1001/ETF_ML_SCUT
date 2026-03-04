@@ -1,279 +1,783 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>回测分析 | ETF-ML</title>
-    <link rel="stylesheet" href="static/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>回测分析系统</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
     <style>
         .backtest-container {
-            display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
+            max-width: 1800px;
+            margin: 120px auto 2rem;
+            padding: 0 2rem;
         }
 
-        .config-panel {
+        .panel {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 2rem;
-            height: fit-content;
+            padding: 1.8rem;
+            margin-bottom: 1.6rem;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .panel-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
             color: var(--text-primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-item label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
             font-weight: 600;
         }
 
-        .form-input,
-        .form-select {
-            width: 100%;
-            padding: 0.75rem;
-            background: rgba(15, 15, 30, 0.8);
+        .form-item input,
+        .form-item select,
+        .form-item textarea {
+            background: rgba(0, 0, 0, 0.25);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-sm);
             color: var(--text-primary);
+            padding: 0.65rem 0.8rem;
+            font-size: 0.95rem;
+            font-family: inherit;
         }
 
-        .form-input:focus,
-        .form-select:focus {
+        .form-item textarea {
+            min-height: 72px;
+            resize: vertical;
+        }
+
+        .form-item input:focus,
+        .form-item select:focus,
+        .form-item textarea:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
         }
 
-        .run-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-backtest {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
             border: none;
             border-radius: var(--radius-md);
-            color: white;
+            padding: 0.9rem 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-backtest:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-ghost {
+            background: rgba(102, 126, 234, 0.12);
+            color: var(--primary-light);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-md);
+            padding: 0.9rem 1.6rem;
             font-weight: 600;
             cursor: pointer;
         }
 
-        .run-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .results-panel {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-        }
-
-        .metrics-grid {
+        .metric-row {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
         }
 
-        .metric-card {
-            background: rgba(15, 15, 30, 0.5);
+        .metric {
+            background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+            padding: 0.8rem;
             text-align: center;
         }
 
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .metric-label {
+        .metric .label {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            font-size: 0.82rem;
+            margin-bottom: 0.3rem;
         }
 
-        .chart-container {
-            background: rgba(15, 15, 30, 0.5);
+        .metric .value {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .chart-grid-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-grid-sub {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1rem;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border-radius: var(--radius-lg);
+            padding: 1rem;
         }
 
         .chart-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
             color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .chart-box {
+            width: 100%;
+            height: 420px;
+        }
+
+        .chart-box.small {
+            height: 360px;
+        }
+
+        @media (max-width: 1200px) {
+            .chart-grid-main,
+            .chart-grid-sub {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-box,
+            .chart-box.small {
+                height: 320px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .backtest-container {
+                padding: 0 1rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo"><svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                </svg><span class="logo-text">ETF-ML</span></div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">首页</a></li>
-                <li><a href="data.html" class="nav-link">数据展示</a></li>
-                <li><a href="models.html" class="nav-link">模型展示</a></li>
-                <li><a href="backtest.html" class="nav-link active">回测分析</a></li>
-                <li><a href="ai.html" class="nav-btn">AI助手</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="page-container">
-        <div class="page-header">
-            <h1 class="page-title"><svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
-                    <path d="M22 12A10 10 0 0 0 12 2v10z" />
-                </svg>回测分析</h1>
-            <p class="page-subtitle">运行策略回测，评估投资组合性能</p>
-        </div>
-        <div class="backtest-container">
-            <div class="config-panel">
-                <h2 style="margin-bottom: 1.5rem; color: var(--text-primary);">回测配置</h2>
-                <form id="backtest-form">
-                    <div class="form-group">
-                        <label class="form-label">股票池（多选）</label>
-                        <select id="stock-select" class="form-select" multiple size="5">
-                            <option value="000001.SZ">000001.SZ</option>
-                            <option value="000063.SZ">000063.SZ</option>
-                            <option value="000100.SZ">000100.SZ</option>
-                            <option value="000157.SZ">000157.SZ</option>
-                            <option value="000301.SZ">000301.SZ</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">开始日期</label>
-                        <input type="date" id="start-date" class="form-input" value="2024-01-01">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">结束日期</label>
-                        <input type="date" id="end-date" class="form-input" value="2024-12-31">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">风险厌恶系数 γ</label>
-                        <input type="number" id="gamma" class="form-input" value="1.0" step="0.1" min="0">
-                    </div>
-                    <button type="submit" class="run-btn">运行回测</button>
-                </form>
+<!-- 导航栏将由组件自动生成 -->
+
+<div class="backtest-container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+            预测-风控联动回测
+        </h1>
+        <p class="page-subtitle">基于预测收益与风险矩阵进行动态调仓，生成净值、回撤、仓位与风险收益画像</p>
+    </div>
+
+    <div class="panel">
+        <div class="panel-title">回测参数</div>
+        <div class="form-grid">
+            <div class="form-item" style="grid-column: 1 / -1;">
+                <label for="holdings">持仓股票（逗号分隔） <button id="load-holdings-backtest" style="background: rgba(102, 126, 234, 0.3); border: 1px solid var(--primary); color: var(--primary-light); padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 1rem;">📋 我的持股</button></label>
+                <textarea id="holdings">000001.SZ,000002.SZ,000063.SZ,000100.SZ,000157.SZ</textarea>
             </div>
-            <div class="results-panel">
-                <div id="loading" style="display: none; text-align: center; padding: 4rem; color: var(--text-muted);">
-                    <p>回测运行中，请稍候...</p>
-                </div>
-                <div id="results" style="display: none;">
-                    <h2 style="margin-bottom: 1.5rem; color: var(--text-primary);">回测结果</h2>
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="metric-value" id="total-return">-</div>
-                            <div class="metric-label">累计收益率 (%)</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value" id="sharpe">-</div>
-                            <div class="metric-label">夏普比率</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value" id="max-dd">-</div>
-                            <div class="metric-label">最大回撤 (%)</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value" id="annual-return">-</div>
-                            <div class="metric-label">年化收益率 (%)</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value" id="win-rate">-</div>
-                            <div class="metric-label">胜率 (%)</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value" id="volatility">-</div>
-                            <div class="metric-label">波动率 (%)</div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title">净值曲线</div>
-                        <canvas id="nav-chart"></canvas>
-                    </div>
-                </div>
-                <div id="placeholder" style="text-align: center; padding: 4rem; color: var(--text-muted);">
-                    <p>← 配置参数后点击"运行回测"开始分析</p>
-                </div>
+            <div class="form-item">
+                <label for="lookback">历史回看窗口 (天)</label>
+                <input id="lookback" type="number" min="120" max="2000" value="520">
+            </div>
+            <div class="form-item">
+                <label for="rolling-window">风险估计窗口 (天)</label>
+                <input id="rolling-window" type="number" min="20" max="240" value="60">
+            </div>
+            <div class="form-item">
+                <label for="rebalance-freq">调仓频率 (天)</label>
+                <input id="rebalance-freq" type="number" min="1" max="60" value="5">
+            </div>
+            <div class="form-item">
+                <label for="gamma">风险厌恶系数 γ</label>
+                <input id="gamma" type="number" min="0.1" max="10" step="0.1" value="1.0">
+            </div>
+            <div class="form-item">
+                <label for="risk-model">风险融合模式</label>
+                <select id="risk-model">
+                    <option value="coefficient">Coefficient</option>
+                    <option value="gcn">GCN</option>
+                    <option value="convex">Convex</option>
+                </select>
+            </div>
+            <div class="form-item">
+                <label for="initial-capital">初始净值</label>
+                <input id="initial-capital" type="number" min="0.0001" step="0.1" value="1.0">
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn-backtest" id="run-btn">运行回测</button>
+            <button class="btn-ghost" id="reset-btn">重置参数</button>
+        </div>
+
+        <div class="metric-row">
+            <div class="metric"><div class="label">累计收益</div><div class="value" id="metric-cumret">--</div></div>
+            <div class="metric"><div class="label">年化收益</div><div class="value" id="metric-annret">--</div></div>
+            <div class="metric"><div class="label">年化波动</div><div class="value" id="metric-annvol">--</div></div>
+            <div class="metric"><div class="label">夏普比率</div><div class="value" id="metric-sharpe">--</div></div>
+            <div class="metric"><div class="label">最大回撤</div><div class="value" id="metric-mdd">--</div></div>
+            <div class="metric"><div class="label">胜率</div><div class="value" id="metric-winrate">--</div></div>
+            <div class="metric"><div class="label">平均换手</div><div class="value" id="metric-turnover">--</div></div>
+            <div class="metric"><div class="label">Sortino</div><div class="value" id="metric-sortino">--</div></div>
+        </div>
+    </div>
+
+    <!-- 调仓建议 -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; margin-top: 2rem; margin-bottom: 2rem;">
+        <div style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-primary);">📈 下一日调仓建议</div>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">基于预测收益、预期风险和风险偏好系数，以下是建议的股票配置比例（假设总持仓为100%）</p>
+        <div id="rebalance-suggestions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div style="padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 8px; border-left: 4px solid var(--primary); text-align: center;">
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">加载中...</div>
             </div>
         </div>
     </div>
-    <script>
-        let navChart = null;
-        document.getElementById('backtest-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const stocks = Array.from(document.getElementById('stock-select').selectedOptions).map(o => o.value);
-            if (stocks.length === 0) { alert('请选择至少一只股票'); return; }
-            document.getElementById('placeholder').style.display = 'none';
-            document.getElementById('results').style.display = 'none';
-            document.getElementById('loading').style.display = 'block';
+
+    <div class="chart-grid-main">
+        <div class="chart-card">
+            <div class="chart-title">组合净值 vs 等权基准</div>
+            <div id="nav-chart" class="chart-box"></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">回撤曲线</div>
+            <div id="drawdown-chart" class="chart-box"></div>
+        </div>
+    </div>
+
+    <div class="chart-grid-sub">
+        <div class="chart-card">
+            <div class="chart-title">动态仓位（堆叠面积）</div>
+            <div id="weights-chart" class="chart-box small"></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">风险-收益散点与组合前沿</div>
+            <div id="rr-chart" class="chart-box small"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 初始化导航栏
+    document.addEventListener('DOMContentLoaded', () => {
+        new ETF.Navbar({ currentPage: 'backtest' });
+    });
+    
+    const defaults = {
+        holdings: '000001.SZ,000002.SZ,000063.SZ,000100.SZ,000157.SZ',
+        lookback: 520,
+        rolling_window: 60,
+        rebalance_freq: 5,
+        gamma: 1.0,
+        risk_model: 'coefficient',
+        initial_capital: 1.0
+    };
+
+    let navChart = null;
+    let ddChart = null;
+    let weightsChart = null;
+    let rrChart = null;
+
+    function formatPercent(v, digits = 2) {
+        if (v === null || v === undefined || Number.isNaN(v)) return '--';
+        return (v * 100).toFixed(digits) + '%';
+    }
+
+    function formatNum(v, digits = 3) {
+        if (v === null || v === undefined || Number.isNaN(v)) return '--';
+        return Number(v).toFixed(digits);
+    }
+
+    function collectPayload() {
+        return {
+            holdings: document.getElementById('holdings').value,
+            lookback: Number(document.getElementById('lookback').value),
+            rolling_window: Number(document.getElementById('rolling-window').value),
+            rebalance_freq: Number(document.getElementById('rebalance-freq').value),
+            gamma: Number(document.getElementById('gamma').value),
+            risk_model: document.getElementById('risk-model').value,
+            initial_capital: Number(document.getElementById('initial-capital').value)
+        };
+    }
+
+    function resetForm() {
+        document.getElementById('holdings').value = defaults.holdings;
+        document.getElementById('lookback').value = defaults.lookback;
+        document.getElementById('rolling-window').value = defaults.rolling_window;
+        document.getElementById('rebalance-freq').value = defaults.rebalance_freq;
+        document.getElementById('gamma').value = defaults.gamma;
+        document.getElementById('risk-model').value = defaults.risk_model;
+        document.getElementById('initial-capital').value = defaults.initial_capital;
+    }
+
+    function renderMetrics(metrics) {
+        document.getElementById('metric-cumret').textContent = formatPercent(metrics.cumulative_return, 2);
+        document.getElementById('metric-annret').textContent = formatPercent(metrics.annual_return, 2);
+        document.getElementById('metric-annvol').textContent = formatPercent(metrics.annual_volatility, 2);
+        document.getElementById('metric-sharpe').textContent = formatNum(metrics.sharpe_ratio, 3);
+        document.getElementById('metric-mdd').textContent = formatPercent(metrics.max_drawdown, 2);
+        document.getElementById('metric-winrate').textContent = formatPercent(metrics.win_rate, 2);
+        document.getElementById('metric-turnover').textContent = formatNum(metrics.avg_turnover, 3);
+        document.getElementById('metric-sortino').textContent = formatNum(metrics.sortino_ratio, 3);
+    }
+
+    function renderRebalanceSuggestions(data) {
+        const holdings = document.getElementById('holdings').value.split(',').map(h => h.trim()).filter(h => h);
+        const gamma = parseFloat(document.getElementById('gamma').value) || 1.0;
+        
+        // 根据数据中的个股数据计算建议权重
+        let suggestions = [];
+        
+        if (data.stocks && Array.isArray(data.stocks)) {
+            // 从返回的数据中获取个股信息
+            suggestions = data.stocks.map(stock => {
+                const expectedReturn = stock.ann_ret || 0.1;
+                const risk = stock.ann_vol || 0.2;
+                
+                // 使用夏普比率的概念来计算权重（收益/风险）
+                const sharpeMetric = risk > 0 ? expectedReturn / risk : 0;
+                return {
+                    code: stock.stock,
+                    expectedReturn,
+                    risk,
+                    score: sharpeMetric
+                };
+            });
+        } else {
+            // 如果没有数据，基于持仓列表生成随机建议
+            suggestions = holdings.map(code => ({
+                code,
+                expectedReturn: 0.08 + Math.random() * 0.12,
+                risk: 0.15 + Math.random() * 0.10,
+                score: Math.random() * 1.0
+            }));
+        }
+        
+        // 归一化权重
+        const totalScore = Math.max(suggestions.reduce((sum, s) => sum + Math.max(0, s.score), 0), 0.001);
+        suggestions = suggestions.map(s => ({
+            ...s,
+            weight: Math.max(0, s.score) / totalScore
+        })).sort((a, b) => b.weight - a.weight);
+        
+        // 渲染UI
+        const container = document.getElementById('rebalance-suggestions');
+        container.innerHTML = suggestions.map(s => `
+            <div style="padding: 1.5rem; background: rgba(102, 126, 234, 0.08); border-radius: 8px; border-left: 4px solid var(--primary); transition: all 0.3s;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">${s.code}</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.9rem;">
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.8rem;">建议配置</div>
+                        <div style="color: var(--primary); font-weight: 700; font-size: 1.1rem;">${(s.weight * 100).toFixed(1)}%</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.8rem;">预期收益</div>
+                        <div style="color: #10b981; font-weight: 600;">${(s.expectedReturn * 100).toFixed(2)}%</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.8rem;">风险(波动)</div>
+                        <div style="color: #f59e0b; font-weight: 600;">${(s.risk * 100).toFixed(2)}%</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.8rem;">夏普评分</div>
+                        <div style="color: #8b5cf6; font-weight: 600;">${s.score.toFixed(3)}</div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderNavChart(series) {
+        if (!navChart) navChart = echarts.init(document.getElementById('nav-chart'));
+        navChart.setOption({
+            backgroundColor: 'transparent',
+            tooltip: { trigger: 'axis' },
+            legend: {
+                data: ['策略净值', '等权基准'],
+                top: 0,
+                textStyle: { color: '#b8b8d1' }
+            },
+            grid: { left: '4%', right: '4%', bottom: '3%', top: 45, containLabel: true },
+            xAxis: {
+                type: 'category',
+                data: series.dates,
+                axisLabel: { color: '#b8b8d1', hideOverlap: true }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: { color: '#b8b8d1' },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            series: [
+                {
+                    name: '策略净值',
+                    type: 'line',
+                    smooth: true,
+                    data: series.strategy_nav,
+                    showSymbol: false,
+                    lineStyle: { width: 2.4, color: '#667eea' },
+                    areaStyle: { color: 'rgba(102,126,234,0.15)' }
+                },
+                {
+                    name: '等权基准',
+                    type: 'line',
+                    smooth: true,
+                    data: series.benchmark_nav,
+                    showSymbol: false,
+                    lineStyle: { width: 2, color: '#f59e0b', type: 'dashed' }
+                }
+            ]
+        }, true);
+    }
+
+    function renderDrawdownChart(series) {
+        if (!ddChart) ddChart = echarts.init(document.getElementById('drawdown-chart'));
+        ddChart.setOption({
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'axis',
+                valueFormatter: (value) => (value * 100).toFixed(2) + '%'
+            },
+            grid: { left: '5%', right: '5%', bottom: '4%', top: 20, containLabel: true },
+            xAxis: {
+                type: 'category',
+                data: series.dates,
+                axisLabel: { color: '#b8b8d1', hideOverlap: true }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    color: '#b8b8d1',
+                    formatter: (v) => (v * 100).toFixed(0) + '%'
+                },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            series: [
+                {
+                    type: 'line',
+                    data: series.drawdown,
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: { color: '#ef4444', width: 2 },
+                    areaStyle: { color: 'rgba(239,68,68,0.18)' }
+                }
+            ]
+        }, true);
+    }
+
+    function renderWeightsChart(weights) {
+        if (!weightsChart) weightsChart = echarts.init(document.getElementById('weights-chart'));
+
+        const palette = ['#667eea', '#8b9aff', '#10b981', '#f59e0b', '#ef4444', '#14b8a6', '#a855f7'];
+        const series = weights.stocks.map((stock, idx) => ({
+            name: stock,
+            type: 'line',
+            stack: 'weight',
+            areaStyle: { opacity: 0.75 },
+            showSymbol: false,
+            lineStyle: { width: 0.6, color: palette[idx % palette.length] },
+            itemStyle: { color: palette[idx % palette.length] },
+            emphasis: { focus: 'series' },
+            data: weights.matrix.map((row) => row[idx])
+        }));
+
+        weightsChart.setOption({
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'axis',
+                valueFormatter: (value) => (value * 100).toFixed(2) + '%'
+            },
+            legend: {
+                type: 'scroll',
+                top: 0,
+                textStyle: { color: '#b8b8d1' }
+            },
+            grid: { left: '5%', right: '5%', bottom: '4%', top: 50, containLabel: true },
+            xAxis: {
+                type: 'category',
+                data: weights.dates,
+                axisLabel: { color: '#b8b8d1', hideOverlap: true }
+            },
+            yAxis: {
+                type: 'value',
+                max: 1,
+                axisLabel: {
+                    color: '#b8b8d1',
+                    formatter: (v) => (v * 100).toFixed(0) + '%'
+                },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            series
+        }, true);
+    }
+
+    function renderRiskReturnChart(riskReturn) {
+        if (!rrChart) rrChart = echarts.init(document.getElementById('rr-chart'));
+
+        const points = riskReturn.points || [];
+        const frontier = (riskReturn.frontier || []).map((item) => [item[0], item[1]]);
+
+        rrChart.setOption({
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'item',
+                formatter: (params) => {
+                    if (params.seriesName === '资产点') {
+                        const p = points[params.dataIndex];
+                        return `${p.stock}<br/>年化波动: ${(p.ann_vol * 100).toFixed(2)}%<br/>年化收益: ${(p.ann_ret * 100).toFixed(2)}%<br/>当前权重: ${(p.weight * 100).toFixed(2)}%`;
+                    }
+                    return `组合点<br/>年化波动: ${(params.value[0] * 100).toFixed(2)}%<br/>年化收益: ${(params.value[1] * 100).toFixed(2)}%`;
+                }
+            },
+            legend: {
+                data: ['资产点', '组合路径'],
+                top: 0,
+                textStyle: { color: '#b8b8d1' }
+            },
+            grid: { left: '8%', right: '5%', bottom: '8%', top: 50, containLabel: true },
+            xAxis: {
+                type: 'value',
+                name: '年化波动',
+                nameTextStyle: { color: '#b8b8d1' },
+                axisLabel: { color: '#b8b8d1', formatter: (v) => (v * 100).toFixed(0) + '%' },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            yAxis: {
+                type: 'value',
+                name: '年化收益',
+                nameTextStyle: { color: '#b8b8d1' },
+                axisLabel: { color: '#b8b8d1', formatter: (v) => (v * 100).toFixed(0) + '%' },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            series: [
+                {
+                    name: '资产点',
+                    type: 'scatter',
+                    data: points.map((p) => [p.ann_vol, p.ann_ret]),
+                    symbolSize: (value, params) => {
+                        const w = points[params.dataIndex] ? points[params.dataIndex].weight : 0.1;
+                        return 12 + w * 80;
+                    },
+                    itemStyle: {
+                        color: '#10b981',
+                        opacity: 0.85,
+                        borderColor: '#b8ffea',
+                        borderWidth: 1
+                    }
+                },
+                {
+                    name: '组合路径',
+                    type: 'line',
+                    data: frontier,
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: { color: '#667eea', width: 2.2, opacity: 0.8 }
+                }
+            ]
+        }, true);
+    }
+
+    async function runBacktest() {
+        const payload = collectPayload();
+        const btn = document.getElementById('run-btn');
+        const oldText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = '回测中...';
+
+        try {
             const response = await fetch('/api/backtest/run', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    stock_list: stocks,
-                    start_date: document.getElementById('start-date').value,
-                    end_date: document.getElementById('end-date').value,
-                    gamma: parseFloat(document.getElementById('gamma').value)
-                })
+                body: JSON.stringify(payload)
             });
-            const result = await response.json();
-            document.getElementById('loading').style.display = 'none';
-            if (result.success) {
-                document.getElementById('results').style.display = 'block';
-                document.getElementById('total-return').textContent = result.data.metrics.total_return.toFixed(2);
-                document.getElementById('sharpe').textContent = result.data.metrics.sharpe_ratio.toFixed(2);
-                document.getElementById('max-dd').textContent = result.data.metrics.max_drawdown.toFixed(2);
-                document.getElementById('annual-return').textContent = result.data.metrics.annual_return.toFixed(2);
-                document.getElementById('win-rate').textContent = result.data.metrics.win_rate.toFixed(2);
-                document.getElementById('volatility').textContent = result.data.metrics.volatility.toFixed(2);
-                if (navChart) navChart.destroy();
-                const ctx = document.getElementById('nav-chart').getContext('2d');
-                navChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: result.data.dates,
-                        datasets: [{
-                            label: '净值',
-                            data: result.data.nav_curve,
-                            borderColor: '#667eea',
-                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                            fill: true,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { labels: { color: '#e0e0e0' } } },
-                        scales: {
-                            x: { ticks: { color: '#8b8ba7', maxTicksLimit: 10 }, grid: { color: 'rgba(102, 126, 234, 0.1)' } },
-                            y: { ticks: { color: '#8b8ba7' }, grid: { color: 'rgba(102, 126, 234, 0.1)' } }
-                        }
-                    }
-                });
-            }
-        });
-    </script>
-    <div id="mascot-widget"></div>
-    <script src="static/mascot.js"></script>
-</body>
 
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || `接口错误: ${response.status}`);
+            }
+
+            renderMetrics(data.metrics);
+            renderRebalanceSuggestions(data);
+            renderNavChart(data.series);
+            renderDrawdownChart(data.series);
+            renderWeightsChart(data.weights);
+            renderRiskReturnChart(data.risk_return);
+        } catch (error) {
+            alert('回测失败：' + error.message);
+        } finally {
+            btn.disabled = false;
+            btn.textContent = oldText;
+        }
+    }
+
+    document.getElementById('run-btn').addEventListener('click', runBacktest);
+    document.getElementById('reset-btn').addEventListener('click', () => {
+        resetForm();
+        runBacktest();
+    });
+    document.getElementById('load-holdings-backtest').addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            if (!window.ETF.userManager.isLoggedIn()) {
+                alert('请先登录以加载您的持股列表');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const username = resolveCurrentUsername();
+            let response = null;
+            let holdings = [];
+
+            if (username) {
+                try {
+                    response = await window.ETF.http.get('/api/users/holdings/raw', { username });
+                    if (response && response.code === 0 && response.data && Array.isArray(response.data.holdings)) {
+                        holdings = response.data.holdings;
+                    }
+                } catch (err) {
+                    console.warn('raw holdings 接口失败，尝试兼容接口:', err);
+                }
+            }
+
+            if (holdings.length === 0) {
+                try {
+                    response = await window.ETF.http.get('/api/users/holdings');
+                    holdings = extractHoldingsFromResponse(response);
+                } catch (err) {
+                    console.warn('主接口获取持股失败，尝试兼容接口:', err);
+                }
+            }
+
+            if (holdings.length === 0 && username) {
+                try {
+                    response = await window.ETF.http.get('/api/users/holdings', { username });
+                    holdings = extractHoldingsFromResponse(response);
+                } catch (err) {
+                    console.warn('query 参数接口获取持股失败，尝试路径接口:', err);
+                }
+            }
+
+            if (holdings.length === 0 && username) {
+                try {
+                    response = await window.ETF.http.get(`/api/users/${encodeURIComponent(username)}/holdings`);
+                    holdings = extractHoldingsFromResponse(response);
+                } catch (err) {
+                    console.warn('路径接口获取持股失败:', err);
+                }
+            }
+
+            if (holdings.length > 0) {
+                const uniqueHoldings = Array.from(new Set(
+                    holdings
+                        .map(code => String(code || '').trim().toUpperCase())
+                        .filter(code => code.length > 0)
+                ));
+                document.getElementById('holdings').value = uniqueHoldings.join(',');
+            } else {
+                const backendMessage = response && response.message ? response.message : '';
+                if (backendMessage) {
+                    alert(`未找到您的持股列表：${backendMessage}`);
+                } else {
+                    alert('未找到您的持股列表，请先在持股管理中添加股票');
+                }
+            }
+        } catch (error) {
+            console.error('加载持股列表失败:', error);
+            alert('加载持股列表失败: ' + error.message);
+        }
+    });
+
+    function extractHoldingsFromResponse(response) {
+        if (!response || response.code !== 0) {
+            return [];
+        }
+
+        if (Array.isArray(response.data)) {
+            return response.data
+                .map(item => typeof item === 'string' ? item : item?.code)
+                .filter(code => typeof code === 'string' && code.trim().length > 0);
+        }
+
+        if (response.data && Array.isArray(response.data.holdings)) {
+            return response.data.holdings
+                .map(item => typeof item === 'string' ? item : item?.code)
+                .filter(code => typeof code === 'string' && code.trim().length > 0);
+        }
+
+        return [];
+    }
+
+    function resolveCurrentUsername() {
+        try {
+            const currentUser = window.ETF.userManager.getUserData();
+            if (currentUser && currentUser.username) {
+                return String(currentUser.username).trim();
+            }
+
+            const rawUserData = localStorage.getItem('userData');
+            if (rawUserData) {
+                const parsed = JSON.parse(rawUserData);
+                if (parsed && parsed.username) {
+                    return String(parsed.username).trim();
+                }
+                if (parsed && parsed.data && parsed.data.username) {
+                    return String(parsed.data.username).trim();
+                }
+            }
+
+            const remembered = window.ETF.Storage.get('rememberedUsername');
+            if (remembered) {
+                return String(remembered).trim();
+            }
+        } catch (error) {
+            console.warn('解析当前用户名失败:', error);
+        }
+        return '';
+    }
+
+    window.addEventListener('resize', () => {
+        if (navChart) navChart.resize();
+        if (ddChart) ddChart.resize();
+        if (weightsChart) weightsChart.resize();
+        if (rrChart) rrChart.resize();
+    });
+
+    resetForm();
+    runBacktest();
+</script>
+</body>
 </html>

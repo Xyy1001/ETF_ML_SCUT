@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>风险建模分析系统</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <style>
+        .risk-container {
+            max-width: 1800px;
+            margin: 120px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .method-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.6rem;
+            transition: all 0.3s ease;
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .method-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .method-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .method-principle {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .check-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .check-wrap input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .panel-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-item label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-item input,
+        .form-item select,
+        .form-item textarea {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            padding: 0.65rem 0.8rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .form-item textarea {
+            min-height: 74px;
+            resize: vertical;
+        }
+
+        .form-item input:focus,
+        .form-item select:focus,
+        .form-item textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-risk {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0.9rem 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-risk:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-ghost {
+            background: rgba(102, 126, 234, 0.12);
+            color: var(--primary-light);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-md);
+            padding: 0.9rem 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .viz-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .chart-box {
+            width: 100%;
+            height: 520px;
+        }
+
+        .chart-box.small {
+            height: 520px;
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .metric {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        .metric .label {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric .value {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1200px) {
+            .viz-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-box,
+            .chart-box.small {
+                height: 420px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .risk-container {
+                padding: 0 1rem;
+            }
+
+            .chart-box,
+            .chart-box.small {
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏将由组件自动生成 -->
+
+    <div class="risk-container">
+        <div class="page-header">
+            <h1 class="page-title">
+                <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                </svg>
+                多方法风险建模
+            </h1>
+            <p class="page-subtitle">选择 GCN / Coefficient / Convex 方法，对持仓组合生成风险关联画像</p>
+        </div>
+
+        <div class="methods-grid">
+            <div class="method-card">
+                <div class="method-head">
+                    <div class="method-title">GCN</div>
+                    <label class="check-wrap"><input type="checkbox" id="method-gcn" checked>启用</label>
+                </div>
+                <div class="method-principle">基于图卷积网络，利用股票间图结构与节点特征传播，得到风险传播强度与节点风险评分。</div>
+            </div>
+            <div class="method-card">
+                <div class="method-head">
+                    <div class="method-title">Coefficient</div>
+                    <label class="check-wrap"><input type="checkbox" id="method-coefficient" checked>启用</label>
+                </div>
+                <div class="method-principle">基于协方差/系数矩阵估计资产联动风险，强调相关性强度与组合的系统性风险暴露。</div>
+            </div>
+            <div class="method-card">
+                <div class="method-head">
+                    <div class="method-title">Convex</div>
+                    <label class="check-wrap"><input type="checkbox" id="method-convex">启用</label>
+                </div>
+                <div class="method-principle">使用凸组合思想融合波动率、相关性与结构因子，平衡稳健性与极端情形下的风险敏感性。</div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">参数设置</div>
+            <div class="form-grid">
+                <div class="form-item" style="grid-column: 1 / -1;">
+                    <label for="holdings">持仓股票（逗号分隔，例如：000001.SZ,000002.SZ,000063.SZ） <button id="load-holdings-risk" style="background: rgba(102, 126, 234, 0.3); border: 1px solid var(--primary); color: var(--primary-light); padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 1rem;">📋 我的持股</button></label>
+                    <textarea id="holdings">000001.SZ,000002.SZ,000063.SZ,000100.SZ,000157.SZ</textarea>
+                </div>
+                <div class="form-item">
+                    <label for="lookback">回看窗口 (天)</label>
+                    <input id="lookback" type="number" min="30" max="1200" value="500">
+                </div>
+                <div class="form-item">
+                    <label for="risk-horizon">风险预测周期 (天)</label>
+                    <input id="risk-horizon" type="number" min="1" max="90" value="20">
+                </div>
+                <div class="form-item">
+                    <label for="edge-threshold">关联阈值</label>
+                    <input id="edge-threshold" type="number" min="0" max="1" step="0.01" value="0.18">
+                </div>
+                <div class="form-item">
+                    <label for="topk">每个节点保留边数 Top-K</label>
+                    <input id="topk" type="number" min="1" max="20" value="6">
+                </div>
+                <div class="form-item">
+                    <label for="convex-lambda">Convex λ</label>
+                    <input id="convex-lambda" type="number" min="0" max="1" step="0.05" value="0.6">
+                </div>
+                <div class="form-item">
+                    <label for="normalize-mode">标准化方式</label>
+                    <select id="normalize-mode">
+                        <option value="zscore">z-score</option>
+                        <option value="minmax">min-max</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-risk" id="run-btn">生成风险画像</button>
+                <button class="btn-ghost" id="reset-btn">重置参数</button>
+                <button class="btn-ghost" id="export-csv-btn">导出 CSV</button>
+                <button class="btn-ghost" id="export-json-btn">导出 JSON</button>
+            </div>
+
+            <div class="metric-row">
+                <div class="metric"><div class="label">组合平均风险</div><div class="value" id="metric-mean">--</div></div>
+                <div class="metric"><div class="label">最高风险股票</div><div class="value" id="metric-max-stock">--</div></div>
+                <div class="metric"><div class="label">最高风险分数</div><div class="value" id="metric-max-score">--</div></div>
+                <div class="metric"><div class="label">关联边数量</div><div class="value" id="metric-edge-count">--</div></div>
+            </div>
+        </div>
+
+        <div class="viz-grid">
+            <div class="chart-card">
+                <div class="chart-title">风险关联画像（网络图）</div>
+                <div id="network-chart" class="chart-box"></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">持仓风险分数（方法对比）</div>
+                <div id="bar-chart" class="chart-box small"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化导航栏
+        document.addEventListener('DOMContentLoaded', () => {
+            new ETF.Navbar({ currentPage: 'risk' });
+        });
+        
+        let networkChart = null;
+        let barChart = null;
+
+        const defaults = {
+            holdings: '000001.SZ,000002.SZ,000063.SZ,000100.SZ,000157.SZ',
+            lookback: 500,
+            risk_horizon: 20,
+            edge_threshold: 0.18,
+            topk: 6,
+            convex_lambda: 0.6,
+            normalize_mode: 'zscore',
+            methods: ['gcn', 'coefficient']
+        };
+
+        function selectedMethods() {
+            const methods = [];
+            if (document.getElementById('method-gcn').checked) methods.push('gcn');
+            if (document.getElementById('method-coefficient').checked) methods.push('coefficient');
+            if (document.getElementById('method-convex').checked) methods.push('convex');
+            return methods;
+        }
+
+        function resetForm() {
+            document.getElementById('holdings').value = defaults.holdings;
+            document.getElementById('lookback').value = defaults.lookback;
+            document.getElementById('risk-horizon').value = defaults.risk_horizon;
+            document.getElementById('edge-threshold').value = defaults.edge_threshold;
+            document.getElementById('topk').value = defaults.topk;
+            document.getElementById('convex-lambda').value = defaults.convex_lambda;
+            document.getElementById('normalize-mode').value = defaults.normalize_mode;
+            document.getElementById('method-gcn').checked = true;
+            document.getElementById('method-coefficient').checked = true;
+            document.getElementById('method-convex').checked = false;
+        }
+
+        function collectPayload() {
+            const methods = selectedMethods();
+            if (methods.length === 0) {
+                alert('请至少勾选一种风险建模方法。');
+                return null;
+            }
+
+            return {
+                methods,
+                holdings: document.getElementById('holdings').value,
+                lookback: parseInt(document.getElementById('lookback').value, 10),
+                risk_horizon: parseInt(document.getElementById('risk-horizon').value, 10),
+                edge_threshold: parseFloat(document.getElementById('edge-threshold').value),
+                topk: parseInt(document.getElementById('topk').value, 10),
+                convex_lambda: parseFloat(document.getElementById('convex-lambda').value),
+                normalize_mode: document.getElementById('normalize-mode').value
+            };
+        }
+
+        function renderNetwork(data) {
+            if (!networkChart) {
+                networkChart = echarts.init(document.getElementById('network-chart'));
+            }
+
+            const option = {
+                backgroundColor: 'transparent',
+                tooltip: {
+                    trigger: 'item',
+                    formatter: (params) => {
+                        if (params.dataType === 'edge') {
+                            return `${params.data.source} → ${params.data.target}<br/>关联强度: ${params.data.value.toFixed(3)}`;
+                        }
+                        return `${params.data.name}<br/>风险分数: ${params.data.risk.toFixed(3)}`;
+                    }
+                },
+                series: [
+                    {
+                        type: 'graph',
+                        layout: 'force',
+                        roam: true,
+                        draggable: true,
+                        force: {
+                            repulsion: 320,
+                            edgeLength: [80, 220]
+                        },
+                        label: {
+                            show: true,
+                            color: '#e0e0e0'
+                        },
+                        lineStyle: {
+                            color: 'source',
+                            curveness: 0.15,
+                            opacity: 0.75,
+                            width: 1.5
+                        },
+                        emphasis: { focus: 'adjacency' },
+                        data: data.nodes.map((node) => ({
+                            id: node.id,
+                            name: node.name,
+                            value: node.risk,
+                            risk: node.risk,
+                            symbolSize: 26 + node.risk * 26,
+                            itemStyle: {
+                                color: node.color
+                            }
+                        })),
+                        links: data.links.map((link) => ({
+                            source: link.source,
+                            target: link.target,
+                            value: link.value,
+                            lineStyle: {
+                                width: Math.max(1, link.value * 6),
+                                color: '#8b9aff'
+                            }
+                        }))
+                    }
+                ]
+            };
+
+            networkChart.setOption(option, true);
+        }
+
+        function renderBars(data) {
+            if (!barChart) {
+                barChart = echarts.init(document.getElementById('bar-chart'));
+            }
+
+            const methods = data.method_series.map((item) => item.method.toUpperCase());
+            const series = data.method_series.map((item, index) => {
+                const colorMap = ['#667eea', '#f59e0b', '#10b981'];
+                return {
+                    name: item.method.toUpperCase(),
+                    type: 'bar',
+                    data: item.scores,
+                    itemStyle: { color: colorMap[index % colorMap.length] }
+                };
+            });
+
+            const option = {
+                backgroundColor: 'transparent',
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                legend: {
+                    data: methods,
+                    top: 0,
+                    textStyle: { color: '#b8b8d1' }
+                },
+                grid: {
+                    left: '4%',
+                    right: '4%',
+                    bottom: '3%',
+                    top: 50,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: data.stocks,
+                    axisLabel: { color: '#b8b8d1', rotate: 25 }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: { color: '#b8b8d1' },
+                    splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+                },
+                series
+            };
+
+            barChart.setOption(option, true);
+        }
+
+        function fillMetrics(data) {
+            document.getElementById('metric-mean').textContent = data.metrics.mean_risk.toFixed(4);
+            document.getElementById('metric-max-stock').textContent = data.metrics.max_risk_stock;
+            document.getElementById('metric-max-score').textContent = data.metrics.max_risk_score.toFixed(4);
+            document.getElementById('metric-edge-count').textContent = data.metrics.edge_count;
+        }
+
+        async function runModel() {
+            const payload = collectPayload();
+            if (!payload) return;
+
+            const btn = document.getElementById('run-btn');
+            btn.disabled = true;
+            btn.textContent = '建模中...';
+
+            try {
+                const response = await fetch('/api/risk/modeling', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`接口错误: ${response.status}`);
+                }
+
+                const data = await response.json();
+                renderNetwork(data.graph);
+                renderBars(data.bar);
+                fillMetrics(data);
+            } catch (error) {
+                alert(`风险建模失败：${error.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '生成风险画像';
+            }
+        }
+
+        async function exportResult(format) {
+            const payload = collectPayload();
+            if (!payload) return;
+            payload.format = format;
+
+            const btn = document.getElementById(format === 'csv' ? 'export-csv-btn' : 'export-json-btn');
+            const oldText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = format === 'csv' ? '导出中 CSV...' : '导出中 JSON...';
+
+            try {
+                const response = await fetch('/api/risk/export', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    let message = `接口错误: ${response.status}`;
+                    try {
+                        const err = await response.json();
+                        if (err && err.error) {
+                            message = err.error;
+                        }
+                    } catch (e) {
+                        // 忽略 JSON 解析失败
+                    }
+                    throw new Error(message);
+                }
+
+                const blob = await response.blob();
+                const disposition = response.headers.get('Content-Disposition') || '';
+                let fileName = `risk_result.${format}`;
+                const match = disposition.match(/filename=([^;]+)/i);
+                if (match && match[1]) {
+                    fileName = match[1].replace(/"/g, '').trim();
+                }
+
+                const url = URL.createObjectURL(blob);
+                const anchor = document.createElement('a');
+                anchor.href = url;
+                anchor.download = fileName;
+                document.body.appendChild(anchor);
+                anchor.click();
+                anchor.remove();
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                alert(`导出失败：${error.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = oldText;
+            }
+        }
+
+        document.getElementById('run-btn').addEventListener('click', runModel);
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            resetForm();
+            runModel();
+        });
+        document.getElementById('load-holdings-risk').addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                if (!window.ETF.userManager.isLoggedIn()) {
+                    alert('请先登录以加载您的持股列表');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const username = resolveCurrentUsername();
+                let response = null;
+                let holdings = [];
+
+                if (username) {
+                    try {
+                        response = await window.ETF.http.get('/api/users/holdings/raw', { username });
+                        if (response && response.code === 0 && response.data && Array.isArray(response.data.holdings)) {
+                            holdings = response.data.holdings;
+                        }
+                    } catch (err) {
+                        console.warn('raw holdings 接口失败，尝试兼容接口:', err);
+                    }
+                }
+
+                if (holdings.length === 0) {
+                    try {
+                        response = await window.ETF.http.get('/api/users/holdings');
+                        holdings = extractHoldingsFromResponse(response);
+                    } catch (err) {
+                        console.warn('主接口获取持股失败，尝试兼容接口:', err);
+                    }
+                }
+
+                if (holdings.length === 0 && username) {
+                    try {
+                        response = await window.ETF.http.get('/api/users/holdings', { username });
+                        holdings = extractHoldingsFromResponse(response);
+                    } catch (err) {
+                        console.warn('query 参数接口获取持股失败，尝试路径接口:', err);
+                    }
+                }
+
+                if (holdings.length === 0 && username) {
+                    try {
+                        response = await window.ETF.http.get(`/api/users/${encodeURIComponent(username)}/holdings`);
+                        holdings = extractHoldingsFromResponse(response);
+                    } catch (err) {
+                        console.warn('路径接口获取持股失败:', err);
+                    }
+                }
+
+                if (holdings.length > 0) {
+                    const uniqueHoldings = Array.from(new Set(
+                        holdings
+                            .map(code => String(code || '').trim().toUpperCase())
+                            .filter(code => code.length > 0)
+                    ));
+                    document.getElementById('holdings').value = uniqueHoldings.join(',');
+                } else {
+                    const backendMessage = response && response.message ? response.message : '';
+                    if (backendMessage) {
+                        alert(`未找到您的持股列表：${backendMessage}`);
+                    } else {
+                        alert('未找到您的持股列表，请先在持股管理中添加股票');
+                    }
+                }
+            } catch (error) {
+                console.error('加载持股列表失败:', error);
+                alert('加载持股列表失败: ' + error.message);
+            }
+        });
+
+        function extractHoldingsFromResponse(response) {
+            if (!response || response.code !== 0) {
+                return [];
+            }
+
+            if (Array.isArray(response.data)) {
+                return response.data
+                    .map(item => typeof item === 'string' ? item : item?.code)
+                    .filter(code => typeof code === 'string' && code.trim().length > 0);
+            }
+
+            if (response.data && Array.isArray(response.data.holdings)) {
+                return response.data.holdings
+                    .map(item => typeof item === 'string' ? item : item?.code)
+                    .filter(code => typeof code === 'string' && code.trim().length > 0);
+            }
+
+            return [];
+        }
+
+        function resolveCurrentUsername() {
+            try {
+                const currentUser = window.ETF.userManager.getUserData();
+                if (currentUser && currentUser.username) {
+                    return String(currentUser.username).trim();
+                }
+
+                const rawUserData = localStorage.getItem('userData');
+                if (rawUserData) {
+                    const parsed = JSON.parse(rawUserData);
+                    if (parsed && parsed.username) {
+                        return String(parsed.username).trim();
+                    }
+                    if (parsed && parsed.data && parsed.data.username) {
+                        return String(parsed.data.username).trim();
+                    }
+                }
+
+                const remembered = window.ETF.Storage.get('rememberedUsername');
+                if (remembered) {
+                    return String(remembered).trim();
+                }
+            } catch (error) {
+                console.warn('解析当前用户名失败:', error);
+            }
+            return '';
+        }
+        document.getElementById('export-csv-btn').addEventListener('click', () => exportResult('csv'));
+        document.getElementById('export-json-btn').addEventListener('click', () => exportResult('json'));
+
+        window.addEventListener('resize', () => {
+            if (networkChart) networkChart.resize();
+            if (barChart) barChart.resize();
+        });
+
+        resetForm();
+        runModel();
+    </script>
+</body>
+</html>

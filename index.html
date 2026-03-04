@@ -1,300 +1,382 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ETF-ML | 智能股票预测与分析平台</title>
-    <link rel="stylesheet" href="static/style.css">
-</head>
+    <title>ETF智能投资平台 - SCUT</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        /* 首页专属样式 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
 
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 50%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-md);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--primary-light);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* 功能卡片区域 */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-light);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 30, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .navbar-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .navbar-link:hover {
+            color: var(--primary-light);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info.active {
+            display: flex;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .navbar-menu {
+                gap: 1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                </svg>
-                <span class="logo-text">ETF-ML</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link active">首页</a></li>
-                <li><a href="data.html" class="nav-link">数据展示</a></li>
-                <li><a href="models.html" class="nav-link">模型展示</a></li>
-                <li><a href="backtest.html" class="nav-link">回测分析</a></li>
-                <li><a href="ai.html" class="nav-btn">AI助手</a></li>
-            </ul>
-        </div>
-    </nav>
+    <!-- 导航栏将由组件自动生成 -->
 
     <!-- 英雄区 -->
-    <section id="home" class="hero">
-        <div class="hero-background">
-            <div class="hero-shape shape-1"></div>
-            <div class="hero-shape shape-2"></div>
-            <div class="hero-shape shape-3"></div>
-        </div>
+    <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">
-                深度学习驱动
-                <span class="gradient-text">智能投资决策</span>
-            </h1>
-            <p class="hero-subtitle">
-                基于LSTM+Transformer和GNN的股票预测与风险管理系统<br>
-                精准预测 · 科学回测 · 智能分析
-            </p>
-            <div class="hero-buttons">
-                <a href="data.html" class="btn btn-primary">
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path
-                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                    </svg>
-                    查看数据
-                </a>
-                <a href="backtest.html" class="btn btn-secondary">
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                    运行回测
-                </a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number" id="stock-count">加载中...</div>
-                    <div class="stat-label">支持股票</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="model-count">加载中...</div>
-                    <div class="stat-label">训练模型</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">1.85</div>
-                    <div class="stat-label">夏普比率</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">85%+</div>
-                    <div class="stat-label">预测准确率</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 功能模块 -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">系统功能</h2>
-                <p class="section-subtitle">专业的数据展示、模型预测与风险分析能力</p>
-            </div>
-            <div class="features-grid">
-                <!-- 数据展示 -->
-                <div class="feature-card" data-page="data_page">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path
-                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                            <line x1="12" y1="22.08" x2="12" y2="12" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">数据展示</h3>
-                    <p class="feature-description">展示原始股票数据和计算的技术指标，包括MA、MACD、RSI、BOLL等7种指标</p>
-                    <div class="feature-stats">
-                        <span class="stat-badge">原始数据</span>
-                        <span class="stat-badge">技术指标</span>
-                    </div>
-                </div>
-
-                <!-- 模型展示 -->
-                <div class="feature-card" data-page="models_page">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">模型展示</h3>
-                    <p class="feature-description">展示已训练的LSTM+Transformer股价预测模型和GNN风险管理模型</p>
-                    <div class="feature-stats">
-                        <span class="stat-badge">LSTM模型</span>
-                        <span class="stat-badge">GNN模型</span>
-                    </div>
-                </div>
-
-                <!-- 回测分析 -->
-                <div class="feature-card" data-page="backtest_page">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
-                            <path d="M22 12A10 10 0 0 0 12 2v10z" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">回测分析</h3>
-                    <p class="feature-description">基于历史数据运行策略回测，生成净值曲线、夏普比率、最大回撤等指标</p>
-                    <div class="feature-stats">
-                        <span class="stat-badge">收益分析</span>
-                        <span class="stat-badge">风险评估</span>
-                    </div>
-                </div>
-
-                <!-- AI助手 -->
-                <div class="feature-card" data-page="ai_page">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                            <path d="M8 10h.01M12 10h.01M16 10h.01" />
-                        </svg>
-                    </div>
-                    <h3 class="feature-title">AI智能助手</h3>
-                    <p class="feature-description">提供知识问答、数据分析、报告生成和文件下载等智能服务</p>
-                    <div class="feature-stats">
-                        <span class="stat-badge">知识问答</span>
-                        <span class="stat-badge">智能分析</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 技术架构 -->
-    <section id="technology" class="technology">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">技术架构</h2>
-                <p class="section-subtitle">基于深度学习的端到端预测与分析系统</p>
-            </div>
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <div class="tech-icon">预测模型</div>
-                    <h3 class="tech-title">LSTM+Transformer</h3>
-                    <p class="tech-description">长短期记忆网络结合自注意力机制，捕捉时序特征和多维关联</p>
-                    <ul class="tech-features">
-                        <li>60天历史窗口</li>
-                        <li>7种技术指标输入</li>
-                        <li>10日股价预测</li>
-                        <li>85%+准确率</li>
-                    </ul>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-icon">风险网络</div>
-                    <h3 class="tech-title">图神经网络GNN</h3>
-                    <p class="tech-description">通过图结构建模股票关联关系，预测协方差矩阵和风险结构</p>
-                    <ul class="tech-features">
-                        <li>图注意力机制GAT</li>
-                        <li>动态关联建模</li>
-                        <li>协方差矩阵预测</li>
-                        <li>投资组合优化</li>
-                    </ul>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-icon">回测优化</div>
-                    <h3 class="tech-title">Markowitz优化</h3>
-                    <p class="tech-description">经典均值-方差模型，结合AI预测实现智能资产配置</p>
-                    <ul class="tech-features">
-                        <li>风险收益平衡</li>
-                        <li>动态权重调整</li>
-                        <li>约束条件支持</li>
-                        <li>夏普比率优化</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 性能指标 -->
-    <section id="performance" class="performance">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">系统性能</h2>
-                <p class="section-subtitle">真实回测数据，验证模型可靠性</p>
-            </div>
-            <div class="performance-grid">
-                <div class="performance-card">
-                    <div class="perf-icon">预测准确率</div>
-                    <div class="perf-value">85%+</div>
-                    <div class="perf-label">预测准确率</div>
-                    <div class="perf-description">LSTM模型在测试集上的方向准确率</div>
-                </div>
-                <div class="performance-card">
-                    <div class="perf-icon">夏普比率</div>
-                    <div class="perf-value">1.85</div>
-                    <div class="perf-label">夏普比率</div>
-                    <div class="perf-description">风险调整后的收益指标</div>
-                </div>
-                <div class="performance-card">
-                    <div class="perf-icon">最大回撤</div>
-                    <div class="perf-value">-12.5%</div>
-                    <div class="perf-label">最大回撤</div>
-                    <div class="perf-description">回测期间的最大资金回撤幅度</div>
-                </div>
-                <div class="performance-card">
-                    <div class="perf-icon">胜率</div>
-                    <div class="perf-value">68.5%</div>
-                    <div class="perf-label">胜率</div>
-                    <div class="perf-description">回测中盈利交易占比</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA区域 -->
-    <section class="cta">
-        <div class="cta-content">
-            <h2 class="cta-title">立即开始智能投资分析</h2>
-            <p class="cta-subtitle">体验AI驱动的股票预测与风险管理系统</p>
+            <h1>🚀 智能ETF投资决策平台</h1>
+            <p>基于深度学习与图神经网络，为您提供精准的股票预测、风险评估与投资组合管理</p>
             <div class="cta-buttons">
-                <a href="data.html" class="btn btn-primary btn-lg">浏览数据</a>
-                <a href="backtest.html" class="btn btn-secondary btn-lg">运行回测</a>
-                <a href="ai.html" class="btn btn-outline btn-lg">咨询AI助手</a>
+                <a href="register.html" class="btn btn-primary">
+                    <span>🎯</span> 免费开始
+                </a>
+                <a href="predict.html" class="btn btn-secondary">
+                    <span>📊</span> 体验预测
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 class="footer-title">ETF-ML</h3>
-                    <p class="footer-description">基于深度学习的智能股票预测与分析平台</p>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-heading">快速链接</h4>
-                    <ul class="footer-links">
-                        <li><a href="data.html">数据展示</a></li>
-                        <li><a href="models.html">模型展示</a></li>
-                        <li><a href="backtest.html">回测分析</a></li>
-                        <li><a href="ai.html">AI助手</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-heading">技术栈</h4>
-                    <ul class="footer-links">
-                        <li>PyTorch深度学习</li>
-                        <li>LSTM+Transformer</li>
-                        <li>图神经网络GNN</li>
-                        <li>Markowitz优化</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-heading">联系方式</h4>
-                    <p class="footer-contact">华南理工大学</p>
-                    <p class="footer-contact">机器学习与金融科技团队</p>
-                </div>
+    <!-- 功能特性 -->
+    <section class="features">
+        <h2>✨ 核心功能</h2>
+        <div class="feature-grid">
+            <div class="feature-card" data-link="predict.html">
+                <div class="feature-icon">🔮</div>
+                <h3>股票价格预测</h3>
+                <p>利用 LSTM、GRU 等深度学习模型，结合历史数据和市场趋势，预测未来股票走势，帮助您做出明智的投资决策。</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 ETF-ML. All rights reserved.</p>
+
+            <div class="feature-card" data-link="risk.html">
+                <div class="feature-icon">🛡️</div>
+                <h3>风险智能评估</h3>
+                <p>通过图神经网络分析股票关联性，评估投资组合风险，提供专业的风险预警和优化建议。</p>
+            </div>
+
+            <div class="feature-card" data-link="dashboard.html">
+                <div class="feature-icon">💼</div>
+                <h3>投资组合管理</h3>
+                <p>管理您的股票持仓，实时追踪收益表现，自动生成投资报告，让投资决策更加数据化、科学化。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>实时数据分析</h3>
+                <p>接入实时市场数据，提供多维度数据分析和可视化图表，帮助您全面了解市场动态。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI 智能推荐</h3>
+                <p>基于您的投资偏好和风险承受能力，智能推荐优质股票和投资策略，个性化定制投资方案。</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>安全可靠</h3>
+                <p>采用 SHA256 加密技术保护用户数据，严格的权限管理机制，确保您的投资信息安全无忧。</p>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <!-- 看板娘浮动组件占位 -->
-    <div id="mascot-widget"></div>
-    <script src="static/index.js"></script>
-    <script src="static/mascot.js"></script>
+    <!-- 页脚将由组件自动生成 -->
+
+    <!-- 引入工具库和组件库 -->
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        // 初始化导航栏
+        new ETF.Navbar({ currentPage: 'index' });
+        
+        // 初始化页脚
+        new ETF.Footer();
+
+        // 页面交互增强
+        document.addEventListener('DOMContentLoaded', () => {
+            // 为功能卡片添加点击跳转
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const link = this.getAttribute('data-link');
+                    if (link) {
+                        window.location.href = link;
+                    }
+                });
+            });
+
+            // 添加滚动动画
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
-
 </html>
