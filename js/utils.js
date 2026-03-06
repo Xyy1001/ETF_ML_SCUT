@@ -31,6 +31,82 @@ const API_CONFIG = {
     }
 };
 
+// ==================== 认证数据工具 ====================
+function extractUsernameFromCandidate(candidate, depth = 0) {
+    if (!candidate || depth > 3) {
+        return '';
+    }
+
+    if (typeof candidate === 'string') {
+        return candidate.trim();
+    }
+
+    if (typeof candidate !== 'object') {
+        return '';
+    }
+
+    const directKeys = ['username', 'user_name', 'name', 'user'];
+    for (const key of directKeys) {
+        const value = candidate[key];
+        if (typeof value === 'string' && value.trim()) {
+            return value.trim();
+        }
+    }
+
+    const nestedKeys = ['data', 'value', 'profile', 'userInfo', 'account'];
+    for (const key of nestedKeys) {
+        if (candidate[key] && typeof candidate[key] === 'object') {
+            const nested = extractUsernameFromCandidate(candidate[key], depth + 1);
+            if (nested) {
+                return nested;
+            }
+        }
+    }
+
+    return '';
+}
+
+function normalizeUserData(raw) {
+    if (!raw || typeof raw !== 'object') {
+        return null;
+    }
+
+    const username = extractUsernameFromCandidate(raw);
+    if (!username) {
+        return null;
+    }
+
+    const normalized = { ...raw };
+    normalized.username = username;
+    return normalized;
+}
+
+function getCurrentUsername() {
+    try {
+        if (userManager && typeof userManager.getUserData === 'function') {
+            const managerUser = userManager.getUserData();
+            const managerName = extractUsernameFromCandidate(managerUser);
+            if (managerName) {
+                return managerName;
+            }
+        }
+    } catch (error) {
+        console.warn('从用户管理器读取用户名失败:', error);
+    }
+
+    try {
+        const rawUserData = localStorage.getItem('userData');
+        if (rawUserData) {
+            const parsed = JSON.parse(rawUserData);
+            return extractUsernameFromCandidate(parsed);
+        }
+    } catch (error) {
+        console.warn('解析 userData 失败，忽略当前用户请求头:', error);
+    }
+
+    return '';
+}
+
 // ==================== HTTP 请求封装 ====================
 class HttpClient {
     constructor(config) {
@@ -83,16 +159,7 @@ class HttpClient {
      */
     getAuthHeaders() {
         const token = localStorage.getItem('authToken');
-        let currentUsername = '';
-        try {
-            const rawUserData = localStorage.getItem('userData');
-            if (rawUserData) {
-                const parsed = JSON.parse(rawUserData);
-                currentUsername = (parsed && parsed.username) ? String(parsed.username).trim() : '';
-            }
-        } catch (error) {
-            console.warn('解析 userData 失败，忽略当前用户请求头:', error);
-        }
+        const currentUsername = getCurrentUsername();
 
         const headers = {};
         if (token) {
@@ -158,7 +225,14 @@ class UserManager {
         const userData = localStorage.getItem('userData');
         if (userData) {
             try {
-                this.userData = JSON.parse(userData);
+                const parsed = JSON.parse(userData);
+                const normalized = normalizeUserData(parsed);
+                if (!normalized) {
+                    throw new Error('缺少有效用户名');
+                }
+
+                this.userData = normalized;
+                localStorage.setItem('userData', JSON.stringify(normalized));
                 this.notifyCallbacks();
             } catch (e) {
                 console.error('用户数据解析失败:', e);
@@ -178,8 +252,13 @@ class UserManager {
             });
 
             if (response.code === 0 && response.data) {
-                this.userData = response.data;
-                localStorage.setItem('userData', JSON.stringify(response.data));
+                const normalized = normalizeUserData(response.data);
+                if (!normalized) {
+                    return { success: false, message: '登录失败：用户信息异常，请重新登录' };
+                }
+
+                this.userData = normalized;
+                localStorage.setItem('userData', JSON.stringify(normalized));
                 if (response.token) {
                     localStorage.setItem('authToken', response.token);
                 }
@@ -224,7 +303,7 @@ class UserManager {
      * 检查登录状态
      */
     isLoggedIn() {
-        return this.userData !== null;
+        return !!extractUsernameFromCandidate(this.userData);
     }
 
     /**

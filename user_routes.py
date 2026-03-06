@@ -60,7 +60,8 @@ def get_supported_stocks():
     """获取支持的股票列表（从数据库中检查是否存在日线数据表）"""
     global _supported_stocks
     
-    if _supported_stocks is not None:
+    # 只有成功获取过才使用缓存
+    if _supported_stocks is not None and len(_supported_stocks) > 0:
         return _supported_stocks
     
     supported = []
@@ -71,6 +72,10 @@ def get_supported_stocks():
             print("获取支持股票列表失败：数据库未连接")
             return []
         
+        if manager.cursor is None:
+            print("获取支持股票列表失败：数据库游标为空")
+            return []
+        
         # 查询数据库中所有的表名
         manager.cursor.execute("""
             SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES 
@@ -79,12 +84,19 @@ def get_supported_stocks():
         
         tables = manager.cursor.fetchall()
         
-        # 过滤股票日线数据表
-        # 假设股票表的命名规则为：stock_XXXXXX_SZ 或 stock_XXXXXX_SH
+        # 股票代码的正则模式：6位数字.交易所代码（SZ/SH/BJ等）
+        stock_pattern = re.compile(r'^(\d{6})\.(SZ|SH|BJ)$', re.IGNORECASE)
+        
         for table in tables:
             table_name = table[0]
-            # 检查是否是股票数据表（以stock_开头）
-            if table_name.startswith('stock_'):
+            # 检查表名是否匹配股票代码格式
+            match = stock_pattern.match(table_name)
+            if match:
+                stock_code = table_name.upper()  # 统一转为大写
+                if stock_code not in supported:
+                    supported.append(stock_code)
+            # 兼容旧版 stock_ 前缀的命名方式
+            elif table_name.startswith('stock_'):
                 # 提取股票代码 (从 stock_000001_SZ 提取 000001.SZ)
                 parts = table_name[6:].rsplit('_', 1)  # 从 stock_ 后开始
                 if len(parts) == 2:
@@ -95,41 +107,67 @@ def get_supported_stocks():
                         supported.append(stock_code)
         
         supported.sort()
-        _supported_stocks = supported
         
+        # 只有获取到股票才缓存，避免失败时永久缓存空列表
         if supported:
+            _supported_stocks = supported
             print(f"从数据库中找到 {len(supported)} 只股票的日线数据")
         else:
             print("数据库中未找到股票日线数据表")
             
     except Exception as e:
         print(f"获取支持股票列表失败: {e}")
-        _supported_stocks = []
-    
-    return _supported_stocks
+        import traceback
+        traceback.print_exc()
     
     return supported
 
 
 def get_current_username():
     """从请求中获取当前用户名（优先登录态，其次兼容旧参数）"""
+    def _extract_username(payload, depth=0):
+        if payload is None or depth > 3:
+            return None
+
+        if isinstance(payload, str):
+            value = payload.strip()
+            return value if value else None
+
+        if not isinstance(payload, dict):
+            return None
+
+        for key in ('username', 'user_name', 'name', 'user'):
+            value = payload.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+
+        for key in ('data', 'value', 'profile', 'userInfo', 'account'):
+            nested = payload.get(key)
+            if isinstance(nested, dict):
+                extracted = _extract_username(nested, depth + 1)
+                if extracted:
+                    return extracted
+
+        return None
+
     # 1) 优先从请求头获取（由前端登录态自动注入）
-    username = request.headers.get('X-Current-User', '').strip()
+    for header_key in ('X-Current-User', 'X-Username', 'X-User'):
+        username = request.headers.get(header_key, '').strip()
+        if username:
+            return username
+
+    # 2) 兼容：从 body 中获取（POST/PUT/PATCH）
+    data = request.get_json(silent=True) or {}
+    username = _extract_username(data)
     if username:
         return username
 
-    # 2) 兼容：从POST body中获取
-    if request.method == 'POST':
-        data = request.get_json() or {}
-        username = data.get('username', '').strip()
+    # 3) 兼容：从查询参数中获取
+    for query_key in ('username', 'user', 'name'):
+        username = request.args.get(query_key, '').strip()
         if username:
             return username
-    
-    # 3) 兼容：从查询参数中获取
-    username = request.args.get('username', '').strip()
-    if username:
-        return username
-    
+
     return None
 
 
