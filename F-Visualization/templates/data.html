@@ -40,7 +40,7 @@
                 </svg>
                 股票数据处理系统
             </h1>
-            <p class="subtitle">智能化股票技术指标计算平�?/p>
+            <p class="subtitle">智能化股票技术指标计算平台</p>
         </header>
 
         <!-- 主内容区 -->
@@ -57,19 +57,19 @@
                     </h2>
                 </div>
 
-                <!-- 搜索�?-->
+                <!-- 搜索框 -->
                 <div class="search-container">
                     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8" />
                         <path d="M21 21l-4.35-4.35" />
                     </svg>
-                    <input type="text" id="searchInput" class="search-input" placeholder="搜索股票代码或名�?..">
+                    <input type="text" id="searchInput" class="search-input" placeholder="搜索股票代码或名称...">
                 </div>
 
-                <!-- 已选股票显�?-->
+                <!-- 已选股票显示 -->
                 <div class="selected-stocks" id="selectedStocks">
                     <div class="selected-header">
-                        <span>已选择: <span id="selectedCount">0</span> 只股�?/span>
+                        <span>已选择: <span id="selectedCount">0</span> 只股票</span>
                             <button class="btn-clear" id="clearBtn">清空</button>
                     </div>
                     <div class="selected-tags" id="selectedTags"></div>
@@ -79,7 +79,7 @@
                 <div class="stock-list" id="stockList">
                     <div class="loading">
                         <div class="spinner"></div>
-                        <p>加载股票列表�?..</p>
+                        <p>加载股票列表中...</p>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                                 <line x1="8" y1="2" x2="8" y2="6" />
                                 <line x1="3" y1="10" x2="21" y2="10" />
                             </svg>
-                            开始日�?
+                            开始日期
                         </label>
                         <input type="date" id="startDate" class="form-input" required>
                     </div>
@@ -129,7 +129,7 @@
 
                     <!-- 指标参数 -->
                     <div class="divider"></div>
-                    <h3 class="section-title">技术指标参�?/h3>
+                    <h3 class="section-title">技术指标参数</h3>
 
                         <div class="form-group">
                             <label class="form-label">
@@ -140,7 +140,7 @@
                                         <circle cx="12" cy="12" r="10" />
                                         <path d="M12 16v-4M12 8h.01" />
                                     </svg>
-                                    <span class="tooltip-text">平均真实波幅计算周期，默�?4�?/span>
+                                    <span class="tooltip-text">平均真实波幅计算周期，默认为14</span>
                                     </span>
                             </label>
                             <input type="number" id="atrPeriod" class="form-input" value="14" min="1" max="100">
@@ -155,7 +155,7 @@
                                         <circle cx="12" cy="12" r="10" />
                                         <path d="M12 16v-4M12 8h.01" />
                                     </svg>
-                                    <span class="tooltip-text">相对强弱指数计算周期，默�?4�?/span>
+                                    <span class="tooltip-text">相对强弱指数计算周期，默认为14</span>
                                     </span>
                             </label>
                             <input type="number" id="rsiPeriod" class="form-input" value="14" min="1" max="100">
@@ -167,7 +167,7 @@
                                 stroke-width="2">
                                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                             </svg>
-                            开始处理数�?
+                            开始处理数据
                         </button>
 
                         <!-- 进度显示 -->
@@ -175,7 +175,7 @@
                             <div class="progress-bar">
                                 <div class="progress-fill" id="progressFill"></div>
                             </div>
-                            <p class="progress-text" id="progressText">处理�?..</p>
+                            <p class="progress-text" id="progressText">处理中...</p>
                         </div>
 
                         <!-- 结果显示 -->

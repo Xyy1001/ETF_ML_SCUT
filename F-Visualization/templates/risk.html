@@ -41,7 +41,7 @@
                 </svg>
                 风险控制系统
             </h1>
-            <p class="page-subtitle">基于GNN的协方差矩阵与相关系数矩阵预�?/p>
+            <p class="page-subtitle">基于GNN的协方差矩阵与相关系数矩阵预测平台</p>
         </header>
 
         <!-- 主内容区 -->
@@ -67,19 +67,19 @@
                     </div>
                     <div class="card-body">
                         <div id="methodsList" class="methods-list">
-                            <div class="loading">加载�?..</div>
+                            <div class="loading">加载中...</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 已训练模�?-->
+                <!-- 已训练模型 -->
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
                             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
                             </svg>
-                            已训练模�?
+                            已训练模型
                         </h3>
                         <button class="icon-btn" onclick="loadModels()" title="刷新">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -90,7 +90,7 @@
                     </div>
                     <div class="card-body">
                         <div id="modelsList" class="models-list">
-                            <div class="loading">加载�?..</div>
+                            <div class="loading">加载模型列表中...</div>
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="card-body">
                         <div id="dataFilesList" class="data-files-list">
-                            <div class="loading">加载�?..</div>
+                            <div class="loading">加载中...</div>
                         </div>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
                                             stroke-width="2">
                                             <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                                         </svg>
-                                        学习�?(Learning Rate)
+                                        学习率 (Learning Rate)
                                     </label>
                                     <input type="number" id="learningRate" step="0.0001" min="0.0001" max="1"
                                         value="0.001" required>
@@ -222,7 +222,7 @@
                                         stroke-width="2">
                                         <polygon points="5 3 19 12 5 21 5 3" />
                                     </svg>
-                                    开始训�?
+                                    开始训练
                                 </button>
                                 <button type="button" class="btn btn-secondary" id="stopBtn" disabled>
                                     <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -251,7 +251,7 @@
                     <div class="card-body">
                         <div class="progress-container">
                             <div class="progress-info">
-                                <span id="progressText">等待开�?..</span>
+                                <span id="progressText">等待开始...</span>
                                 <span id="progressPercent">0%</span>
                             </div>
                             <div class="progress-bar">
@@ -263,7 +263,7 @@
                                     <span class="stat-value" id="currentEpoch">0</span>
                                 </div>
                                 <div class="stat-item">
-                                    <span class="stat-label">总轮�?/span>
+                                    <span class="stat-label">总轮次</span>
                                         <span class="stat-value" id="totalEpochs">0</span>
                                 </div>
                                 <div class="stat-item">

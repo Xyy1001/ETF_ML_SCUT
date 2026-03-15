@@ -1,0 +1,2605 @@
+nohup: ignoring input
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:51: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='ffill')
+/home/liwenbo/xuyingyu/TrainingModel.py:53: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method='bfill')
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+读取到 26 个数据文件
+数据文件列表: ['000895.SZ.csv', '000807.SZ.csv', '000625.SZ.csv', '000100.SZ.csv', '000568.SZ.csv', '000651.SZ.csv', '000800.SZ.csv', '000786.SZ.csv', '000338.SZ.csv', '000630.SZ.csv', '000617.SZ.csv', '000063.SZ.csv', '000596.SZ.csv', '000708.SZ.csv', '000876.SZ.csv', '000725.SZ.csv', '000157.SZ.csv', '000768.SZ.csv', '000425.SZ.csv', '000538.SZ.csv', '000858.SZ.csv', '000301.SZ.csv', '000002.SZ.csv', '000408.SZ.csv', '000661.SZ.csv', '000001.SZ.csv']
+数据加载完成！
+数据集数量: 26
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3014
+目标变量形状: (3123,)
+特征变量形状: (3123, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 238
+目标变量形状: (347,)
+特征变量形状: (347, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3014
+测试集样本数: 238
+开始训练...
+Epoch [10/100], Loss (反标准化后): 5.277196
+Epoch [20/100], Loss (反标准化后): 3.843045
+Epoch [30/100], Loss (反标准化后): 3.071674
+Epoch [40/100], Loss (反标准化后): 3.145308
+Epoch [50/100], Loss (反标准化后): 2.610574
+Epoch [60/100], Loss (反标准化后): 2.866177
+Epoch [70/100], Loss (反标准化后): 2.545561
+Epoch [80/100], Loss (反标准化后): 2.352896
+Epoch [90/100], Loss (反标准化后): 2.521070
+Epoch [100/100], Loss (反标准化后): 2.361824
+训练完成！
+模型已保存到 models/000895.SZ.pth
+训练曲线已保存到 plots/000895.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3107
+目标变量形状: (3216,)
+特征变量形状: (3216, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 249
+目标变量形状: (358,)
+特征变量形状: (358, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3107
+测试集样本数: 249
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.383601
+Epoch [20/100], Loss (反标准化后): 0.281330
+Epoch [30/100], Loss (反标准化后): 0.270627
+Epoch [40/100], Loss (反标准化后): 0.185221
+Epoch [50/100], Loss (反标准化后): 0.152353
+Epoch [60/100], Loss (反标准化后): 0.154613
+Epoch [70/100], Loss (反标准化后): 0.144849
+Epoch [80/100], Loss (反标准化后): 0.126713
+Epoch [90/100], Loss (反标准化后): 0.127688
+Epoch [100/100], Loss (反标准化后): 0.124281
+训练完成！
+模型已保存到 models/000807.SZ.pth
+训练曲线已保存到 plots/000807.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3118
+目标变量形状: (3227,)
+特征变量形状: (3227, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 250
+目标变量形状: (359,)
+特征变量形状: (359, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3118
+测试集样本数: 250
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.672206
+Epoch [20/100], Loss (反标准化后): 0.462685
+Epoch [30/100], Loss (反标准化后): 0.454247
+Epoch [40/100], Loss (反标准化后): 0.383936
+Epoch [50/100], Loss (反标准化后): 0.306742
+Epoch [60/100], Loss (反标准化后): 0.301993
+Epoch [70/100], Loss (反标准化后): 0.307131
+Epoch [80/100], Loss (反标准化后): 0.275540
+Epoch [90/100], Loss (反标准化后): 0.267940
+Epoch [100/100], Loss (反标准化后): 0.264801
+训练完成！
+模型已保存到 models/000625.SZ.pth
+训练曲线已保存到 plots/000625.SZ.png
+
+=== 缺失值检查和处理 ===/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3016
+目标变量形状: (3125,)
+特征变量形状: (3125, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 239
+目标变量形状: (348,)
+特征变量形状: (348, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3016
+测试集样本数: 239
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.060841
+Epoch [20/100], Loss (反标准化后): 0.036579
+Epoch [30/100], Loss (反标准化后): 0.031574
+Epoch [40/100], Loss (反标准化后): 0.025714
+Epoch [50/100], Loss (反标准化后): 0.022157
+Epoch [60/100], Loss (反标准化后): 0.024249
+Epoch [70/100], Loss (反标准化后): 0.020390
+Epoch [80/100], Loss (反标准化后): 0.021159
+Epoch [90/100], Loss (反标准化后): 0.020857
+Epoch [100/100], Loss (反标准化后): 0.019701
+训练完成！
+模型已保存到 models/000100.SZ.pth
+训练曲线已保存到 plots/000100.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3176
+目标变量形状: (3285,)
+特征变量形状: (3285, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 257
+目标变量形状: (366,)
+特征变量形状: (366, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3176
+测试集样本数: 257
+开始训练...
+Epoch [10/100], Loss (反标准化后): 42.097980
+Epoch [20/100], Loss (反标准化后): 30.125650
+Epoch [30/100], Loss (反标准化后): 21.602861
+Epoch [40/100], Loss (反标准化后): 18.219885
+Epoch [50/100], Loss (反标准化后): 18.252085
+Epoch [60/100], Loss (反标准化后): 17.162926
+Epoch [70/100], Loss (反标准化后): 15.313095
+Epoch [80/100], Loss (反标准化后): 15.393422
+Epoch [90/100], Loss (反标准化后): 15.152674
+Epoch [100/100], Loss (反标准化后): 15.727898
+训练完成！
+模型已保存到 models/000568.SZ.pth
+训练曲线已保存到 plots/000568.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3059
+目标变量形状: (3168,)
+特征变量形状: (3168, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 243
+目标变量形状: (352,)
+特征变量形状: (352, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3059
+测试集样本数: 243
+开始训练...
+Epoch [10/100], Loss (反标准化后): 8.645108
+Epoch [20/100], Loss (反标准化后): 5.486030
+Epoch [30/100], Loss (反标准化后): 4.687691
+Epoch [40/100], Loss (反标准化后): 4.028903
+Epoch [50/100], Loss (反标准化后): 4.598471
+Epoch [60/100], Loss (反标准化后): 3.613104
+Epoch [70/100], Loss (反标准化后): 3.656462
+Epoch [80/100], Loss (反标准化后): 4.020342
+Epoch [90/100], Loss (反标准化后): 3.597356
+Epoch [100/100], Loss (反标准化后): 2.946296
+训练完成！
+模型已保存到 models/000651.SZ.pth
+训练曲线已保存到 plots/000651.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3179
+目标变量形状: (3288,)
+特征变量形状: (3288, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 257
+目标变量形状: (366,)
+特征变量形状: (366, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3179
+测试集样本数: 257
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.465766
+Epoch [20/100], Loss (反标准化后): 0.296416
+Epoch [30/100], Loss (反标准化后): 0.221595
+Epoch [40/100], Loss (反标准化后): 0.205151
+Epoch [50/100], Loss (反标准化后): 0.220753
+Epoch [60/100], Loss (反标准化后): 0.208014
+Epoch [70/100], Loss (反标准化后): 0.191663
+Epoch [80/100], Loss (反标准化后): 0.177229
+Epoch [90/100], Loss (反标准化后): 0.167731
+Epoch [100/100], Loss (反标准化后): 0.172122
+训练完成！
+模型已保存到 models/000800.SZ.pth
+训练曲线已保存到 plots/000800.SZ.png/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3074
+目标变量形状: (3183,)
+特征变量形状: (3183, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 245
+目标变量形状: (354,)
+特征变量形状: (354, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3074
+测试集样本数: 245
+开始训练...
+Epoch [10/100], Loss (反标准化后): 2.173317
+Epoch [20/100], Loss (反标准化后): 1.790833
+Epoch [30/100], Loss (反标准化后): 1.300090
+Epoch [40/100], Loss (反标准化后): 1.068207
+Epoch [50/100], Loss (反标准化后): 1.090149
+Epoch [60/100], Loss (反标准化后): 1.028348
+Epoch [70/100], Loss (反标准化后): 0.868790
+Epoch [80/100], Loss (反标准化后): 0.879011
+Epoch [90/100], Loss (反标准化后): 0.894876
+Epoch [100/100], Loss (反标准化后): 0.875259
+训练完成！
+模型已保存到 models/000786.SZ.pth
+训练曲线已保存到 plots/000786.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3203
+目标变量形状: (3312,)
+特征变量形状: (3312, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 259
+目标变量形状: (368,)
+特征变量形状: (368, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3203
+测试集样本数: 259
+开始训练...
+Epoch [10/100], Loss (反标准化后): 1.489939
+Epoch [20/100], Loss (反标准化后): 1.206189
+Epoch [30/100], Loss (反标准化后): 1.293763
+Epoch [40/100], Loss (反标准化后): 1.091481
+Epoch [50/100], Loss (反标准化后): 0.924906
+Epoch [60/100], Loss (反标准化后): 0.812997
+Epoch [70/100], Loss (反标准化后): 0.687409
+Epoch [80/100], Loss (反标准化后): 0.615302
+Epoch [90/100], Loss (反标准化后): 0.597854
+Epoch [100/100], Loss (反标准化后): 0.574143
+训练完成！
+模型已保存到 models/000338.SZ.pth
+训练曲线已保存到 plots/000338.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3050
+目标变量形状: (3159,)
+特征变量形状: (3159, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 243
+目标变量形状: (352,)
+特征变量形状: (352, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3050
+测试集样本数: 243
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.554763
+Epoch [20/100], Loss (反标准化后): 0.367285
+Epoch [30/100], Loss (反标准化后): 0.375260
+Epoch [40/100], Loss (反标准化后): 0.277833
+Epoch [50/100], Loss (反标准化后): 0.345261
+Epoch [60/100], Loss (反标准化后): 0.254157
+Epoch [70/100], Loss (反标准化后): 0.224588
+Epoch [80/100], Loss (反标准化后): 0.261495
+Epoch [90/100], Loss (反标准化后): 0.230500
+Epoch [100/100], Loss (反标准化后): 0.225081
+训练完成！
+模型已保存到 models/000630.SZ.pth
+训练曲线已保存到 plots/000630.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3086
+目标变量形状: (3195,)
+特征变量形状: (3195, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 247
+目标变量形状: (356,)
+特征变量形状: (356, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3086
+测试集样本数: 247
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.524343
+Epoch [20/100], Loss (反标准化后): 0.353514
+Epoch [30/100], Loss (反标准化后): 0.352832
+Epoch [40/100], Loss (反标准化后): 0.322476
+Epoch [50/100], Loss (反标准化后): 0.300326
+Epoch [60/100], Loss (反标准化后): 0.294126
+Epoch [70/100], Loss (反标准化后): 0.279125
+Epoch [80/100], Loss (反标准化后): 0.299084
+Epoch [90/100], Loss (反标准化后): 0.277874
+Epoch [100/100], Loss (反标准化后): 0.250828
+训练完成！
+模型已保存到 models/000617.SZ.pth
+训练曲线已保存到 plots/000617.SZ.png/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3131
+目标变量形状: (3240,)
+特征变量形状: (3240, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 252
+目标变量形状: (361,)
+特征变量形状: (361, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3131
+测试集样本数: 252
+开始训练...
+Epoch [10/100], Loss (反标准化后): 3.097006
+Epoch [20/100], Loss (反标准化后): 2.329876
+Epoch [30/100], Loss (反标准化后): 1.889770
+Epoch [40/100], Loss (反标准化后): 1.723639
+Epoch [50/100], Loss (反标准化后): 1.511666
+Epoch [60/100], Loss (反标准化后): 1.399822
+Epoch [70/100], Loss (反标准化后): 1.617692
+Epoch [80/100], Loss (反标准化后): 1.341233
+Epoch [90/100], Loss (反标准化后): 1.528119
+Epoch [100/100], Loss (反标准化后): 1.261918
+训练完成！
+模型已保存到 models/000063.SZ.pth
+训练曲线已保存到 plots/000063.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3201
+目标变量形状: (3310,)
+特征变量形状: (3310, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 259
+目标变量形状: (368,)
+特征变量形状: (368, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3201
+测试集样本数: 259
+开始训练...
+Epoch [10/100], Loss (反标准化后): 65.050041
+Epoch [20/100], Loss (反标准化后): 45.238819
+Epoch [30/100], Loss (反标准化后): 39.398937
+Epoch [40/100], Loss (反标准化后): 33.362362
+Epoch [50/100], Loss (反标准化后): 27.488581
+Epoch [60/100], Loss (反标准化后): 28.924574
+Epoch [70/100], Loss (反标准化后): 23.424124
+Epoch [80/100], Loss (反标准化后): 23.076889
+Epoch [90/100], Loss (反标准化后): 22.099878
+Epoch [100/100], Loss (反标准化后): 20.652391
+训练完成！
+模型已保存到 models/000596.SZ.pth
+训练曲线已保存到 plots/000596.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3104
+目标变量形状: (3213,)
+特征变量形状: (3213, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 249
+目标变量形状: (358,)
+特征变量形状: (358, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3104
+测试集样本数: 249
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.915752
+Epoch [20/100], Loss (反标准化后): 0.698365
+Epoch [30/100], Loss (反标准化后): 0.588631
+Epoch [40/100], Loss (反标准化后): 0.581698
+Epoch [50/100], Loss (反标准化后): 0.577704
+Epoch [60/100], Loss (反标准化后): 0.467831
+Epoch [70/100], Loss (反标准化后): 0.404462
+Epoch [80/100], Loss (反标准化后): 0.358113
+Epoch [90/100], Loss (反标准化后): 0.319572
+Epoch [100/100], Loss (反标准化后): 0.309063
+训练完成！
+模型已保存到 models/000708.SZ.pth
+训练曲线已保存到 plots/000708.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3041
+目标变量形状: (3150,)
+特征变量形状: (3150, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 242
+目标变量形状: (351,)
+特征变量形状: (351, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3041
+测试集样本数: 242
+开始训练...
+Epoch [10/100], Loss (反标准化后): 1.132657
+Epoch [20/100], Loss (反标准化后): 0.797835
+Epoch [30/100], Loss (反标准化后): 0.612079
+Epoch [40/100], Loss (反标准化后): 0.592188
+Epoch [50/100], Loss (反标准化后): 0.625914
+Epoch [60/100], Loss (反标准化后): 0.411180
+Epoch [70/100], Loss (反标准化后): 0.391096
+Epoch [80/100], Loss (反标准化后): 0.382962
+Epoch [90/100], Loss (反标准化后): 0.384627
+Epoch [100/100], Loss (反标准化后): 0.380067
+训练完成！
+模型已保存到 models/000876.SZ.pth/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+
+训练曲线已保存到 plots/000876.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3195
+目标变量形状: (3304,)
+特征变量形状: (3304, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 259
+目标变量形状: (368,)
+特征变量形状: (368, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3195
+测试集样本数: 259
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.040680
+Epoch [20/100], Loss (反标准化后): 0.033109
+Epoch [30/100], Loss (反标准化后): 0.025164
+Epoch [40/100], Loss (反标准化后): 0.021588
+Epoch [50/100], Loss (反标准化后): 0.017542
+Epoch [60/100], Loss (反标准化后): 0.015134
+Epoch [70/100], Loss (反标准化后): 0.013384
+Epoch [80/100], Loss (反标准化后): 0.013122
+Epoch [90/100], Loss (反标准化后): 0.012527
+Epoch [100/100], Loss (反标准化后): 0.012468
+训练完成！
+模型已保存到 models/000725.SZ.pth
+训练曲线已保存到 plots/000725.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3198
+目标变量形状: (3307,)
+特征变量形状: (3307, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 259
+目标变量形状: (368,)
+特征变量形状: (368, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3198
+测试集样本数: 259
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.118100
+Epoch [20/100], Loss (反标准化后): 0.085643
+Epoch [30/100], Loss (反标准化后): 0.078234
+Epoch [40/100], Loss (反标准化后): 0.080509
+Epoch [50/100], Loss (反标准化后): 0.050814
+Epoch [60/100], Loss (反标准化后): 0.043063
+Epoch [70/100], Loss (反标准化后): 0.041547
+Epoch [80/100], Loss (反标准化后): 0.039404
+Epoch [90/100], Loss (反标准化后): 0.039136
+Epoch [100/100], Loss (反标准化后): 0.032637
+训练完成！
+模型已保存到 models/000157.SZ.pth
+训练曲线已保存到 plots/000157.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3182
+目标变量形状: (3291,)
+特征变量形状: (3291, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 257
+目标变量形状: (366,)
+特征变量形状: (366, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3182
+测试集样本数: 257
+开始训练...
+Epoch [10/100], Loss (反标准化后): 2.159731
+Epoch [20/100], Loss (反标准化后): 1.685551
+Epoch [30/100], Loss (反标准化后): 1.338649
+Epoch [40/100], Loss (反标准化后): 1.118726
+Epoch [50/100], Loss (反标准化后): 0.907210
+Epoch [60/100], Loss (反标准化后): 0.770677
+Epoch [70/100], Loss (反标准化后): 0.701708
+Epoch [80/100], Loss (反标准化后): 0.660019
+Epoch [90/100], Loss (反标准化后): 0.616830
+Epoch [100/100], Loss (反标准化后): 0.646415
+训练完成！
+模型已保存到 models/000768.SZ.pth
+训练曲线已保存到 plots/000768.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3161
+目标变量形状: (3270,)
+特征变量形状: (3270, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 255
+目标变量形状: (364,)
+特征变量形状: (364, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3161
+测试集样本数: 255
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.280703
+Epoch [20/100], Loss (反标准化后): 0.202228
+Epoch [30/100], Loss (反标准化后): 0.156575
+Epoch [40/100], Loss (反标准化后): 0.146359
+Epoch [50/100], Loss (反标准化后): 0.129426
+Epoch [60/100], Loss (反标准化后): 0.127141
+Epoch [70/100], Loss (反标准化后): 0.110340
+Epoch [80/100], Loss (反标准化后): 0.117743
+Epoch [90/100], Loss (反标准化后): 0.111761
+Epoch [100/100], Loss (反标准化后): 0.117303
+训练完成！/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+
+模型已保存到 models/000425.SZ.pth
+训练曲线已保存到 plots/000425.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3059
+目标变量形状: (3168,)
+特征变量形状: (3168, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 244
+目标变量形状: (353,)
+特征变量形状: (353, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3059
+测试集样本数: 244
+开始训练...
+Epoch [10/100], Loss (反标准化后): 15.265842
+Epoch [20/100], Loss (反标准化后): 11.554600
+Epoch [30/100], Loss (反标准化后): 10.183820
+Epoch [40/100], Loss (反标准化后): 9.014752
+Epoch [50/100], Loss (反标准化后): 7.270094
+Epoch [60/100], Loss (反标准化后): 6.077997
+Epoch [70/100], Loss (反标准化后): 5.340313
+Epoch [80/100], Loss (反标准化后): 5.518229
+Epoch [90/100], Loss (反标准化后): 5.147104
+Epoch [100/100], Loss (反标准化后): 5.240290
+训练完成！
+模型已保存到 models/000538.SZ.pth
+训练曲线已保存到 plots/000538.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3152
+目标变量形状: (3261,)
+特征变量形状: (3261, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 254
+目标变量形状: (363,)
+特征变量形状: (363, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3152
+测试集样本数: 254
+开始训练...
+Epoch [10/100], Loss (反标准化后): 36.250633
+Epoch [20/100], Loss (反标准化后): 18.545752
+Epoch [30/100], Loss (反标准化后): 13.869012
+Epoch [40/100], Loss (反标准化后): 11.881085
+Epoch [50/100], Loss (反标准化后): 10.039948
+Epoch [60/100], Loss (反标准化后): 9.242176
+Epoch [70/100], Loss (反标准化后): 9.479564
+Epoch [80/100], Loss (反标准化后): 8.070821
+Epoch [90/100], Loss (反标准化后): 7.806367
+Epoch [100/100], Loss (反标准化后): 8.150108
+训练完成！
+模型已保存到 models/000858.SZ.pth
+训练曲线已保存到 plots/000858.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3044
+目标变量形状: (3153,)
+特征变量形状: (3153, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 242
+目标变量形状: (351,)
+特征变量形状: (351, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3044
+测试集样本数: 242
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.708657
+Epoch [20/100], Loss (反标准化后): 0.477767
+Epoch [30/100], Loss (反标准化后): 0.397133
+Epoch [40/100], Loss (反标准化后): 0.395414
+Epoch [50/100], Loss (反标准化后): 0.324758
+Epoch [60/100], Loss (反标准化后): 0.232568
+Epoch [70/100], Loss (反标准化后): 0.234085
+Epoch [80/100], Loss (反标准化后): 0.208201
+Epoch [90/100], Loss (反标准化后): 0.203583
+Epoch [100/100], Loss (反标准化后): 0.214101
+训练完成！
+模型已保存到 models/000301.SZ.pth
+训练曲线已保存到 plots/000301.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3070
+目标变量形状: (3179,)
+特征变量形状: (3179, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 245
+目标变量形状: (354,)
+特征变量形状: (354, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3070
+测试集样本数: 245
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.855300
+Epoch [20/100], Loss (反标准化后): 0.619416
+Epoch [30/100], Loss (反标准化后): 0.518848
+Epoch [40/100], Loss (反标准化后): 0.373117
+Epoch [50/100], Loss (反标准化后): 0.336334
+Epoch [60/100], Loss (反标准化后): 0.305178
+Epoch [70/100], Loss (反标准化后): 0.279019
+Epoch [80/100], Loss (反标准化后): 0.295674
+Epoch [90/100], Loss (反标准化后): 0.256297
+Epoch [100/100], Loss (反标准化后): 0.239196/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+/home/liwenbo/xuyingyu/TrainingModel.py:442: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=trans_layers)
+
+训练完成！
+模型已保存到 models/000002.SZ.pth
+训练曲线已保存到 plots/000002.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3014
+目标变量形状: (3123,)
+特征变量形状: (3123, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 238
+目标变量形状: (347,)
+特征变量形状: (347, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3014
+测试集样本数: 238
+开始训练...
+Epoch [10/100], Loss (反标准化后): 1.523143
+Epoch [20/100], Loss (反标准化后): 0.746724
+Epoch [30/100], Loss (反标准化后): 0.532293
+Epoch [40/100], Loss (反标准化后): 0.436628
+Epoch [50/100], Loss (反标准化后): 0.399780
+Epoch [60/100], Loss (反标准化后): 0.373125
+Epoch [70/100], Loss (反标准化后): 0.386401
+Epoch [80/100], Loss (反标准化后): 0.330806
+Epoch [90/100], Loss (反标准化后): 0.322487
+Epoch [100/100], Loss (反标准化后): 0.301861
+训练完成！
+模型已保存到 models/000408.SZ.pth
+训练曲线已保存到 plots/000408.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3162
+目标变量形状: (3271,)
+特征变量形状: (3271, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 255
+目标变量形状: (364,)
+特征变量形状: (364, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3162
+测试集样本数: 255
+开始训练...
+Epoch [10/100], Loss (反标准化后): 577.764771
+Epoch [20/100], Loss (反标准化后): 236.427048
+Epoch [30/100], Loss (反标准化后): 215.833847
+Epoch [40/100], Loss (反标准化后): 170.848755
+Epoch [50/100], Loss (反标准化后): 180.127640
+Epoch [60/100], Loss (反标准化后): 163.785492
+Epoch [70/100], Loss (反标准化后): 171.547592
+Epoch [80/100], Loss (反标准化后): 167.786377
+Epoch [90/100], Loss (反标准化后): 173.155960
+Epoch [100/100], Loss (反标准化后): 178.679504
+训练完成！
+模型已保存到 models/000661.SZ.pth
+训练曲线已保存到 plots/000661.SZ.png
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3147
+目标变量形状: (3256,)
+特征变量形状: (3256, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 253
+目标变量形状: (362,)
+特征变量形状: (362, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3147
+测试集样本数: 253
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.493042
+Epoch [20/100], Loss (反标准化后): 0.384817
+Epoch [30/100], Loss (反标准化后): 0.286337
+Epoch [40/100], Loss (反标准化后): 0.266003
+Epoch [50/100], Loss (反标准化后): 0.206129
+Epoch [60/100], Loss (反标准化后): 0.186917
+Epoch [70/100], Loss (反标准化后): 0.193604
+Epoch [80/100], Loss (反标准化后): 0.170494
+Epoch [90/100], Loss (反标准化后): 0.207550
+Epoch [100/100], Loss (反标准化后): 0.190653
+训练完成！
+模型已保存到 models/000001.SZ.pth
+训练曲线已保存到 plots/000001.SZ.png

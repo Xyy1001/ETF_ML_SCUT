@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>风险建模分析系统</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <style>
+        .risk-container {
+            max-width: 1800px;
+            margin: 120px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .method-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.6rem;
+            transition: all 0.3s ease;
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .method-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .method-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .method-principle {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .check-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .check-wrap input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .panel-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-item label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-item input,
+        .form-item select,
+        .form-item textarea {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            padding: 0.65rem 0.8rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .form-item textarea {
+            min-height: 74px;
+            resize: vertical;
+        }
+
+        .form-item input:focus,
+        .form-item select:focus,
+        .form-item textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-risk {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0.9rem 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-risk:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-ghost {
+            background: rgba(102, 126, 234, 0.12);
+            color: var(--primary-light);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-md);
+            padding: 0.9rem 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .viz-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .chart-box {
+            width: 100%;
+            height: 520px;
+        }
+
+        .chart-box.small {
+            height: 520px;
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .metric {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        .metric .label {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric .value {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1200px) {
+            .viz-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-box,
+            .chart-box.small {
+                height: 420px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .risk-container {
+                padding: 0 1rem;
+            }
+
+            .chart-box,
+            .chart-box.small {
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏将由组件自动生成 -->
+
+    <div class="risk-container">
+        <div class="page-header">
+            <h1 class="page-title">
+                <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                </svg>
+                多方法风险建模
+            </h1>
+            <p class="page-subtitle">选择 GCN / Coefficient / Convex 方法，对持仓组合生成风险关联画像</p>
+        </div>
+
+        <div class="methods-grid">
+            <div class="method-card">
+                <div class="method-head">
+                    <div class="method-title">GCN</div>
+                    <label class="check-wrap"><input type="checkbox" id="method-gcn" checked>启用</label>
+                </div>
+                <div class="method-principle">基于图卷积网络，利用股票间图结构与节点特征传播，得到风险传播强度与节点风险评分</div>
+            </div>
+            <div class="method-card">
+                <div class="method-head">
+                    <div class="method-title">Coefficient</div>
+                    <label class="check-wrap"><input type="checkbox" id="method-coefficient" checked>启用</label>
+                </div>
+                <div class="method-principle">基于协方差/系数矩阵估计资产联动风险，强调相关性强度与组合的系统性风险暴露</div>
+            </div>
+            <div class="method-card">
+                <div class="method-head">
+                    <div class="method-title">Convex</div>
+                    <label class="check-wrap"><input type="checkbox" id="method-convex">启用</label>
+                </div>
+                <div class="method-principle">使用凸组合思想融合波动率、相关性与结构因子，平衡稳健性与极端情形下的风险敏感性</div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-title">参数设置</div>
+            <div class="form-grid">
+                <div class="form-item" style="grid-column: 1 / -1;">
+                    <label for="holdings">持仓股票（逗号分隔，例如：000001.SZ,000002.SZ,000063.SZ） <button id="load-holdings-risk" style="background: rgba(102, 126, 234, 0.3); border: 1px solid var(--primary); color: var(--primary-light); padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 1rem;">📋 我的持股</button></label>
+                    <textarea id="holdings">000001.SZ,000002.SZ,000063.SZ,000100.SZ,000157.SZ</textarea>
+                </div>
+                <div class="form-item">
+                    <label for="lookback">回看窗口 (天)</label>
+                    <input id="lookback" type="number" min="30" max="1200" value="500">
+                </div>
+                <div class="form-item">
+                    <label for="risk-horizon">风险预测周期 (天)</label>
+                    <input id="risk-horizon" type="number" min="1" max="90" value="20">
+                </div>
+                <div class="form-item">
+                    <label for="predict-start-date">开始预测日期（仅登录用户可选）</label>
+                    <input id="predict-start-date" type="date" disabled>
+                </div>
+                <div class="form-item">
+                    <label for="edge-threshold">关联阈值</label>
+                    <input id="edge-threshold" type="number" min="0" max="1" step="0.01" value="0.18">
+                </div>
+                <div class="form-item">
+                    <label for="topk">每个节点保留边数 Top-K</label>
+                    <input id="topk" type="number" min="1" max="20" value="6">
+                </div>
+                <div class="form-item">
+                    <label for="convex-lambda">Convex λ</label>
+                    <input id="convex-lambda" type="number" min="0" max="1" step="0.05" value="0.6">
+                </div>
+                <div class="form-item">
+                    <label for="normalize-mode">标准化方式</label>
+                    <select id="normalize-mode">
+                        <option value="zscore">z-score</option>
+                        <option value="minmax">min-max</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-risk" id="run-btn">生成风险画像</button>
+                <button class="btn-ghost" id="reset-btn">重置参数</button>
+                <button class="btn-ghost" id="export-csv-btn">导出 CSV</button>
+                <button class="btn-ghost" id="export-json-btn">导出 JSON</button>
+            </div>
+
+            <div style="margin-top: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: 10px; background: rgba(102, 126, 234, 0.08);">
+                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.7rem;">策略快照（保存当前风险配置，支持一键切换）</div>
+                <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                    <select id="snapshot-select-risk" class="param-select" style="min-width: 220px; flex: 1;"></select>
+                    <input id="snapshot-name-risk" class="param-input" placeholder="输入快照名称，例如：稳健" style="min-width: 220px; flex: 1;" />
+                    <button id="snapshot-save-risk" class="btn-ghost">保存快照</button>
+                    <button id="snapshot-apply-risk" class="btn-ghost">应用快照</button>
+                    <button id="snapshot-delete-risk" class="btn-ghost">删除快照</button>
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.7rem; flex-wrap: wrap;">
+                    <button id="snapshot-quick-aggressive-risk" class="btn-ghost" style="padding: 0.45rem 0.8rem; font-size: 0.85rem;">激进</button>
+                    <button id="snapshot-quick-neutral-risk" class="btn-ghost" style="padding: 0.45rem 0.8rem; font-size: 0.85rem;">中性</button>
+                    <button id="snapshot-quick-steady-risk" class="btn-ghost" style="padding: 0.45rem 0.8rem; font-size: 0.85rem;">稳健</button>
+                </div>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-color);">
+                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.7rem;">快照对比（自动高亮差异参数）</div>
+                    <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+                        <select id="snapshot-compare-a-risk" class="param-select" style="min-width: 200px; flex: 1;"></select>
+                        <span style="color: var(--text-muted);">vs</span>
+                        <select id="snapshot-compare-b-risk" class="param-select" style="min-width: 200px; flex: 1;"></select>
+                        <select id="snapshot-compare-scope-risk" class="param-select" style="min-width: 160px;">
+                            <option value="all">全局</option>
+                            <option value="predict">预测页</option>
+                            <option value="risk">风险页</option>
+                            <option value="backtest">回测页</option>
+                            <option value="shared">共享上下文</option>
+                        </select>
+                    </div>
+                    <div id="snapshot-compare-summary-risk" style="margin-top: 0.6rem; color: var(--text-secondary); font-size: 0.85rem;"></div>
+                    <div id="snapshot-compare-results-risk" style="margin-top: 0.7rem; display: grid; gap: 0.45rem;"></div>
+                </div>
+            </div>
+
+            <div class="metric-row">
+                <div class="metric"><div class="label">组合平均风险</div><div class="value" id="metric-mean">--</div></div>
+                <div class="metric"><div class="label">最高风险股票</div><div class="value" id="metric-max-stock">--</div></div>
+                <div class="metric"><div class="label">最高风险分数</div><div class="value" id="metric-max-score">--</div></div>
+                <div class="metric"><div class="label">关联边数量</div><div class="value" id="metric-edge-count">--</div></div>
+            </div>
+        </div>
+
+        <div class="viz-grid">
+            <div class="chart-card">
+                <div class="chart-title">风险关联画像（网络图）</div>
+                <div id="network-chart" class="chart-box"></div>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">持仓风险分数（方法对比）</div>
+                <div id="bar-chart" class="chart-box small"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化导航栏
+        document.addEventListener('DOMContentLoaded', () => {
+            new ETF.Navbar({ currentPage: 'risk' });
+
+            initPredictStartDateControl();
+            restoreRiskParams();
+
+            const watchIds = [
+                'holdings', 'lookback', 'risk-horizon', 'predict-start-date',
+                'edge-threshold', 'topk', 'convex-lambda', 'normalize-mode'
+            ];
+            watchIds.forEach((id) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('change', saveRiskParams);
+                el.addEventListener('input', saveRiskParams);
+            });
+            ['method-gcn', 'method-coefficient', 'method-convex'].forEach((id) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('change', saveRiskParams);
+            });
+
+            document.getElementById('snapshot-save-risk').addEventListener('click', saveRiskSnapshot);
+            document.getElementById('snapshot-apply-risk').addEventListener('click', applyRiskSnapshot);
+            document.getElementById('snapshot-delete-risk').addEventListener('click', deleteRiskSnapshot);
+            document.getElementById('snapshot-select-risk').addEventListener('change', () => {
+                const val = document.getElementById('snapshot-select-risk').value;
+                if (val) {
+                    document.getElementById('snapshot-name-risk').value = val;
+                    applyRiskSnapshot();
+                }
+            });
+            document.getElementById('snapshot-quick-aggressive-risk').addEventListener('click', () => quickApplyRiskSnapshot('激进'));
+            document.getElementById('snapshot-quick-neutral-risk').addEventListener('click', () => quickApplyRiskSnapshot('中性'));
+            document.getElementById('snapshot-quick-steady-risk').addEventListener('click', () => quickApplyRiskSnapshot('稳健'));
+            document.getElementById('snapshot-compare-a-risk').addEventListener('change', renderRiskSnapshotComparison);
+            document.getElementById('snapshot-compare-b-risk').addEventListener('change', renderRiskSnapshotComparison);
+            document.getElementById('snapshot-compare-scope-risk').addEventListener('change', renderRiskSnapshotComparison);
+
+            refreshRiskSnapshotList();
+            renderRiskSnapshotComparison();
+
+            runModel();
+        });
+        
+        let networkChart = null;
+        let barChart = null;
+
+        const defaults = {
+            holdings: '000001.SZ,000002.SZ,000063.SZ,000100.SZ,000157.SZ',
+            lookback: 500,
+            risk_horizon: 20,
+            predict_start_date: '',
+            edge_threshold: 0.18,
+            topk: 6,
+            convex_lambda: 0.6,
+            normalize_mode: 'zscore',
+            methods: ['gcn', 'coefficient']
+        };
+
+        function selectedMethods() {
+            const methods = [];
+            if (document.getElementById('method-gcn').checked) methods.push('gcn');
+            if (document.getElementById('method-coefficient').checked) methods.push('coefficient');
+            if (document.getElementById('method-convex').checked) methods.push('convex');
+            return methods;
+        }
+
+        function resetForm() {
+            document.getElementById('holdings').value = defaults.holdings;
+            document.getElementById('lookback').value = defaults.lookback;
+            document.getElementById('risk-horizon').value = defaults.risk_horizon;
+            document.getElementById('predict-start-date').value = defaults.predict_start_date || getTodayISO();
+            document.getElementById('edge-threshold').value = defaults.edge_threshold;
+            document.getElementById('topk').value = defaults.topk;
+            document.getElementById('convex-lambda').value = defaults.convex_lambda;
+            document.getElementById('normalize-mode').value = defaults.normalize_mode;
+            document.getElementById('method-gcn').checked = true;
+            document.getElementById('method-coefficient').checked = true;
+            document.getElementById('method-convex').checked = false;
+
+            if (window.ETF && window.ETF.StrategyState) {
+                window.ETF.StrategyState.clearPage('risk');
+                publishRiskSharedContext();
+            }
+        }
+
+        function saveRiskParams() {
+            // 安全检查：确保 StrategyState 已初始化
+            if (!window.ETF || !window.ETF.StrategyState) {
+                console.warn('StrategyState 未初始化，跳过参数保存');
+                return;
+            }
+            
+            const params = {
+                holdings: document.getElementById('holdings').value,
+                lookback: parseInt(document.getElementById('lookback').value, 10),
+                risk_horizon: parseInt(document.getElementById('risk-horizon').value, 10),
+                predict_start_date: document.getElementById('predict-start-date').value,
+                edge_threshold: parseFloat(document.getElementById('edge-threshold').value),
+                topk: parseInt(document.getElementById('topk').value, 10),
+                convex_lambda: parseFloat(document.getElementById('convex-lambda').value),
+                normalize_mode: document.getElementById('normalize-mode').value,
+                methods: selectedMethods()
+            };
+            window.ETF.StrategyState.setPage('risk', params);
+            publishRiskSharedContext();
+        }
+
+        function applyRiskParams(params) {
+            if (!params || typeof params !== 'object') return;
+            if (params.holdings) document.getElementById('holdings').value = params.holdings;
+            if (params.lookback) document.getElementById('lookback').value = params.lookback;
+            if (params.risk_horizon) document.getElementById('risk-horizon').value = params.risk_horizon;
+            if (params.predict_start_date) document.getElementById('predict-start-date').value = params.predict_start_date;
+            if (params.edge_threshold !== undefined) document.getElementById('edge-threshold').value = params.edge_threshold;
+            if (params.topk) document.getElementById('topk').value = params.topk;
+            if (params.convex_lambda !== undefined) document.getElementById('convex-lambda').value = params.convex_lambda;
+            if (params.normalize_mode) document.getElementById('normalize-mode').value = params.normalize_mode;
+            if (Array.isArray(params.methods)) {
+                document.getElementById('method-gcn').checked = params.methods.includes('gcn');
+                document.getElementById('method-coefficient').checked = params.methods.includes('coefficient');
+                document.getElementById('method-convex').checked = params.methods.includes('convex');
+            }
+        }
+
+        function buildSnapshotPayloadForRisk() {
+            if (!window.ETF || !window.ETF.StrategyState) {
+                return { pages: {}, shared: {} };
+            }
+            
+            const currentRisk = {
+                holdings: document.getElementById('holdings').value,
+                lookback: parseInt(document.getElementById('lookback').value, 10),
+                risk_horizon: parseInt(document.getElementById('risk-horizon').value, 10),
+                predict_start_date: document.getElementById('predict-start-date').value,
+                edge_threshold: parseFloat(document.getElementById('edge-threshold').value),
+                topk: parseInt(document.getElementById('topk').value, 10),
+                convex_lambda: parseFloat(document.getElementById('convex-lambda').value),
+                normalize_mode: document.getElementById('normalize-mode').value,
+                methods: selectedMethods()
+            };
+            const shared = window.ETF.StrategyState.getShared({});
+            return {
+                pages: {
+                    predict: window.ETF.StrategyState.getPage('predict', {}),
+                    risk: currentRisk,
+                    backtest: window.ETF.StrategyState.getPage('backtest', {})
+                },
+                shared: {
+                    ...shared,
+                    risk: {
+                        methods: currentRisk.methods,
+                        holdings: currentRisk.holdings,
+                        lookback: currentRisk.lookback,
+                        risk_horizon: currentRisk.risk_horizon,
+                        predict_start_date: currentRisk.predict_start_date || ''
+                    }
+                }
+            };
+        }
+
+        function refreshRiskSnapshotList(selectedName = '') {
+            const select = document.getElementById('snapshot-select-risk');
+            if (!select) return;
+            if (!window.ETF || !window.ETF.StrategyState) {
+                return;
+            }
+            const snapshots = window.ETF.StrategyState.listSnapshots();
+            select.innerHTML = '<option value="">选择快照</option>';
+            snapshots.forEach((item) => {
+                const option = document.createElement('option');
+                option.value = item.name;
+                option.textContent = item.name;
+                select.appendChild(option);
+            });
+            if (selectedName && snapshots.some((item) => item.name === selectedName)) {
+                select.value = selectedName;
+            }
+
+            const compareA = document.getElementById('snapshot-compare-a-risk');
+            const compareB = document.getElementById('snapshot-compare-b-risk');
+            if (!compareA || !compareB) {
+                return;
+            }
+
+            const prevA = compareA.value;
+            const prevB = compareB.value;
+            compareA.innerHTML = '<option value="">快照A</option>';
+            compareB.innerHTML = '<option value="">快照B</option>';
+
+            snapshots.forEach((item) => {
+                const optionA = document.createElement('option');
+                optionA.value = item.name;
+                optionA.textContent = item.name;
+                compareA.appendChild(optionA);
+
+                const optionB = document.createElement('option');
+                optionB.value = item.name;
+                optionB.textContent = item.name;
+                compareB.appendChild(optionB);
+            });
+
+            if (prevA && snapshots.some((item) => item.name === prevA)) {
+                compareA.value = prevA;
+            }
+            if (prevB && snapshots.some((item) => item.name === prevB)) {
+                compareB.value = prevB;
+            }
+
+            if (!compareA.value && snapshots.length >= 1) {
+                compareA.value = snapshots[0].name;
+            }
+            if (!compareB.value && snapshots.length >= 2) {
+                compareB.value = snapshots[1].name;
+            }
+            renderRiskSnapshotComparison();
+        }
+
+        function snapshotScopeData(snapshot, scope) {
+            const payload = snapshot?.payload || {};
+            if (scope === 'predict' || scope === 'risk' || scope === 'backtest') {
+                return (payload.pages && payload.pages[scope]) || {};
+            }
+            if (scope === 'shared') {
+                return payload.shared || {};
+            }
+            return payload;
+        }
+
+        function flattenSnapshotObject(input, prefix = '', result = {}) {
+            if (input === null || input === undefined) {
+                result[prefix || 'value'] = input;
+                return result;
+            }
+
+            if (Array.isArray(input)) {
+                result[prefix || 'value'] = JSON.stringify(input);
+                return result;
+            }
+
+            if (typeof input !== 'object') {
+                result[prefix || 'value'] = input;
+                return result;
+            }
+
+            const keys = Object.keys(input);
+            if (keys.length === 0) {
+                result[prefix || 'value'] = '{}';
+                return result;
+            }
+
+            keys.forEach((key) => {
+                const nextPath = prefix ? `${prefix}.${key}` : key;
+                flattenSnapshotObject(input[key], nextPath, result);
+            });
+            return result;
+        }
+
+        function formatCompareValue(value) {
+            if (value === undefined) return 'undefined';
+            if (value === null) return 'null';
+            if (typeof value === 'string') return value;
+            if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+            return JSON.stringify(value);
+        }
+
+        function renderRiskSnapshotComparison() {
+            const compareAName = document.getElementById('snapshot-compare-a-risk').value;
+            const compareBName = document.getElementById('snapshot-compare-b-risk').value;
+            const scope = document.getElementById('snapshot-compare-scope-risk').value;
+            const summary = document.getElementById('snapshot-compare-summary-risk');
+            const container = document.getElementById('snapshot-compare-results-risk');
+
+            if (!compareAName || !compareBName) {
+                summary.textContent = '请选择两个快照进行对比';
+                container.innerHTML = '';
+                return;
+            }
+
+            if (compareAName === compareBName) {
+                summary.textContent = '两个快照相同，无差异';
+                container.innerHTML = '';
+                return;
+            }
+
+            if (!window.ETF || !window.ETF.StrategyState) {
+                return;
+            }
+            const snapshotA = window.ETF.StrategyState.getSnapshot(compareAName);
+            const snapshotB = window.ETF.StrategyState.getSnapshot(compareBName);
+            if (!snapshotA || !snapshotB) {
+                summary.textContent = '快照不存在，请刷新后重试';
+                container.innerHTML = '';
+                return;
+            }
+
+            const flatA = flattenSnapshotObject(snapshotScopeData(snapshotA, scope));
+            const flatB = flattenSnapshotObject(snapshotScopeData(snapshotB, scope));
+            const keySet = new Set([...Object.keys(flatA), ...Object.keys(flatB)]);
+
+            const diffs = [];
+            Array.from(keySet).sort().forEach((key) => {
+                const valueA = flatA[key];
+                const valueB = flatB[key];
+                if (formatCompareValue(valueA) !== formatCompareValue(valueB)) {
+                    diffs.push({ key, valueA, valueB });
+                }
+            });
+
+            summary.textContent = `快照A: ${compareAName} | 快照B: ${compareBName} | 差异参数: ${diffs.length}`;
+
+            if (diffs.length === 0) {
+                container.innerHTML = '<div style="padding: 0.7rem; border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 8px; background: rgba(16, 185, 129, 0.08); color: #86efac;">当前范围内参数完全一致</div>';
+                return;
+            }
+
+            container.innerHTML = diffs.map((item) => `
+                <div style="padding: 0.7rem; border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 8px; background: rgba(245, 158, 11, 0.08);">
+                    <div style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 0.35rem;">${item.key}</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                        <div style="padding: 0.45rem; border-radius: 6px; background: rgba(239, 68, 68, 0.14); color: #fecaca;">A: ${formatCompareValue(item.valueA)}</div>
+                        <div style="padding: 0.45rem; border-radius: 6px; background: rgba(59, 130, 246, 0.14); color: #bfdbfe;">B: ${formatCompareValue(item.valueB)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function saveRiskSnapshot() {
+            saveRiskParams();
+            const name = String(document.getElementById('snapshot-name-risk').value || '').trim();
+            if (!name) {
+                alert('请先输入快照名称');
+                return;
+            }
+            try {
+                if (window.ETF && window.ETF.StrategyState) {
+                    window.ETF.StrategyState.saveSnapshot(name, buildSnapshotPayloadForRisk());
+                } else {
+                    throw new Error('系统未就绪，请刷新页面后重试');
+                }
+                refreshRiskSnapshotList(name);
+                alert(`快照已保存：${name}`);
+            } catch (error) {
+                alert(`保存快照失败：${error.message}`);
+            }
+        }
+
+        async function applyRiskSnapshot() {
+            const chosen = document.getElementById('snapshot-select-risk').value || document.getElementById('snapshot-name-risk').value;
+            const name = String(chosen || '').trim();
+            if (!name) {
+                alert('请先选择快照');
+                return;
+            }
+            try {
+                if (!window.ETF || !window.ETF.StrategyState) {
+                    throw new Error('系统未就绪，请刷新页面后重试');
+                }
+                const snapshot = window.ETF.StrategyState.applySnapshot(name);
+                const params = snapshot?.payload?.pages?.risk;
+                if (params) {
+                    applyRiskParams(params);
+                    saveRiskParams();
+                    await runModel();
+                }
+                document.getElementById('snapshot-name-risk').value = name;
+                refreshRiskSnapshotList(name);
+            } catch (error) {
+                alert(`应用快照失败：${error.message}`);
+            }
+        }
+
+        function deleteRiskSnapshot() {
+            const chosen = document.getElementById('snapshot-select-risk').value || document.getElementById('snapshot-name-risk').value;
+            const name = String(chosen || '').trim();
+            if (!name) {
+                alert('请先选择快照');
+                return;
+            }
+            if (!window.ETF || !window.ETF.StrategyState) {
+                return;
+            }
+            const ok = window.ETF.StrategyState.deleteSnapshot(name);
+            if (!ok) {
+                alert('删除失败：未找到该快照');
+                return;
+            }
+            document.getElementById('snapshot-name-risk').value = '';
+            refreshRiskSnapshotList();
+        }
+
+        async function quickApplyRiskSnapshot(name) {
+            if (!window.ETF || !window.ETF.StrategyState || !window.ETF.StrategyState.getSnapshot(name)) {
+                alert(`未找到快照：${name}`);
+                return;
+            }
+            document.getElementById('snapshot-select-risk').value = name;
+            document.getElementById('snapshot-name-risk').value = name;
+            await applyRiskSnapshot();
+        }
+
+        function publishRiskSharedContext() {
+            // 安全检查：确保 StrategyState 已初始化
+            if (!window.ETF || !window.ETF.StrategyState) {
+                console.warn('StrategyState 未初始化，跳过上下文发布');
+                return;
+            }
+            
+            window.ETF.StrategyState.mergeShared({
+                risk: {
+                    methods: selectedMethods(),
+                    holdings: document.getElementById('holdings').value,
+                    lookback: parseInt(document.getElementById('lookback').value, 10),
+                    risk_horizon: parseInt(document.getElementById('risk-horizon').value, 10),
+                    predict_start_date: document.getElementById('predict-start-date').value || ''
+                }
+            });
+        }
+
+        function restoreRiskParams() {
+            // 安全检查：确保 StrategyState 已初始化
+            if (!window.ETF || !window.ETF.StrategyState) {
+                console.warn('StrategyState 未初始化，使用默认参数');
+                return;
+            }
+            
+            const pageParams = window.ETF.StrategyState.getPage('risk', null);
+            const shared = window.ETF.StrategyState.getShared({});
+
+            if (pageParams) {
+                if (pageParams.holdings) document.getElementById('holdings').value = pageParams.holdings;
+                if (pageParams.lookback) document.getElementById('lookback').value = pageParams.lookback;
+                if (pageParams.risk_horizon) document.getElementById('risk-horizon').value = pageParams.risk_horizon;
+                if (pageParams.predict_start_date) document.getElementById('predict-start-date').value = pageParams.predict_start_date;
+                if (pageParams.edge_threshold !== undefined) document.getElementById('edge-threshold').value = pageParams.edge_threshold;
+                if (pageParams.topk) document.getElementById('topk').value = pageParams.topk;
+                if (pageParams.convex_lambda !== undefined) document.getElementById('convex-lambda').value = pageParams.convex_lambda;
+                if (pageParams.normalize_mode) document.getElementById('normalize-mode').value = pageParams.normalize_mode;
+                const methods = Array.isArray(pageParams.methods) ? pageParams.methods : defaults.methods;
+                document.getElementById('method-gcn').checked = methods.includes('gcn');
+                document.getElementById('method-coefficient').checked = methods.includes('coefficient');
+                document.getElementById('method-convex').checked = methods.includes('convex');
+                return;
+            }
+
+            if (shared.risk && typeof shared.risk === 'object') {
+                const fromRisk = shared.risk;
+                if (fromRisk.holdings) document.getElementById('holdings').value = fromRisk.holdings;
+                if (fromRisk.lookback) document.getElementById('lookback').value = fromRisk.lookback;
+                if (fromRisk.risk_horizon) document.getElementById('risk-horizon').value = fromRisk.risk_horizon;
+                if (fromRisk.predict_start_date) document.getElementById('predict-start-date').value = fromRisk.predict_start_date;
+                if (Array.isArray(fromRisk.methods)) {
+                    document.getElementById('method-gcn').checked = fromRisk.methods.includes('gcn');
+                    document.getElementById('method-coefficient').checked = fromRisk.methods.includes('coefficient');
+                    document.getElementById('method-convex').checked = fromRisk.methods.includes('convex');
+                }
+                return;
+            }
+
+            if (shared.predict && typeof shared.predict === 'object') {
+                if (shared.predict.predict_start_date) {
+                    document.getElementById('predict-start-date').value = shared.predict.predict_start_date;
+                }
+                if (shared.predict.stock) {
+                    document.getElementById('holdings').value = shared.predict.stock;
+                }
+            }
+        }
+
+        function getTodayISO() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        function initPredictStartDateControl() {
+            defaults.predict_start_date = getTodayISO();
+            const input = document.getElementById('predict-start-date');
+
+            const update = () => {
+                const loggedIn = window.ETF.userManager.isLoggedIn();
+                if (!loggedIn) {
+                    input.disabled = true;
+                    input.value = getTodayISO();
+                    return;
+                }
+                input.disabled = false;
+                if (!input.value) {
+                    input.value = getTodayISO();
+                }
+            };
+
+            update();
+            window.ETF.userManager.onChange(update);
+        }
+
+        function collectPayload() {
+            const methods = selectedMethods();
+            if (methods.length === 0) {
+                alert('请至少勾选一种风险建模方法');
+                return null;
+            }
+
+            const payload = {
+                methods,
+                holdings: document.getElementById('holdings').value,
+                lookback: parseInt(document.getElementById('lookback').value, 10),
+                risk_horizon: parseInt(document.getElementById('risk-horizon').value, 10),
+                edge_threshold: parseFloat(document.getElementById('edge-threshold').value),
+                topk: parseInt(document.getElementById('topk').value, 10),
+                convex_lambda: parseFloat(document.getElementById('convex-lambda').value),
+                normalize_mode: document.getElementById('normalize-mode').value
+            };
+
+            if (window.ETF.userManager.isLoggedIn()) {
+                payload.predict_start_date = document.getElementById('predict-start-date').value || getTodayISO();
+            }
+
+            return payload;
+        }
+
+        function renderNetwork(data) {
+            if (!networkChart) {
+                networkChart = echarts.init(document.getElementById('network-chart'));
+            }
+
+            const option = {
+                backgroundColor: 'transparent',
+                tooltip: {
+                    trigger: 'item',
+                    formatter: (params) => {
+                        if (params.dataType === 'edge') {
+                            return `${params.data.source} → ${params.data.target}<br/>关联强度: ${params.data.value.toFixed(3)}`;
+                        }
+                        return `${params.data.name}<br/>风险分数: ${params.data.risk.toFixed(3)}`;
+                    }
+                },
+                series: [
+                    {
+                        type: 'graph',
+                        layout: 'force',
+                        roam: true,
+                        draggable: true,
+                        force: {
+                            repulsion: 320,
+                            edgeLength: [80, 220]
+                        },
+                        label: {
+                            show: true,
+                            color: '#e0e0e0'
+                        },
+                        lineStyle: {
+                            color: 'source',
+                            curveness: 0.15,
+                            opacity: 0.75,
+                            width: 1.5
+                        },
+                        emphasis: { focus: 'adjacency' },
+                        data: data.nodes.map((node) => ({
+                            id: node.id,
+                            name: node.name,
+                            value: node.risk,
+                            risk: node.risk,
+                            symbolSize: 26 + node.risk * 26,
+                            itemStyle: {
+                                color: node.color
+                            }
+                        })),
+                        links: data.links.map((link) => ({
+                            source: link.source,
+                            target: link.target,
+                            value: link.value,
+                            lineStyle: {
+                                width: Math.max(1, link.value * 6),
+                                color: '#8b9aff'
+                            }
+                        }))
+                    }
+                ]
+            };
+
+            networkChart.setOption(option, true);
+        }
+
+        function renderBars(data) {
+            if (!barChart) {
+                barChart = echarts.init(document.getElementById('bar-chart'));
+            }
+
+            const methods = data.method_series.map((item) => item.method.toUpperCase());
+            const series = data.method_series.map((item, index) => {
+                const colorMap = ['#667eea', '#f59e0b', '#10b981'];
+                return {
+                    name: item.method.toUpperCase(),
+                    type: 'bar',
+                    data: item.scores,
+                    itemStyle: { color: colorMap[index % colorMap.length] }
+                };
+            });
+
+            const option = {
+                backgroundColor: 'transparent',
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                legend: {
+                    data: methods,
+                    top: 0,
+                    textStyle: { color: '#b8b8d1' }
+                },
+                grid: {
+                    left: '4%',
+                    right: '4%',
+                    bottom: '3%',
+                    top: 50,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: data.stocks,
+                    axisLabel: { color: '#b8b8d1', rotate: 25 }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: { color: '#b8b8d1' },
+                    splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+                },
+                series
+            };
+
+            barChart.setOption(option, true);
+        }
+
+        function fillMetrics(data) {
+            document.getElementById('metric-mean').textContent = data.metrics.mean_risk.toFixed(4);
+            document.getElementById('metric-max-stock').textContent = data.metrics.max_risk_stock;
+            document.getElementById('metric-max-score').textContent = data.metrics.max_risk_score.toFixed(4);
+            document.getElementById('metric-edge-count').textContent = data.metrics.edge_count;
+        }
+
+        async function runModel() {
+            const payload = collectPayload();
+            if (!payload) return;
+
+            saveRiskParams();
+
+            const btn = document.getElementById('run-btn');
+            btn.disabled = true;
+            btn.textContent = '建模中...';
+
+            try {
+                const response = await fetch('/api/risk/modeling', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', ...window.ETF.http.getAuthHeaders() },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`接口错误: ${response.status}`);
+                }
+
+                const data = await response.json();
+                renderNetwork(data.graph);
+                renderBars(data.bar);
+                fillMetrics(data);
+            } catch (error) {
+                alert(`风险建模失败：${error.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '生成风险画像';
+            }
+        }
+
+        async function exportResult(format) {
+            const payload = collectPayload();
+            if (!payload) return;
+            payload.format = format;
+
+            const btn = document.getElementById(format === 'csv' ? 'export-csv-btn' : 'export-json-btn');
+            const oldText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = format === 'csv' ? '导出中 CSV...' : '导出中 JSON...';
+
+            try {
+                const response = await fetch('/api/risk/export', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', ...window.ETF.http.getAuthHeaders() },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    let message = `接口错误: ${response.status}`;
+                    try {
+                        const err = await response.json();
+                        if (err && err.error) {
+                            message = err.error;
+                        }
+                    } catch (e) {
+                        // 忽略 JSON 解析失败
+                    }
+                    throw new Error(message);
+                }
+
+                const blob = await response.blob();
+                const disposition = response.headers.get('Content-Disposition') || '';
+                let fileName = `risk_result.${format}`;
+                const match = disposition.match(/filename=([^;]+)/i);
+                if (match && match[1]) {
+                    fileName = match[1].replace(/"/g, '').trim();
+                }
+
+                const url = URL.createObjectURL(blob);
+                const anchor = document.createElement('a');
+                anchor.href = url;
+                anchor.download = fileName;
+                document.body.appendChild(anchor);
+                anchor.click();
+                anchor.remove();
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                alert(`导出失败：${error.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = oldText;
+            }
+        }
+
+        document.getElementById('run-btn').addEventListener('click', runModel);
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            resetForm();
+            runModel();
+        });
+        document.getElementById('load-holdings-risk').addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                if (!window.ETF.userManager.isLoggedIn()) {
+                    alert('请先登录以加载您的持股列表');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const username = resolveCurrentUsername();
+                let response = null;
+                let holdings = [];
+
+                if (username) {
+                    try {
+                        response = await window.ETF.http.get('/api/users/holdings/raw', { username });
+                        if (response && response.code === 0 && response.data && Array.isArray(response.data.holdings)) {
+                            holdings = response.data.holdings;
+                        }
+                    } catch (err) {
+                        console.warn('raw holdings 接口失败，尝试兼容接口:', err);
+                    }
+                }
+
+                if (holdings.length === 0) {
+                    try {
+                        response = await window.ETF.http.get('/api/users/holdings');
+                        holdings = extractHoldingsFromResponse(response);
+                    } catch (err) {
+                        console.warn('主接口获取持股失败，尝试兼容接口:', err);
+                    }
+                }
+
+                if (holdings.length === 0 && username) {
+                    try {
+                        response = await window.ETF.http.get('/api/users/holdings', { username });
+                        holdings = extractHoldingsFromResponse(response);
+                    } catch (err) {
+                        console.warn('query 参数接口获取持股失败，尝试路径接口:', err);
+                    }
+                }
+
+                if (holdings.length === 0 && username) {
+                    try {
+                        response = await window.ETF.http.get(`/api/users/${encodeURIComponent(username)}/holdings`);
+                        holdings = extractHoldingsFromResponse(response);
+                    } catch (err) {
+                        console.warn('路径接口获取持股失败:', err);
+                    }
+                }
+
+                if (holdings.length > 0) {
+                    const uniqueHoldings = Array.from(new Set(
+                        holdings
+                            .map(code => String(code || '').trim().toUpperCase())
+                            .filter(code => code.length > 0)
+                    ));
+                    document.getElementById('holdings').value = uniqueHoldings.join(',');
+                    saveRiskParams();
+                } else {
+                    const backendMessage = response && response.message ? response.message : '';
+                    if (backendMessage) {
+                        alert(`未找到您的持股列表：${backendMessage}`);
+                    } else {
+                        alert('未找到您的持股列表，请先在持股管理中添加股票');
+                    }
+                }
+            } catch (error) {
+                console.error('加载持股列表失败:', error);
+                alert('加载持股列表失败: ' + error.message);
+            }
+        });
+
+        function extractHoldingsFromResponse(response) {
+            if (!response || response.code !== 0) {
+                return [];
+            }
+
+            if (Array.isArray(response.data)) {
+                return response.data
+                    .map(item => typeof item === 'string' ? item : item?.code)
+                    .filter(code => typeof code === 'string' && code.trim().length > 0);
+            }
+
+            if (response.data && Array.isArray(response.data.holdings)) {
+                return response.data.holdings
+                    .map(item => typeof item === 'string' ? item : item?.code)
+                    .filter(code => typeof code === 'string' && code.trim().length > 0);
+            }
+
+            return [];
+        }
+
+        function resolveCurrentUsername() {
+            try {
+                const currentUser = window.ETF.userManager.getUserData();
+                if (currentUser && currentUser.username) {
+                    return String(currentUser.username).trim();
+                }
+
+                const rawUserData = localStorage.getItem('userData');
+                if (rawUserData) {
+                    const parsed = JSON.parse(rawUserData);
+                    if (parsed && parsed.username) {
+                        return String(parsed.username).trim();
+                    }
+                    if (parsed && parsed.data && parsed.data.username) {
+                        return String(parsed.data.username).trim();
+                    }
+                }
+
+                const remembered = window.ETF.Storage.get('rememberedUsername');
+                if (remembered) {
+                    return String(remembered).trim();
+                }
+            } catch (error) {
+                console.warn('解析当前用户名失败:', error);
+            }
+            return '';
+        }
+        document.getElementById('export-csv-btn').addEventListener('click', () => exportResult('csv'));
+        document.getElementById('export-json-btn').addEventListener('click', () => exportResult('json'));
+
+        window.addEventListener('resize', () => {
+            if (networkChart) networkChart.resize();
+            if (barChart) barChart.resize();
+        });
+    </script>
+</body>
+</html>

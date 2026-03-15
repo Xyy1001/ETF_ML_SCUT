@@ -1,0 +1,2605 @@
+nohup: ignoring input
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:35: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="ffill")
+/home/liwenbo/xuyingyu/GRU/LSTM_GRU_multi.py:36: FutureWarning: Series.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df[col] = df[col].fillna(method="bfill")
+
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+开始缺失值填充...
+缺失值统计:
+mtm_5                  5
+mtm_10                10
+mtm_20                20
+ma_5                   4
+ma_10                  9
+ma_20                 19
+ema_5                  4
+ema_10                 9
+ema_20                19
+tr                     1
+atr                   14
+u                      1
+d                      1
+au                    14
+ad                    14
+rs                    14
+rsi                   14
+ma_12                 11
+ma_26                 25
+ema_12                11
+ema_26                25
+dif                   25
+dif_ma_9              33
+dea                   33
+volume_change_rate     1
+dtype: int64
+填充后剩余缺失值数量: 0
+读取到 26 个数据文件
+数据文件列表: ['000895.SZ.csv', '000807.SZ.csv', '000625.SZ.csv', '000100.SZ.csv', '000568.SZ.csv', '000651.SZ.csv', '000800.SZ.csv', '000786.SZ.csv', '000338.SZ.csv', '000630.SZ.csv', '000617.SZ.csv', '000063.SZ.csv', '000596.SZ.csv', '000708.SZ.csv', '000876.SZ.csv', '000725.SZ.csv', '000157.SZ.csv', '000768.SZ.csv', '000425.SZ.csv', '000538.SZ.csv', '000858.SZ.csv', '000301.SZ.csv', '000002.SZ.csv', '000408.SZ.csv', '000661.SZ.csv', '000001.SZ.csv']
+数据加载完成！
+数据集数量: 26
+
+=== 开始训练: 000895.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3014
+目标变量形状: (3123,)
+特征变量形状: (3123, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 238
+目标变量形状: (347,)
+特征变量形状: (347, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3014
+测试集样本数: 238
+开始训练...
+Epoch [10/100], Loss (反标准化后): 1.987530
+Epoch [20/100], Loss (反标准化后): 1.435041
+Epoch [30/100], Loss (反标准化后): 1.196181
+Epoch [40/100], Loss (反标准化后): 1.190689
+Epoch [50/100], Loss (反标准化后): 1.047832
+Epoch [60/100], Loss (反标准化后): 0.984504
+Epoch [70/100], Loss (反标准化后): 0.944081
+Epoch [80/100], Loss (反标准化后): 1.119547
+Epoch [90/100], Loss (反标准化后): 1.122715
+Epoch [100/100], Loss (反标准化后): 0.956624
+训练完成！
+模型已保存到 gru_models/000895.SZ.pth
+训练曲线已保存到 gru_plots/000895.SZ.png
+
+=== 开始训练: 000807.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3107
+目标变量形状: (3216,)
+特征变量形状: (3216, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 249
+目标变量形状: (358,)
+特征变量形状: (358, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3107
+测试集样本数: 249
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.107350
+Epoch [20/100], Loss (反标准化后): 0.055534
+Epoch [30/100], Loss (反标准化后): 0.044253
+Epoch [40/100], Loss (反标准化后): 0.047072
+Epoch [50/100], Loss (反标准化后): 0.025211
+Epoch [60/100], Loss (反标准化后): 0.038907
+Epoch [70/100], Loss (反标准化后): 0.039937
+Epoch [80/100], Loss (反标准化后): 0.023866
+Epoch [90/100], Loss (反标准化后): 0.015887
+Epoch [100/100], Loss (反标准化后): 0.018147
+训练完成！
+模型已保存到 gru_models/000807.SZ.pth
+训练曲线已保存到 gru_plots/000807.SZ.png
+
+=== 开始训练: 000625.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3118
+目标变量形状: (3227,)
+特征变量形状: (3227, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 250
+目标变量形状: (359,)
+特征变量形状: (359, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3118
+测试集样本数: 250
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.201176
+Epoch [20/100], Loss (反标准化后): 0.112627
+Epoch [30/100], Loss (反标准化后): 0.076732
+Epoch [40/100], Loss (反标准化后): 0.088529
+Epoch [50/100], Loss (反标准化后): 0.068235
+Epoch [60/100], Loss (反标准化后): 0.054266
+Epoch [70/100], Loss (反标准化后): 0.053751
+Epoch [80/100], Loss (反标准化后): 0.032659
+Epoch [90/100], Loss (反标准化后): 0.034341
+Epoch [100/100], Loss (反标准化后): 0.042671
+训练完成！
+模型已保存到 gru_models/000625.SZ.pth
+训练曲线已保存到 gru_plots/000625.SZ.png
+
+=== 开始训练: 000100.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3016
+目标变量形状: (3125,)
+特征变量形状: (3125, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 239
+目标变量形状: (348,)
+特征变量形状: (348, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3016
+测试集样本数: 239
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.015745
+Epoch [20/100], Loss (反标准化后): 0.008508
+Epoch [30/100], Loss (反标准化后): 0.008949
+Epoch [40/100], Loss (反标准化后): 0.005541
+Epoch [50/100], Loss (反标准化后): 0.005568
+Epoch [60/100], Loss (反标准化后): 0.004291
+Epoch [70/100], Loss (反标准化后): 0.004275
+Epoch [80/100], Loss (反标准化后): 0.003352
+Epoch [90/100], Loss (反标准化后): 0.002931
+Epoch [100/100], Loss (反标准化后): 0.003942
+训练完成！
+模型已保存到 gru_models/000100.SZ.pth
+训练曲线已保存到 gru_plots/000100.SZ.png
+
+=== 开始训练: 000568.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3176
+目标变量形状: (3285,)
+特征变量形状: (3285, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 257
+目标变量形状: (366,)
+特征变量形状: (366, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3176
+测试集样本数: 257
+开始训练...
+Epoch [10/100], Loss (反标准化后): 10.422799
+Epoch [20/100], Loss (反标准化后): 5.931174
+Epoch [30/100], Loss (反标准化后): 5.158794
+Epoch [40/100], Loss (反标准化后): 4.525951
+Epoch [50/100], Loss (反标准化后): 3.749451
+Epoch [60/100], Loss (反标准化后): 4.018156
+Epoch [70/100], Loss (反标准化后): 3.324204
+Epoch [80/100], Loss (反标准化后): 2.526217
+Epoch [90/100], Loss (反标准化后): 2.426288
+Epoch [100/100], Loss (反标准化后): 2.608747
+训练完成！
+模型已保存到 gru_models/000568.SZ.pth
+训练曲线已保存到 gru_plots/000568.SZ.png
+
+=== 开始训练: 000651.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3059
+目标变量形状: (3168,)
+特征变量形状: (3168, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 243
+目标变量形状: (352,)
+特征变量形状: (352, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3059
+测试集样本数: 243
+开始训练...
+Epoch [10/100], Loss (反标准化后): 2.090598
+Epoch [20/100], Loss (反标准化后): 1.595472
+Epoch [30/100], Loss (反标准化后): 0.937533
+Epoch [40/100], Loss (反标准化后): 1.013945
+Epoch [50/100], Loss (反标准化后): 0.803577
+Epoch [60/100], Loss (反标准化后): 0.692463
+Epoch [70/100], Loss (反标准化后): 0.661810
+Epoch [80/100], Loss (反标准化后): 1.010130
+Epoch [90/100], Loss (反标准化后): 0.783984
+Epoch [100/100], Loss (反标准化后): 0.638161
+训练完成！
+模型已保存到 gru_models/000651.SZ.pth
+训练曲线已保存到 gru_plots/000651.SZ.png
+
+=== 开始训练: 000800.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3179
+目标变量形状: (3288,)
+特征变量形状: (3288, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 257
+目标变量形状: (366,)
+特征变量形状: (366, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3179
+测试集样本数: 257
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.136509
+Epoch [20/100], Loss (反标准化后): 0.066976
+Epoch [30/100], Loss (反标准化后): 0.060144
+Epoch [40/100], Loss (反标准化后): 0.045797
+Epoch [50/100], Loss (反标准化后): 0.036775
+Epoch [60/100], Loss (反标准化后): 0.049684
+Epoch [70/100], Loss (反标准化后): 0.037987
+Epoch [80/100], Loss (反标准化后): 0.028811
+Epoch [90/100], Loss (反标准化后): 0.027861
+Epoch [100/100], Loss (反标准化后): 0.025225
+训练完成！
+模型已保存到 gru_models/000800.SZ.pth
+训练曲线已保存到 gru_plots/000800.SZ.png
+
+=== 开始训练: 000786.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3074
+目标变量形状: (3183,)
+特征变量形状: (3183, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 245
+目标变量形状: (354,)
+特征变量形状: (354, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3074
+测试集样本数: 245
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.755718
+Epoch [20/100], Loss (反标准化后): 0.399198
+Epoch [30/100], Loss (反标准化后): 0.367979
+Epoch [40/100], Loss (反标准化后): 0.280133
+Epoch [50/100], Loss (反标准化后): 0.276812
+Epoch [60/100], Loss (反标准化后): 0.256990
+Epoch [70/100], Loss (反标准化后): 0.197748
+Epoch [80/100], Loss (反标准化后): 0.194689
+Epoch [90/100], Loss (反标准化后): 0.198499
+Epoch [100/100], Loss (反标准化后): 0.180671
+训练完成！
+模型已保存到 gru_models/000786.SZ.pth
+训练曲线已保存到 gru_plots/000786.SZ.png
+
+=== 开始训练: 000338.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3203
+目标变量形状: (3312,)
+特征变量形状: (3312, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 259
+目标变量形状: (368,)
+特征变量形状: (368, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3203
+测试集样本数: 259
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.512829
+Epoch [20/100], Loss (反标准化后): 0.326549
+Epoch [30/100], Loss (反标准化后): 0.291899
+Epoch [40/100], Loss (反标准化后): 0.271604
+Epoch [50/100], Loss (反标准化后): 0.235940
+Epoch [60/100], Loss (反标准化后): 0.247838
+Epoch [70/100], Loss (反标准化后): 0.235079
+Epoch [80/100], Loss (反标准化后): 0.224359
+Epoch [90/100], Loss (反标准化后): 0.234029
+Epoch [100/100], Loss (反标准化后): 0.220942
+训练完成！
+模型已保存到 gru_models/000338.SZ.pth
+训练曲线已保存到 gru_plots/000338.SZ.png
+
+=== 开始训练: 000630.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3050
+目标变量形状: (3159,)
+特征变量形状: (3159, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 243
+目标变量形状: (352,)
+特征变量形状: (352, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3050
+测试集样本数: 243
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.252808
+Epoch [20/100], Loss (反标准化后): 0.161417
+Epoch [30/100], Loss (反标准化后): 0.158544
+Epoch [40/100], Loss (反标准化后): 0.138760
+Epoch [50/100], Loss (反标准化后): 0.130357
+Epoch [60/100], Loss (反标准化后): 0.132850
+Epoch [70/100], Loss (反标准化后): 0.119690
+Epoch [80/100], Loss (反标准化后): 0.132964
+Epoch [90/100], Loss (反标准化后): 0.142767
+Epoch [100/100], Loss (反标准化后): 0.124917
+训练完成！
+模型已保存到 gru_models/000630.SZ.pth
+训练曲线已保存到 gru_plots/000630.SZ.png
+
+=== 开始训练: 000617.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3086
+目标变量形状: (3195,)
+特征变量形状: (3195, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 247
+目标变量形状: (356,)
+特征变量形状: (356, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3086
+测试集样本数: 247
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.123014
+Epoch [20/100], Loss (反标准化后): 0.060245
+Epoch [30/100], Loss (反标准化后): 0.049790
+Epoch [40/100], Loss (反标准化后): 0.037681
+Epoch [50/100], Loss (反标准化后): 0.037639
+Epoch [60/100], Loss (反标准化后): 0.031337
+Epoch [70/100], Loss (反标准化后): 0.028675
+Epoch [80/100], Loss (反标准化后): 0.032367
+Epoch [90/100], Loss (反标准化后): 0.022228
+Epoch [100/100], Loss (反标准化后): 0.030155
+训练完成！
+模型已保存到 gru_models/000617.SZ.pth
+训练曲线已保存到 gru_plots/000617.SZ.png
+
+=== 开始训练: 000063.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3131
+目标变量形状: (3240,)
+特征变量形状: (3240, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 252
+目标变量形状: (361,)
+特征变量形状: (361, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3131
+测试集样本数: 252
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.616683
+Epoch [20/100], Loss (反标准化后): 0.360251
+Epoch [30/100], Loss (反标准化后): 0.286912
+Epoch [40/100], Loss (反标准化后): 0.217711
+Epoch [50/100], Loss (反标准化后): 0.304857
+Epoch [60/100], Loss (反标准化后): 0.177673
+Epoch [70/100], Loss (反标准化后): 0.166554
+Epoch [80/100], Loss (反标准化后): 0.122907
+Epoch [90/100], Loss (反标准化后): 0.159371
+Epoch [100/100], Loss (反标准化后): 0.166382
+训练完成！
+模型已保存到 gru_models/000063.SZ.pth
+训练曲线已保存到 gru_plots/000063.SZ.png
+
+=== 开始训练: 000596.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3201
+目标变量形状: (3310,)
+特征变量形状: (3310, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 259
+目标变量形状: (368,)
+特征变量形状: (368, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3201
+测试集样本数: 259
+开始训练...
+Epoch [10/100], Loss (反标准化后): 15.692248
+Epoch [20/100], Loss (反标准化后): 12.398414
+Epoch [30/100], Loss (反标准化后): 6.709396
+Epoch [40/100], Loss (反标准化后): 6.509403
+Epoch [50/100], Loss (反标准化后): 6.166553
+Epoch [60/100], Loss (反标准化后): 4.457273
+Epoch [70/100], Loss (反标准化后): 6.874328
+Epoch [80/100], Loss (反标准化后): 5.729943
+Epoch [90/100], Loss (反标准化后): 4.039620
+Epoch [100/100], Loss (反标准化后): 5.107746
+训练完成！
+模型已保存到 gru_models/000596.SZ.pth
+训练曲线已保存到 gru_plots/000596.SZ.png
+
+=== 开始训练: 000708.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3104
+目标变量形状: (3213,)
+特征变量形状: (3213, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 249
+目标变量形状: (358,)
+特征变量形状: (358, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3104
+测试集样本数: 249
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.303332
+Epoch [20/100], Loss (反标准化后): 0.141052
+Epoch [30/100], Loss (反标准化后): 0.095647
+Epoch [40/100], Loss (反标准化后): 0.090684
+Epoch [50/100], Loss (反标准化后): 0.057205
+Epoch [60/100], Loss (反标准化后): 0.055989
+Epoch [70/100], Loss (反标准化后): 0.100906
+Epoch [80/100], Loss (反标准化后): 0.047534
+Epoch [90/100], Loss (反标准化后): 0.032951
+Epoch [100/100], Loss (反标准化后): 0.049441
+训练完成！
+模型已保存到 gru_models/000708.SZ.pth
+训练曲线已保存到 gru_plots/000708.SZ.png
+
+=== 开始训练: 000876.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3041
+目标变量形状: (3150,)
+特征变量形状: (3150, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 242
+目标变量形状: (351,)
+特征变量形状: (351, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3041
+测试集样本数: 242
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.321950
+Epoch [20/100], Loss (反标准化后): 0.214502
+Epoch [30/100], Loss (反标准化后): 0.186615
+Epoch [40/100], Loss (反标准化后): 0.160742
+Epoch [50/100], Loss (反标准化后): 0.158384
+Epoch [60/100], Loss (反标准化后): 0.158222
+Epoch [70/100], Loss (反标准化后): 0.159541
+Epoch [80/100], Loss (反标准化后): 0.139924
+Epoch [90/100], Loss (反标准化后): 0.157372
+Epoch [100/100], Loss (反标准化后): 0.120667
+训练完成！
+模型已保存到 gru_models/000876.SZ.pth
+训练曲线已保存到 gru_plots/000876.SZ.png
+
+=== 开始训练: 000725.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3195
+目标变量形状: (3304,)
+特征变量形状: (3304, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 259
+目标变量形状: (368,)
+特征变量形状: (368, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3195
+测试集样本数: 259
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.009694
+Epoch [20/100], Loss (反标准化后): 0.005045
+Epoch [30/100], Loss (反标准化后): 0.003937
+Epoch [40/100], Loss (反标准化后): 0.003982
+Epoch [50/100], Loss (反标准化后): 0.002820
+Epoch [60/100], Loss (反标准化后): 0.002941
+Epoch [70/100], Loss (反标准化后): 0.002527
+Epoch [80/100], Loss (反标准化后): 0.002133
+Epoch [90/100], Loss (反标准化后): 0.002646
+Epoch [100/100], Loss (反标准化后): 0.002864
+训练完成！
+模型已保存到 gru_models/000725.SZ.pth
+训练曲线已保存到 gru_plots/000725.SZ.png
+
+=== 开始训练: 000157.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3198
+目标变量形状: (3307,)
+特征变量形状: (3307, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 259
+目标变量形状: (368,)
+特征变量形状: (368, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3198
+测试集样本数: 259
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.033595
+Epoch [20/100], Loss (反标准化后): 0.018156
+Epoch [30/100], Loss (反标准化后): 0.012943
+Epoch [40/100], Loss (反标准化后): 0.011519
+Epoch [50/100], Loss (反标准化后): 0.010512
+Epoch [60/100], Loss (反标准化后): 0.009350
+Epoch [70/100], Loss (反标准化后): 0.007776
+Epoch [80/100], Loss (反标准化后): 0.007554
+Epoch [90/100], Loss (反标准化后): 0.007020
+Epoch [100/100], Loss (反标准化后): 0.005051
+训练完成！
+模型已保存到 gru_models/000157.SZ.pth
+训练曲线已保存到 gru_plots/000157.SZ.png
+
+=== 开始训练: 000768.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3182
+目标变量形状: (3291,)
+特征变量形状: (3291, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 257
+目标变量形状: (366,)
+特征变量形状: (366, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3182
+测试集样本数: 257
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.545780
+Epoch [20/100], Loss (反标准化后): 0.277848
+Epoch [30/100], Loss (反标准化后): 0.216093
+Epoch [40/100], Loss (反标准化后): 0.172599
+Epoch [50/100], Loss (反标准化后): 0.175659
+Epoch [60/100], Loss (反标准化后): 0.115994
+Epoch [70/100], Loss (反标准化后): 0.120997
+Epoch [80/100], Loss (反标准化后): 0.108990
+Epoch [90/100], Loss (反标准化后): 0.098784
+Epoch [100/100], Loss (反标准化后): 0.113343
+训练完成！
+模型已保存到 gru_models/000768.SZ.pth
+训练曲线已保存到 gru_plots/000768.SZ.png
+
+=== 开始训练: 000425.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3161
+目标变量形状: (3270,)
+特征变量形状: (3270, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 255
+目标变量形状: (364,)
+特征变量形状: (364, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3161
+测试集样本数: 255
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.113432
+Epoch [20/100], Loss (反标准化后): 0.057697
+Epoch [30/100], Loss (反标准化后): 0.047169
+Epoch [40/100], Loss (反标准化后): 0.050033
+Epoch [50/100], Loss (反标准化后): 0.041737
+Epoch [60/100], Loss (反标准化后): 0.039327
+Epoch [70/100], Loss (反标准化后): 0.033244
+Epoch [80/100], Loss (反标准化后): 0.041125
+Epoch [90/100], Loss (反标准化后): 0.038632
+Epoch [100/100], Loss (反标准化后): 0.032002
+训练完成！
+模型已保存到 gru_models/000425.SZ.pth
+训练曲线已保存到 gru_plots/000425.SZ.png
+
+=== 开始训练: 000538.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3059
+目标变量形状: (3168,)
+特征变量形状: (3168, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 244
+目标变量形状: (353,)
+特征变量形状: (353, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3059
+测试集样本数: 244
+开始训练...
+Epoch [10/100], Loss (反标准化后): 4.549340
+Epoch [20/100], Loss (反标准化后): 2.549512
+Epoch [30/100], Loss (反标准化后): 2.176417
+Epoch [40/100], Loss (反标准化后): 1.919567
+Epoch [50/100], Loss (反标准化后): 1.610152
+Epoch [60/100], Loss (反标准化后): 1.586443
+Epoch [70/100], Loss (反标准化后): 1.415568
+Epoch [80/100], Loss (反标准化后): 1.146464
+Epoch [90/100], Loss (反标准化后): 1.264099
+Epoch [100/100], Loss (反标准化后): 1.193605
+训练完成！
+模型已保存到 gru_models/000538.SZ.pth
+训练曲线已保存到 gru_plots/000538.SZ.png
+
+=== 开始训练: 000858.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3152
+目标变量形状: (3261,)
+特征变量形状: (3261, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 254
+目标变量形状: (363,)
+特征变量形状: (363, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3152
+测试集样本数: 254
+开始训练...
+Epoch [10/100], Loss (反标准化后): 8.818001
+Epoch [20/100], Loss (反标准化后): 4.775456
+Epoch [30/100], Loss (反标准化后): 3.937410
+Epoch [40/100], Loss (反标准化后): 3.895720
+Epoch [50/100], Loss (反标准化后): 3.726483
+Epoch [60/100], Loss (反标准化后): 2.501466
+Epoch [70/100], Loss (反标准化后): 2.990654
+Epoch [80/100], Loss (反标准化后): 2.176151
+Epoch [90/100], Loss (反标准化后): 1.973069
+Epoch [100/100], Loss (反标准化后): 1.417223
+训练完成！
+模型已保存到 gru_models/000858.SZ.pth
+训练曲线已保存到 gru_plots/000858.SZ.png
+
+=== 开始训练: 000301.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3044
+目标变量形状: (3153,)
+特征变量形状: (3153, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 242
+目标变量形状: (351,)
+特征变量形状: (351, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3044
+测试集样本数: 242
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.160691
+Epoch [20/100], Loss (反标准化后): 0.083166
+Epoch [30/100], Loss (反标准化后): 0.067570
+Epoch [40/100], Loss (反标准化后): 0.057633
+Epoch [50/100], Loss (反标准化后): 0.048229
+Epoch [60/100], Loss (反标准化后): 0.044970
+Epoch [70/100], Loss (反标准化后): 0.032958
+Epoch [80/100], Loss (反标准化后): 0.025117
+Epoch [90/100], Loss (反标准化后): 0.041223
+Epoch [100/100], Loss (反标准化后): 0.022050
+训练完成！
+模型已保存到 gru_models/000301.SZ.pth
+训练曲线已保存到 gru_plots/000301.SZ.png
+
+=== 开始训练: 000002.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3070
+目标变量形状: (3179,)
+特征变量形状: (3179, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 245
+目标变量形状: (354,)
+特征变量形状: (354, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3070
+测试集样本数: 245
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.194800
+Epoch [20/100], Loss (反标准化后): 0.110803
+Epoch [30/100], Loss (反标准化后): 0.109476
+Epoch [40/100], Loss (反标准化后): 0.095201
+Epoch [50/100], Loss (反标准化后): 0.066317
+Epoch [60/100], Loss (反标准化后): 0.076732
+Epoch [70/100], Loss (反标准化后): 0.044695
+Epoch [80/100], Loss (反标准化后): 0.074396
+Epoch [90/100], Loss (反标准化后): 0.061026
+Epoch [100/100], Loss (反标准化后): 0.044444
+训练完成！
+模型已保存到 gru_models/000002.SZ.pth
+训练曲线已保存到 gru_plots/000002.SZ.png
+
+=== 开始训练: 000408.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3014
+目标变量形状: (3123,)
+特征变量形状: (3123, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 238
+目标变量形状: (347,)
+特征变量形状: (347, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3014
+测试集样本数: 238
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.377758
+Epoch [20/100], Loss (反标准化后): 0.200595
+Epoch [30/100], Loss (反标准化后): 0.131878
+Epoch [40/100], Loss (反标准化后): 0.125995
+Epoch [50/100], Loss (反标准化后): 0.105053
+Epoch [60/100], Loss (反标准化后): 0.091117
+Epoch [70/100], Loss (反标准化后): 0.073727
+Epoch [80/100], Loss (反标准化后): 0.071963
+Epoch [90/100], Loss (反标准化后): 0.065985
+Epoch [100/100], Loss (反标准化后): 0.068622
+训练完成！
+模型已保存到 gru_models/000408.SZ.pth
+训练曲线已保存到 gru_plots/000408.SZ.png
+
+=== 开始训练: 000661.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3162
+目标变量形状: (3271,)
+特征变量形状: (3271, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 255
+目标变量形状: (364,)
+特征变量形状: (364, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3162
+测试集样本数: 255
+开始训练...
+Epoch [10/100], Loss (反标准化后): 73.435539
+Epoch [20/100], Loss (反标准化后): 50.960430
+Epoch [30/100], Loss (反标准化后): 31.533310
+Epoch [40/100], Loss (反标准化后): 28.798468
+Epoch [50/100], Loss (反标准化后): 29.723091
+Epoch [60/100], Loss (反标准化后): 19.970003
+Epoch [70/100], Loss (反标准化后): 20.227623
+Epoch [80/100], Loss (反标准化后): 16.816393
+Epoch [90/100], Loss (反标准化后): 14.074881
+Epoch [100/100], Loss (反标准化后): 9.774468
+训练完成！
+模型已保存到 gru_models/000661.SZ.pth
+训练曲线已保存到 gru_plots/000661.SZ.png
+
+=== 开始训练: 000001.SZ ===
+
+=== 缺失值检查和处理 ===
+列 1 (open): 无缺失值
+列 2 (high): 无缺失值
+列 3 (low): 无缺失值
+列 4 (close): 无缺失值
+列 5 (pre_close): 无缺失值
+列 6 (change): 无缺失值
+列 7 (pct_chg): 无缺失值
+列 8 (vol): 无缺失值
+列 9 (amount): 无缺失值
+列 10 (mtm_5): 无缺失值
+列 11 (mtm_10): 无缺失值
+列 12 (mtm_20): 无缺失值
+列 13 (ma_5): 无缺失值
+列 14 (ma_10): 无缺失值
+列 15 (ma_20): 无缺失值
+列 16 (ema_5): 无缺失值
+列 17 (ema_10): 无缺失值
+列 18 (ema_20): 无缺失值
+列 19 (tr): 无缺失值
+列 20 (atr): 无缺失值
+列 21 (u): 无缺失值
+列 22 (d): 无缺失值
+列 23 (au): 无缺失值
+列 24 (ad): 无缺失值
+列 25 (rs): 无缺失值
+列 26 (rsi): 无缺失值
+列 27 (ma_12): 无缺失值
+列 28 (ma_26): 无缺失值
+列 29 (ema_12): 无缺失值
+列 30 (ema_26): 无缺失值
+列 31 (dif): 无缺失值
+列 32 (dif_ma_9): 无缺失值
+列 33 (dea): 无缺失值
+列 34 (volume_change_rate): 无缺失值
+
+缺失值处理总结:
+总共处理了 0 个缺失值
+数据完整，无缺失值
+✓ 所有缺失值已成功处理
+数据集样本数量: 3147
+目标变量形状: (3256,)
+特征变量形状: (3256, 33)
+每个样本包含天数: 110 (input=100, output=10)
+数据集样本数量: 253
+目标变量形状: (362,)
+特征变量形状: (362, 33)
+每个样本包含天数: 110 (input=100, output=10)
+训练集样本数: 3147
+测试集样本数: 253
+开始训练...
+Epoch [10/100], Loss (反标准化后): 0.150261
+Epoch [20/100], Loss (反标准化后): 0.089086
+Epoch [30/100], Loss (反标准化后): 0.068657
+Epoch [40/100], Loss (反标准化后): 0.046346
+Epoch [50/100], Loss (反标准化后): 0.043084
+Epoch [60/100], Loss (反标准化后): 0.036393
+Epoch [70/100], Loss (反标准化后): 0.042341
+Epoch [80/100], Loss (反标准化后): 0.028518
+Epoch [90/100], Loss (反标准化后): 0.022675
+Epoch [100/100], Loss (反标准化后): 0.022360
+训练完成！
+模型已保存到 gru_models/000001.SZ.pth
+训练曲线已保存到 gru_plots/000001.SZ.png

@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>持股管理 - ETF智能投资平台</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        /* 持股管理页面专属样式 */
+        .holdings-container {
+            max-width: 1200px;
+            margin: 110px auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .holdings-header {
+            margin-bottom: 2rem;
+        }
+
+        .holdings-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .holdings-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .holdings-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .holdings-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 左侧：添加股票 */
+        .add-stock-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .add-stock-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .stock-list-info {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .stock-list-info.available {
+            background: #f0f9ff;
+            color: #0369a1;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-group button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-add {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-add:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-add:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 右侧：持股列表 */
+        .holdings-list-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 140px);
+        }
+
+        .holdings-list-section h2 {
+            color: var(--primary);
+            margin-bottom: 0;
+            font-size: 1.5rem;
+        }
+
+        .holdings-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .btn-toggle-list {
+            border: 1px solid var(--primary);
+            background: rgba(102, 126, 234, 0.12);
+            color: #334155;
+            padding: 0.45rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .btn-toggle-list:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .holdings-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .holdings-list-section.is-compact {
+            max-height: 520px;
+        }
+
+        .holdings-list li {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .holdings-list li:hover {
+            background: #f0f7ff;
+            transform: translateX(4px);
+        }
+
+        .stock-info {
+            flex: 1;
+        }
+
+        .stock-code {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .stock-status {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .stock-status.supported {
+            color: #059669;
+        }
+
+        .stock-status.not-supported {
+            color: #dc2626;
+        }
+
+        .stock-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .btn-predict {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .btn-predict:hover {
+            background: #0369a1;
+            color: white;
+        }
+
+        .btn-risk {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .btn-risk:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .alert.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .alert-info {
+            background: #e0f2fe;
+            color: #0c4a6e;
+            border: 1px solid #7dd3fc;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .modal-content .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-actions button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-confirm {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-confirm:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-cancel {
+            background: #e5e7eb;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background: #d1d5db;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .holdings-container {
+                margin: 90px auto 1.25rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .add-stock-section {
+                position: static;
+                top: auto;
+            }
+
+            .holdings-list-section {
+                max-height: none;
+            }
+
+            .holdings-list {
+                overflow: visible;
+                padding-right: 0;
+            }
+
+            .holdings-section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="holdings-container">
+        <div class="holdings-header">
+            <h1>📈 持股管理中心</h1>
+            <p>管理你的投资组合，跟踪和优化你的持仓</p>
+        </div>
+
+        <!-- 统计信息 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="totalStocks">0</div>
+                <div class="stat-label">持有股票数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="supportedStocks">0</div>
+                <div class="stat-label">可分析股票</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="unsupportedStocks">0</div>
+                <div class="stat-label">待支持股票</div>
+            </div>
+        </div>
+
+        <!-- 提示信息 -->
+        <div id="alertBox" class="alert"></div>
+
+        <div class="holdings-layout">
+            <!-- 左侧：添加股票 -->
+            <div class="add-stock-section">
+                <h2>添加股票</h2>
+                <form id="addStockForm">
+                    <div class="form-group">
+                        <label for="stockCode">股票代码</label>
+                        <input 
+                            type="text" 
+                            id="stockCode" 
+                            placeholder="例：000001.SZ 或 000001.SZ,600000.SH,000063.SZ"
+                            autocomplete="off"
+                        >
+                    </div>
+                    <div class="stock-list-info available">
+                        <strong>支持的股票代码格式：</strong>
+                        <p>6位数字 + 交易所代码（.SZ 或 .SH）</p>
+                        <p>例如：000001.SZ、600000.SH</p>
+                        <p style="color: #0369a1; font-weight: 600; margin-top: 0.5rem;"> 支持批量添加：多个股票代码用逗号分隔</p>
+                        <p style="color: #0369a1;">例如：000001.SZ,600000.SH,000063.SZ</p>
+                    </div>
+                    <div id="availableList" class="stock-list-info" style="display: none;">
+                        <strong> 支持的股票列表：</strong>
+                        <div id="availableStocksPreview" style="margin-top: 0.5rem; max-height: 150px; overflow-y: auto; font-size: 0.85rem;"></div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-add">✓ 添加股票</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 右侧：持股列表 -->
+            <div class="holdings-list-section is-compact" id="holdingsListSection">
+                <div class="holdings-section-header">
+                    <h2>我的持股</h2>
+                    <button type="button" id="toggleHoldingsListBtn" class="btn-toggle-list" aria-expanded="false">展开列表</button>
+                </div>
+                <div id="loadingHolder" class="loading">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <ul id="holdingsList" class="holdings-list"></ul>
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 16 16 12 12 8 8 12 12 16"></polyline>
+                    </svg>
+                    <p>还没有添加任何股票</p>
+                    <p style="font-size: 0.9rem;">在左侧输入股票代码开始添加</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置参数模态框 -->
+    <div id="settingsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="settingsTitle">设置预测参数</h3>
+            <div class="form-group">
+                <label for="predictDays">预测天数</label>
+                <input type="number" id="predictDays" min="1" max="100" value="30">
+            </div>
+            <div class="form-group">
+                <label for="historyDays">历史数据天数</label>
+                <input type="number" id="historyDays" min="30" max="365" value="60">
+            </div>
+            <div class="form-group">
+                <label for="modelType">选择模型</label>
+                <select id="modelType">
+                    <option value="gru">GRU模型</option>
+                    <option value="transformer">Transformer模型</option>
+                    <option value="ensemble">融合模型（推荐）</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-confirm" id="confirmBtn">确认</button>
+                <button type="button" class="btn-cancel" id="cancelBtn">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        // 全局引用
+        let holdingsManager;
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', () => {
+            // 创建导航栏和页脚
+            new Navbar({ currentPage: 'holdings' });
+            new Footer();
+
+            // 初始化持股管理（供按钮内联事件复用）
+            holdingsManager = new HoldingsManager();
+            holdingsManager.init();
+        });
+
+        // 持股管理类
+        class HoldingsManager {
+            constructor() {
+                this.supportedStocks = [];
+                this.userHoldings = [];
+                this.editingStock = null;
+                this.currentUsername = '';
+                this.attachEventListeners();
+            }
+
+            async init() {
+                // 检查登录状态
+                if (!window.ETF.userManager.isLoggedIn()) {
+                    this.showAlert('请先登录', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'login.html?redirect=holdings.html';
+                    }, 1500);
+                    return;
+                }
+
+                // 获取当前用户名
+                const userData = window.ETF.userManager.getUserData();
+                this.currentUsername = userData ? userData.username : '';
+                
+                console.log('用户信息:', userData);
+                console.log('当前用户名:', this.currentUsername);
+                
+                if (!this.currentUsername) {
+                    this.showAlert('无法获取用户信息，请重新登录', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'login.html?redirect=holdings.html';
+                    }, 1500);
+                    return;
+                }
+
+                // 加载支持的股票列表和用户持股
+                await this.loadSupportedStocks();
+                await this.loadUserHoldings();
+            }
+
+            attachEventListeners() {
+                document.getElementById('addStockForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.addStock();
+                });
+
+                document.getElementById('cancelBtn').addEventListener('click', () => {
+                    this.closeModal();
+                });
+
+                document.getElementById('confirmBtn').addEventListener('click', () => {
+                    this.confirmSettings();
+                });
+
+                // 显示/隐藏支持的股票列表
+                document.getElementById('stockCode').addEventListener('focus', () => {
+                    if (this.supportedStocks.length > 0) {
+                        document.getElementById('availableList').style.display = 'block';
+                    }
+                });
+
+                document.getElementById('toggleHoldingsListBtn').addEventListener('click', () => {
+                    this.toggleHoldingsList();
+                });
+            }
+
+            toggleHoldingsList() {
+                const section = document.getElementById('holdingsListSection');
+                const toggleBtn = document.getElementById('toggleHoldingsListBtn');
+                const isCompact = section.classList.contains('is-compact');
+
+                if (isCompact) {
+                    section.classList.remove('is-compact');
+                    toggleBtn.textContent = '折叠列表';
+                    toggleBtn.setAttribute('aria-expanded', 'true');
+                } else {
+                    section.classList.add('is-compact');
+                    toggleBtn.textContent = '展开列表';
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            async loadSupportedStocks() {
+                try {
+                    const response = await window.ETF.http.get('/api/stocks/supported');
+                    if (response.code === 0) {
+                        this.supportedStocks = response.data || [];
+                        this.renderAvailableStocks();
+                    }
+                } catch (error) {
+                    console.error('加载支持股票列表失败:', error);
+                    this.showAlert('加载支持股票列表失败', 'error');
+                }
+            }
+
+            renderAvailableStocks() {
+                const preview = document.getElementById('availableStocksPreview');
+                if (this.supportedStocks.length === 0) {
+                    preview.innerHTML = '<p>加载中...</p>';
+                    return;
+                }
+                
+                const html = this.supportedStocks.map(code => 
+                    `<span style="display: inline-block; margin: 0.25rem; padding: 0.25rem 0.5rem; background: #dbeafe; color: #0c4a6e; border-radius: 3px; font-size: 0.8rem;">${code}</span>`
+                ).join('');
+                preview.innerHTML = html;
+            }
+
+            async loadUserHoldings() {
+                try {
+                    document.getElementById('loadingHolder').classList.add('active');
+
+                    const url = '/api/users/holdings';
+                    const params = { _ts: Date.now() };
+                    console.log('请求URL:', url, '参数:', params);
+                    
+                    const response = await window.ETF.http.get(url, params);
+                    
+                    console.log('API响应:', response);
+                    
+                    if (response.code === 0) {
+                        this.userHoldings = response.data || [];
+                        console.log('当前持股:', this.userHoldings);
+                        this.renderHoldings();
+                        this.updateStats();
+                    } else {
+                        console.error('API返回错误:', response.message);
+                        this.showAlert(response.message || '加载持股列表失败', 'error');
+                    }
+                } catch (error) {
+                    console.error('加载持股列表异常:', error);
+                    this.showAlert('加载持股列表失败: ' + error.message, 'error');
+                } finally {
+                    document.getElementById('loadingHolder').classList.remove('active');
+                }
+            }
+
+            renderHoldings() {
+                const list = document.getElementById('holdingsList');
+                const empty = document.getElementById('emptyState');
+
+                console.log('渲染持股列表，数据数量:', this.userHoldings.length);
+                console.log('持股数据:', this.userHoldings);
+
+                if (!this.userHoldings || this.userHoldings.length === 0) {
+                    list.innerHTML = '';
+                    empty.style.display = 'block';
+                    return;
+                }
+
+                empty.style.display = 'none';
+                list.innerHTML = this.userHoldings.map(stock => {
+                    // 处理不同的数据格式
+                    const code = stock.code || stock;
+                    const isSupported = stock.supported === true;
+                    const statusClass = isSupported ? 'supported' : 'not-supported';
+                    const statusText = isSupported ? '✓ 可分析' : '✗ 待支持';
+
+                    console.log(`渲染股票: ${code}, 支持: ${isSupported}`);
+
+                    return `
+                        <li>
+                            <div class="stock-info">
+                                <div class="stock-code">${code}</div>
+                                <div class="stock-status ${statusClass}">${statusText}</div>
+                            </div>
+                            <div class="stock-actions">
+                                ${isSupported ? `
+                                    <button class="btn-icon btn-predict" title="预测分析" onclick="window.location.href='predict.html?stock=${code}'">
+                                        📊
+                                    </button>
+                                    <button class="btn-icon btn-risk" title="风险评估" onclick="window.location.href='risk.html?stock=${code}'">
+                                        ⚠️
+                                    </button>
+                                ` : `
+                                    <button class="btn-icon" title="该股票暂不支持" style="cursor: not-allowed; opacity: 0.5;">
+                                        🔒
+                                    </button>
+                                `}
+                                <button class="btn-icon btn-delete" title="删除" onclick="holdingsManager.deleteStock('${code}')">
+                                    🗑️
+                                </button>
+                            </div>
+                        </li>
+                    `;
+                }).join('');
+            }
+
+            async addStock() {
+                const input = document.getElementById('stockCode').value.trim().toUpperCase();
+
+                if (!input) {
+                    this.showAlert('请输入股票代码', 'error');
+                    return;
+                }
+
+                // 支持逗号分隔的多个股票代码
+                const stockCodes = input.split(',').map(code => code.trim()).filter(code => code);
+
+                if (stockCodes.length === 0) {
+                    this.showAlert('请输入有效的股票代码', 'error');
+                    return;
+                }
+
+                // 验证所有股票代码格式
+                const pattern = /^\d{6}\.(SZ|SH|BJ)$/;
+                const invalidCodes = [];
+                const validCodes = [];
+                const duplicateCodes = [];
+
+                for (const code of stockCodes) {
+                    if (!pattern.test(code)) {
+                        invalidCodes.push(code);
+                    } else if (this.userHoldings.some(h => h.code === code)) {
+                        duplicateCodes.push(code);
+                    } else if (validCodes.includes(code)) {
+                        // 输入中有重复的代码
+                        if (!duplicateCodes.includes(code)) {
+                            duplicateCodes.push(code);
+                        }
+                    } else {
+                        validCodes.push(code);
+                    }
+                }
+
+                // 显示错误信息
+                if (invalidCodes.length > 0) {
+                    this.showAlert(`格式无效的股票代码: ${invalidCodes.join(', ')}`, 'error');
+                    return;
+                }
+
+                if (validCodes.length === 0) {
+                    if (duplicateCodes.length > 0) {
+                        this.showAlert(`所有股票都已在持股列表中: ${duplicateCodes.join(', ')}`, 'error');
+                    }
+                    return;
+                }
+
+                try {
+                    console.log('批量添加股票:', validCodes, '用户:', this.currentUsername);
+                    
+                    const response = await window.ETF.http.post('/api/users/holdings/add', {
+                        stock_codes: validCodes
+                    });
+
+                    console.log('添加响应:', response);
+                    
+                    if (response.code === 0) {
+                        const data = response.data || {};
+                        let message = '';
+                        
+                        if (data.added && data.added.length > 0) {
+                            message += `成功添加 ${data.added.length} 只股票: ${data.added.join(', ')}`;
+                        }
+                        
+                        if (data.failed && data.failed.length > 0) {
+                            if (message) message += '\n';
+                            message += `失败 ${data.failed.length} 只: ${data.failed.map(f => f.code).join(', ')}`;
+                        }
+                        
+                        if (duplicateCodes.length > 0) {
+                            if (message) message += '\n';
+                            message += `跳过已存在: ${duplicateCodes.join(', ')}`;
+                        }
+                        
+                        this.showAlert(message || '股票添加成功！', data.failed && data.failed.length > 0 ? 'warning' : 'success');
+                        document.getElementById('stockCode').value = '';
+                        // 重新加载持股列表
+                        await this.loadUserHoldings();
+                    } else {
+                        this.showAlert(response.message || '添加失败', 'error');
+                    }
+                } catch (error) {
+                    console.error('添加股票失败:', error);
+                    this.showAlert('添加失败: ' + error.message, 'error');
+                }
+            }
+
+            async deleteStock(stockCode) {
+                if (!confirm(`确定要删除 ${stockCode} 吗？`)) {
+                    return;
+                }
+
+                try {
+                    if (!this.currentUsername) {
+                        const userData = window.ETF.userManager.getUserData();
+                        this.currentUsername = userData ? userData.username : '';
+                    }
+
+                    if (!this.currentUsername) {
+                        this.showAlert('用户名不能为空，请重新登录后重试', 'error');
+                        return;
+                    }
+
+                    const response = await window.ETF.http.post('/api/users/holdings/remove', {
+                        stock_code: stockCode
+                    });
+
+                    if (response.code === 0) {
+                        this.showAlert('股票已删除', 'success');
+                        await this.loadUserHoldings();
+                    } else {
+                        this.showAlert(response.message || '删除失败', 'error');
+                    }
+                } catch (error) {
+                    console.error('删除股票失败:', error);
+                    this.showAlert('删除失败: ' + error.message, 'error');
+                }
+            }
+
+            updateStats() {
+                const total = this.userHoldings ? this.userHoldings.length : 0;
+                const supported = this.userHoldings ? this.userHoldings.filter(h => h.supported === true).length : 0;
+                const unsupported = total - supported;
+
+                console.log(`统计: 总数=${total}, 支持=${supported}, 待支持=${unsupported}`);
+
+                document.getElementById('totalStocks').textContent = total;
+                document.getElementById('supportedStocks').textContent = supported;
+                document.getElementById('unsupportedStocks').textContent = unsupported;
+            }
+
+            closeModal() {
+                document.getElementById('settingsModal').classList.remove('active');
+            }
+
+            confirmSettings() {
+                // TODO: 保存用户的预测和风险管理设置
+                this.closeModal();
+                this.showAlert('设置已保存', 'success');
+            }
+
+            showAlert(message, type = 'info') {
+                const alertBox = document.getElementById('alertBox');
+                alertBox.textContent = message;
+                alertBox.className = `alert alert-${type} active`;
+                setTimeout(() => {
+                    alertBox.classList.remove('active');
+                }, 4000);
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -47,7 +47,7 @@
 
         <!-- 主内容区 -->
         <div class="main-grid">
-            <!-- 左侧：数据和模型状�?-->
+            <!-- 左侧：数据和模型状态 -->
             <div class="left-panel">
                 <!-- 已有模型 -->
                 <div class="panel model-panel">
@@ -56,7 +56,7 @@
                             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
                             </svg>
-                            已训练模�?
+                            已训练模型
                         </h2>
                         <button class="btn-refresh" id="refreshModels" title="刷新模型列表">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -68,7 +68,7 @@
                     <div class="model-list" id="modelList">
                         <div class="loading">
                             <div class="spinner"></div>
-                            <p>加载模型列表�?..</p>
+                            <p>加载模型列表中...</p>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="data-list" id="dataList">
                         <div class="loading">
                             <div class="spinner"></div>
-                            <p>加载数据列表�?..</p>
+                            <p>加载数据列表中...</p>
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                                 <input type="number" id="batchSize" class="form-input" value="32" min="1" max="256">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">学习�?(Learning Rate)</label>
+                                <label class="form-label">学习率 (Learning Rate)</label>
                                 <input type="number" id="learningRate" class="form-input" value="0.001" min="0.0001"
                                     max="1" step="0.0001">
                             </div>
@@ -153,7 +153,7 @@
                                 <input type="number" id="outputWindow" class="form-input" value="10" min="1" max="50">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">LSTM隐藏�?/label>
+                                <label class="form-label">LSTM隐藏层大小</label>
                                     <input type="number" id="lstmHidden" class="form-input" value="64" min="16"
                                         max="256">
                             </div>
@@ -165,10 +165,10 @@
                                 stroke-width="2">
                                 <polygon points="5 3 19 12 5 21 5 3" />
                             </svg>
-                            开始训�?
+                            开始训练
                         </button>
 
-                        <!-- 停止按钮（训练时显示�?-->
+                        <!-- 停止按钮（训练时显示）-->
                         <button class="btn-stop" id="stopTrainBtn" style="display: none;">
                             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">

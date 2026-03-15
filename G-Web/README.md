@@ -1,143 +1,256 @@
-# ETF-ML展示系统
+# ETF智能投资平台（G-Web）统一说明文档
 
-基于深度学习的智能股票预测与分析展示平台，面向最终用户提供数据展示、模型展示、回测分析和AI智能助手功能。
+本文件为项目总说明，整合了当前仓库中所有 Markdown 文档的核心信息，作为唯一优先阅读入口。
 
-## 功能特性
+---
 
-- **🏠 首页展示**：系统概览、功能介绍、性能指标展示
-- **📊 数据展示**：原始股票数据和技术指标数据查看、下载
-- **🧠 模型展示**：LSTM+Transformer和GNN模型信息展示
-- **📈 回测分析**：策略回测、净值曲线、性能指标分析
-- **🤖 AI助手**：知识问答、数据分析、报告生成、文件下载
-- **💬 看板娘**：浮动智能助手，简单问答和快速导航
+## 1. 项目概述
 
-## 技术架构
+ETF 智能投资平台是一个基于 Flask + MySQL + PyTorch 的 Web 系统，提供三类核心能力：
 
-### 后端
-- Flask 2.3.3
-- Pandas 2.1.0
-- NumPy 1.24.3
+1. 股票预测（GRU / Transformer）
+2. 风险评估（coefficient / convex / gcn）
+3. 用户与持仓管理（注册、登录、持股增删查）
 
-### 前端
-- HTML5 + CSS3
-- 原生JavaScript
-- Chart.js 图表库
-- 蓝紫色渐变高智风格设计
+当前前端采用原生 HTML + CSS + JavaScript，后端采用 Flask 提供 REST API。
 
-### 机器学习模型
-- **LSTM+Transformer**：股票价格预测
-  - 输入：60天历史数据 + 7种技术指标
-  - 输出：10日价格预测
-  - 准确率：85%+
+---
 
-- **GNN图神经网络**：风险管理
-  - 图注意力网络(GAT)
-  - 预测协方差矩阵
-  - 投资组合优化
+## 2. 当前功能状态
 
-## 快速开始
+### 已完成
 
-### 安装依赖
+- 用户系统：注册、登录、用户信息维护
+- 持股管理：添加股票、删除股票、查看持股、支持状态展示
+- 股票预测：支持模型调用与可视化页面
+- 风险评估：支持多种模型方法
+
+### 近期关键修复
+
+- 密码最低长度已调整为 6 位
+- 导航与页面路由已补齐（首页/登录/注册/持股页）
+- 持股删除报错“用户名不能为空”已修复
+- 持仓接口改造为“优先从登录态识别用户”，前端不再依赖显式传 `username`
+
+---
+
+## 3. 目录与关键文件
+
+- `predict_api.py`：Flask 主入口与主要业务路由
+- `user_routes.py`：用户与持股相关 API
+- `user.py`：用户数据库访问与业务逻辑
+- `holdings.html`：持股管理页面
+- `predict.html`：预测页面
+- `risk.html`：风险评估页面
+- `js/utils.js`：HTTP 封装、用户状态、工具方法
+- `js/components.js`：导航栏/页脚/Toast 等公共组件
+- `test_holdings_system.py`：持仓链路测试脚本
+- `_verify_db_and_auth.py`：数据库与认证连通性辅助检查
+
+---
+
+## 4. 环境与启动
+
+## 4.1 安装依赖
 
 ```bash
-cd G-Web
 pip install -r requirements.txt
 ```
 
-### 运行服务
+## 4.2 配置数据库
+
+项目使用 `.env` 中的 MySQL 配置。启动后会自动检查并创建用户表。
+
+## 4.3 启动服务
+
+Windows:
 
 ```bash
-python app.py
+python predict_api.py
 ```
 
-服务将在 `http://localhost:5001` 启动
+或双击 `start.bat`。
 
-### 访问页面
+Linux / Mac:
 
-- 首页：http://localhost:5001/
-- 数据展示：http://localhost:5001/data
-- 模型展示：http://localhost:5001/models
-- 回测分析：http://localhost:5001/backtest
-- AI助手：http://localhost:5001/ai
-
-## 目录结构
-
-```
-G-Web/
-├── app.py                 # Flask后端主程序
-├── requirements.txt       # Python依赖
-├── README.md             # 说明文档
-├── templates/            # HTML模板
-│   ├── index.html       # 首页
-│   ├── data.html        # 数据展示页
-│   ├── models.html      # 模型展示页
-│   ├── backtest.html    # 回测分析页
-│   └── ai.html          # AI助手页
-└── static/              # 静态资源
-    ├── style.css        # 全局样式
-    ├── index.js         # 首页脚本
-    ├── data.css         # 数据页样式
-    ├── data.js          # 数据页脚本
-    ├── ai.css           # AI页样式
-    ├── ai.js            # AI页脚本
-    ├── mascot.css       # 看板娘样式
-    └── mascot.js        # 看板娘脚本
+```bash
+bash start.sh
 ```
 
-## API接口
+## 4.4 访问地址
 
-### 数据相关
-- `GET /api/data/summary` - 获取数据概览
-- `GET /api/data/stock/<code>` - 获取指定股票数据
+- 首页：`http://127.0.0.1:5000/`
+- 登录：`http://127.0.0.1:5000/login.html`
+- 注册：`http://127.0.0.1:5000/register.html`
+- 预测：`http://127.0.0.1:5000/predict.html`
+- 风险：`http://127.0.0.1:5000/risk.html`
+- 持股：`http://127.0.0.1:5000/holdings.html`
 
-### 模型相关
-- `GET /api/models/summary` - 获取模型概览
+---
 
-### 回测相关
-- `POST /api/backtest/run` - 运行回测分析
+## 4.5 自动每日数据库更新（新增）
 
-### AI助手相关
-- `POST /api/ai/chat` - AI聊天接口
-- `GET /api/ai/knowledge` - 获取知识库分类
-- `GET /api/ai/suggest` - 获取问题建议
-- `POST /api/ai/analysis` - 生成分析报告
-- `POST /api/ai/download` - 下载文件
+网站启动后（`python predict_api.py` 或 `start.sh` / `start.bat`），后端会在后台自动执行“日线增量更新 + 指标计算 + 入库”。
 
-### 看板娘相关
-- `POST /api/mascot/chat` - 看板娘简单问答
+默认行为：
 
-## 知识库分类
+1. 启动服务时先执行一次更新检查
+2. 之后按固定间隔轮询 Tushare 是否有新数据
+3. 若有新数据，自动增量写入数据库并更新指标
 
-系统AI助手包含8大知识库分类：
-1. 系统介绍
-2. 股票预测
-3. 风险控制
-4. 回测分析
-5. 技术指标
-6. 数据来源
-7. 模型架构
-8. 使用帮助
+可通过 `.env` 配置：
 
-## 设计特色
+```env
+# 是否启用自动更新（true/false）
+AUTO_DAILY_UPDATE_ENABLED=true
 
-- 🎨 蓝紫色渐变主题 (#667eea → #764ba2)
-- 🌙 深色模式设计
-- ✨ 毛玻璃效果 (backdrop-filter)
-- 🎯 卡片式布局
-- 📱 响应式设计
-- 🎭 平滑动画过渡
+# 启动服务时是否先跑一次
+AUTO_DAILY_UPDATE_RUN_ON_START=true
 
-## 注意事项
+# 轮询间隔（分钟）
+AUTO_DAILY_UPDATE_INTERVAL_MINUTES=60
 
-1. 本系统为**展示型系统**，面向不可操作用户
-2. 数据和模型路径配置在 `app.py` 中
-3. 回测功能当前为模拟数据，需接入 `C-Backtest/backtest.py`
-4. AI问答基于关键词匹配，可升级为大模型接入
+# 指标重算回看窗口（天）
+AUTO_DAILY_UPDATE_LOOKBACK_DAYS=120
 
-## 开发团队
+# 空表初次拉取起始日期
+AUTO_DAILY_UPDATE_DEFAULT_START_DATE=20100101
+```
 
-华南理工大学 机器学习与金融科技团队
+说明：
 
-## 许可证
+1. 自动更新会读取当前 `.env` 的数据库配置和 `TUSHARE_TOKEN`
+2. 仅会处理数据库中股票表（如 `000001.SZ`），不会影响其他业务表
+3. 更新日志会在后端控制台输出，前缀为 `[AutoUpdate]`
 
-© 2026 ETF-ML. All rights reserved.
+---
+
+## 5. 持股管理说明
+
+## 5.1 支持格式
+
+- `XXXXXX.SZ`
+- `XXXXXX.SH`
+- `XXXXXX.BJ`
+
+示例：`000001.SZ`
+
+## 5.2 支持状态
+
+- 可分析：可直接跳转预测 / 风险评估
+- 待支持：仅可保留或删除，暂不支持分析
+
+## 5.3 存储方式
+
+用户表 `users` 的 `holdings` 字段使用逗号分隔股票代码字符串。
+
+---
+
+## 6. API 摘要（统一响应结构）
+
+响应基本结构：
+
+```json
+{
+  "code": 0,
+  "message": "...",
+  "data": null,
+  "timestamp": "ISO8601"
+}
+```
+
+### 6.1 用户
+
+- `POST /api/users/register`
+- `POST /api/users/login`
+- `POST /api/users/logout`
+
+### 6.2 持股
+
+- `GET /api/stocks/supported`
+- `GET /api/users/holdings`
+- `POST /api/users/holdings/add`
+- `POST /api/users/holdings/remove`
+
+### 6.3 用户识别机制（最新）
+
+后端 `get_current_username()` 优先从请求头读取：
+
+- `X-Current-User`
+
+若请求头缺失，再兼容旧方式：
+
+1. POST JSON 中的 `username`
+2. Query 参数 `username`
+
+前端 `js/utils.js` 已自动从登录态注入 `X-Current-User`，因此持股接口调用无需再显式传 `username`。
+
+---
+
+## 7. 常见问题与排查
+
+## 7.1 服务启动失败
+
+检查：
+
+1. Python 环境是否正确（建议使用项目 conda 环境）
+2. 依赖是否完整安装
+3. 5000 端口是否被占用
+4. `.env` 数据库配置是否可连通
+
+## 7.2 持股页面不显示数据
+
+检查顺序：
+
+1. 是否已登录（右上角显示用户名）
+2. 浏览器 Console 是否有请求失败
+3. 后端日志是否出现 `[持股管理]` 前缀日志
+4. 数据库 `users.holdings` 是否有值
+
+## 7.3 添加/删除失败
+
+重点检查：
+
+- 股票代码格式是否正确
+- 当前用户是否真实存在于数据库
+- 请求是否带有 `X-Current-User`（前端默认会自动加）
+
+---
+
+## 8. 快速验证清单
+
+启动后建议按此顺序验证：
+
+1. 注册新用户
+2. 登录并进入持股管理
+3. 添加一只股票（如 `000001.SZ`）
+4. 删除同一股票
+5. 进入预测与风险页面做一次跳转验证
+6. 运行 `python test_holdings_system.py` 检查持仓 API
+
+---
+
+## 9. 版本与演进建议
+
+当前状态可用于本地开发与演示。后续建议：
+
+1. 将“前端登录态”升级为“服务端 session/JWT 严格鉴权”
+2. 为 `holdings` 拆分独立持仓表，替代逗号字符串
+3. 增加持仓成本、数量、权重和收益追踪
+4. 增加接口自动化测试与 CI
+5. 增加生产部署方案（Gunicorn/Nginx、日志与监控）
+
+---
+
+## 10. 原文档归并来源
+
+本统一文档归并自以下文件：
+
+- `HOLDINGS_DEBUGGING.md`
+- `HOLDINGS_FEATURE.md`
+- `IMPLEMENTATION_SUMMARY.md`
+- `QUICKSTART.md`
+- `QUICK_TROUBLESHOOTING.md`
+- `SYSTEM_STATUS.md`
+
+如需历史过程、排障细节或阶段性记录，可继续参考上述文档。

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户注册 - ETF智能投资平台</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <a href="index.html" class="back-home">
+        <span>←</span> 返回首页
+    </a>
+
+    <div class="auth-container">
+        <div class="auth-card auth-register">
+            <div class="auth-header">
+                <h1>创建账户</h1>
+                <p>加入我们，开始智能投资之旅</p>
+            </div>
+
+            <div id="alertBox" class="alert"></div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="username">
+                        用户名 <span class="required">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        class="form-control" 
+                        placeholder="4-20个字符，支持字母、数字、下划线"
+                        required
+                        minlength="4"
+                        maxlength="20"
+                        pattern="[a-zA-Z0-9_]{4,20}"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        密码 <span class="required">*</span>
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-control" 
+                        placeholder="至少8个字符，包含字母和数字"
+                        required
+                        minlength="8"
+                    >
+                    <div id="passwordStrength" class="password-strength">
+                        <div id="passwordStrengthBar" class="password-strength-bar"></div>
+                    </div>
+                    <div class="password-hint">密码强度：至少8字符，必须包含字母和数字</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        确认密码 <span class="required">*</span>
+                    </label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword" 
+                        class="form-control" 
+                        placeholder="再次输入密码"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        邮箱 <span class="optional">(可选)</span>
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-control" 
+                        placeholder="your@email.com"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">
+                        手机号 <span class="optional">(可选)</span>
+                    </label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        class="form-control" 
+                        placeholder="11位手机号"
+                        pattern="1[3-9]\d{9}"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="realName">
+                        真实姓名 <span class="optional">(可选)</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="realName" 
+                        name="real_name" 
+                        class="form-control" 
+                        placeholder="您的真实姓名"
+                    >
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn-submit">
+                    立即注册
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                已有账户？ <a href="login.html">立即登录</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

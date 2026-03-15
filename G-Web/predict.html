@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模型预测分析系统</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" onerror="(function(){var s=document.createElement('script');s.src='https://unpkg.com/echarts@5.5.1/dist/echarts.min.js';document.head.appendChild(s);}())"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <style>
+        /* ==================== Predict 页面特殊样式 ==================== */
+        .predict-container {
+            max-width: 1800px;
+            margin: 120px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .models-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .model-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .model-card:hover {
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .model-card:hover::before {
+            opacity: 1;
+        }
+
+        .model-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .model-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            font-size: 1.8rem;
+        }
+
+        .model-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .model-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            font-size: 0.95rem;
+        }
+
+        .model-principles {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .principle-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .principle-list {
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .principle-list li {
+            padding: 0.35rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .principle-list li::before {
+            content: '▸';
+            color: var(--primary);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .model-checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .checkbox-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .checkbox-custom {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            appearance: none;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .checkbox-custom:checked {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .checkbox-custom:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* ==================== 参数输入面板 ==================== */
+        .parameters-section {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .section-title-small {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .title-icon-small {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+            border-radius: 8px;
+        }
+
+        .param-value {
+            font-size: 0.85rem;
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .param-input,
+        .param-select {
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .param-input:focus,
+        .param-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .param-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(0, 0, 0, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: 0.5rem;
+        }
+
+        .param-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .param-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .param-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .param-slider::-moz-range-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .param-slider::-webkit-slider-runnable-track {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.3) 0%, rgba(102, 126, 234, 0) 100%);
+            height: 6px;
+            border-radius: 3px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-predict {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-predict:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-predict:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-reset {
+            padding: 1rem 2.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--primary-light);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* ==================== 图表区域 ==================== */
+        .chart-section {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .chart-header {
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 680px;
+            margin-bottom: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+                display: none;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .legend-color.actual {
+            background: #3b82f6;
+        }
+
+        .legend-color.predicted {
+            background: #ef4444;
+        }
+
+        /* ==================== 性能指标 ==================== */
+        .metrics-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .metric-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ==================== 加载动画 ==================== */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(102, 126, 234, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ==================== 响应式 ==================== */
+        @media (max-width: 1024px) {
+            .predict-container {
+                margin: 100px auto 2rem;
+            }
+
+            .models-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 560px;
+            }
+
+            .params-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .predict-container {
+                padding: 0 1rem;
+            }
+
+            .parameters-section,
+            .chart-section {
+                padding: 1.5rem;
+            }
+
+            .params-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .chart-container {
+                height: 460px;
+            }
+
+            .chart-legend {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏将由组件自动生成 -->
+
+    <!-- 主容器 -->
+    <div class="predict-container">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1 class="page-title">
+                <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                    <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+                模型预测分析
+            </h1>
+            <p class="page-subtitle">对比多种深度学习模型的预测性能，交互式数据可视化分析</p>
+        </div>
+
+        <!-- 模型对比卡片 -->
+        <div class="models-comparison">
+            <!-- GRU模型 -->
+            <div class="model-card">
+                <div class="model-header">
+                    <!--<div class="model-icon">🚪</div>-->
+                    <div class="model-title">GRU 模型</div>
+                </div>
+                <p class="model-description">GRU是一种改进的循环神经网络，具有更少的参数和更快的训练速度</p>
+                <div class="model-principles">
+                    <div class="principle-title">核心原理</div>
+                    <ul class="principle-list">
+                        <li>重置门 & 更新门机制</li>
+                        <li>长期依赖捕捉</li>
+                        <li>梯度流通畅</li>
+                        <li>参数高效</li>
+                    </ul>
+                </div>
+                <div class="model-checkbox-wrapper">
+                    <label class="checkbox-label">启用此模型</label>
+                    <input type="checkbox" id="gru-checkbox" class="checkbox-custom" checked>
+                </div>
+            </div>
+
+            <!-- Transformer模型 -->
+            <div class="model-card">
+                <div class="model-header">
+                    <!--<div class="model-icon">⚡</div>-->
+                    <div class="model-title">Transformer 模型</div>
+                </div>
+                <p class="model-description">基于注意力机制的神经网络架构，能够并行处理序列数据，捕捉全局依赖关系</p>
+                <div class="model-principles">
+                    <div class="principle-title">核心原理</div>
+                    <ul class="principle-list">
+                        <li>多头注意力机制</li>
+                        <li>位置编码</li>
+                        <li>并行计算</li>
+                        <li>全局依赖</li>
+                    </ul>
+                </div>
+                <div class="model-checkbox-wrapper">
+                    <label class="checkbox-label">启用此模型</label>
+                    <input type="checkbox" id="transformer-checkbox" class="checkbox-custom">
+                </div>
+            </div>
+        </div>
+
+        <!-- 参数设置面板 -->
+        <div class="parameters-section">
+            <h2 class="section-title-small">
+                <span class="title-icon-small">⚙️</span>
+                预测参数设置
+            </h2>
+
+            <div class="params-grid">
+                <!-- 股票代码 -->
+                <div class="param-group">
+                    <label class="param-label">
+                        <span>股票代码</span>
+                        <span class="param-value" id="stock-value">000001.SZ</span>
+                    </label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <select id="stock-select" class="param-select" style="flex: 1;">
+                            <option value="000001.SZ">000001.SZ</option>
+                        </select>
+                        <button id="load-my-holdings-btn" class="param-select" style="padding: 0.8rem 1.2rem; background: rgba(102, 126, 234, 0.3); border: 1px solid var(--primary); color: var(--primary-light); cursor: pointer; white-space: nowrap; font-size: 0.85rem; flex-shrink: 0; border-radius: 8px;" title="加载我的持股列表">📋 我的持股</button>
+                    </div>
+                </div>
+
+                <!-- 预测时间窗口 -->
+                <div class="param-group">
+                    <label class="param-label">
+                        <span>预测窗口 (天)</span>
+                        <span class="param-value" id="predict-days-value">30</span>
+                    </label>
+                    <input type="range" id="predict-days" class="param-slider" min="5" max="100" value="30" step="5">
+                </div>
+
+                <!-- 历史数据长度 -->
+                <div class="param-group">
+                    <label class="param-label">
+                        <span>历史数据窗口 (天)</span>
+                        <span class="param-value" id="history-days-value">60</span>
+                    </label>
+                    <input type="range" id="history-days" class="param-slider" min="20" max="200" value="60" step="10">
+                </div>
+
+                <div class="param-group">
+                    <label class="param-label">
+                        <span>开始预测日期（仅登录用户可选）</span>
+                        <span class="param-value" id="predict-start-date-status">未登录</span>
+                    </label>
+                    <input type="date" id="predict-start-date" class="param-select" disabled>
+                </div>
+
+                <!-- 模型置信度 -->
+                <div class="param-group">
+                    <label class="param-label">
+                        <span>预测置信度阈值</span>
+                        <span class="param-value" id="confidence-value">0.7</span>
+                    </label>
+                    <input type="range" id="confidence" class="param-slider" min="0.5" max="0.99" value="0.7" step="0.05">
+                </div>
+
+                <!-- GRU 参数 -->
+                <div class="param-group">
+                    <label class="param-label">
+                        <span>GRU 隐藏层大小</span>
+                        <span class="param-value" id="gru-hidden-value">64</span>
+                    </label>
+                    <input type="range" id="gru-hidden" class="param-slider" min="32" max="256" value="64" step="16">
+                </div>
+
+                <!-- Transformer 参数 -->
+                <div class="param-group">
+                    <label class="param-label">
+                        <span>Transformer 头数</span>
+                        <span class="param-value" id="transformer-heads-value">8</span>
+                    </label>
+                    <input type="range" id="transformer-heads" class="param-slider" min="4" max="16" value="8" step="1">
+                </div>
+
+                <!-- 季节性周期 -->
+                <div class="param-group">
+                    <label class="param-label">
+                        <span>季节性周期 (天)</span>
+                        <span class="param-value" id="seasonality-value">20</span>
+                    </label>
+                    <input type="range" id="seasonality" class="param-slider" min="5" max="60" value="20" step="5">
+                </div>
+
+                <!-- 移动平均周期 -->
+                <div class="param-group">
+                    <label class="param-label">
+                        <span>移动平均周期 (天)</span>
+                        <span class="param-value" id="ma-period-value">5</span>
+                    </label>
+                    <input type="range" id="ma-period" class="param-slider" min="2" max="30" value="5" step="1">
+                </div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="action-buttons">
+                <button class="btn-predict" id="predict-btn">🚀 开始预测</button>
+                <button class="btn-reset" id="reset-btn">↺ 重置参数</button>
+            </div>
+
+            <div style="margin-top: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: 10px; background: rgba(102, 126, 234, 0.08);">
+                <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.7rem;">策略快照（保存当前预测配置，支持一键切换）</div>
+                <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                    <select id="snapshot-select-predict" class="param-select" style="min-width: 220px; flex: 1;"></select>
+                    <input id="snapshot-name-predict" class="param-input" placeholder="输入快照名称，例如：激进" style="min-width: 220px; flex: 1;" />
+                    <button id="snapshot-save-predict" class="btn-reset" style="padding: 0.75rem 1.2rem;">保存快照</button>
+                    <button id="snapshot-apply-predict" class="btn-reset" style="padding: 0.75rem 1.2rem;">应用快照</button>
+                    <button id="snapshot-delete-predict" class="btn-reset" style="padding: 0.75rem 1.2rem;">删除快照</button>
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.7rem; flex-wrap: wrap;">
+                    <button id="snapshot-quick-aggressive-predict" class="btn-reset" style="padding: 0.45rem 0.8rem; font-size: 0.85rem;">激进</button>
+                    <button id="snapshot-quick-neutral-predict" class="btn-reset" style="padding: 0.45rem 0.8rem; font-size: 0.85rem;">中性</button>
+                    <button id="snapshot-quick-steady-predict" class="btn-reset" style="padding: 0.45rem 0.8rem; font-size: 0.85rem;">稳健</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图表区域 -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <h2 class="chart-title">
+                    <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                    价格走势预测对比
+                </h2>
+                <p class="chart-subtitle">蓝色：历史真实数据 | 红色：模型预测结果</p>
+            </div>
+
+            <!-- 图表容器 -->
+            <div class="chart-container">
+                <div id="prediction-chart" class="chart-canvas"></div>
+            </div>
+
+            <!-- 图表图例 -->
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color actual"></div>
+                    <span>真实历史数据</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color predicted"></div>
+                    <span>模型预测结果</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 性能指标 -->
+        <div class="parameters-section">
+            <h2 class="section-title-small">
+                <span class="title-icon-small">📊</span>
+                预测性能指标
+            </h2>
+            <div class="metrics-section">
+                <div class="metric-card">
+                    <div class="metric-label">MAE (平均绝对误差)</div>
+                    <div class="metric-value" id="mae-value">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">RMSE (均方根误差)</div>
+                    <div class="metric-value" id="rmse-value">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">MAPE (百分比误差)</div>
+                    <div class="metric-value" id="mape-value">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">R² 决定系数</div>
+                    <div class="metric-value" id="r2-value">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">预测稳定性</div>
+                    <div class="metric-value" id="stability-value">--</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.3rem;">预测序列的稳定性等级</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">预测鲁棒性</div>
+                    <div class="metric-value" id="robustness-value">--</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.3rem;">误差分布的集中程度</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">准确度等级</div>
+                    <div class="metric-value" id="accuracy-level">--</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.3rem;">综合预测质量评估</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">误差方差</div>
+                    <div class="metric-value" id="error-variance">--</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.3rem;">误差波动程度</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载动画 -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        // 全局变量
+        let predictionChart = null;
+        const defaultParams = {
+            stock: '000001.SZ',
+            predictDays: 30,
+            historyDays: 60,
+            confidence: 0.7,
+            gruHidden: 64,
+            transformerHeads: 8,
+            seasonality: 20,
+            maPeriod: 5,
+            predictStartDate: ''
+        };
+        const fallbackStocks = ['000001.SZ', '000002.SZ', '000063.SZ', '000100.SZ', '000157.SZ'];
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 初始化导航栏
+            new ETF.Navbar({ currentPage: 'predict' });
+
+            // 从localStorage恢复参数
+            restorePredictParams();
+
+            defaultParams.predictStartDate = getTodayISO();
+            document.getElementById('predict-start-date').value = defaultParams.predictStartDate;
+            initPredictionStartDateControl();
+            
+            initializeEventListeners();
+            await loadStocksBySelectedModels();
+            
+            // 确保stock-select有初始值（优先使用恢复的值，否则使用默认值）
+            const stockSelect = document.getElementById('stock-select');
+            const savedStock = defaultParams.stock;
+            if (stockSelect.value === '' || stockSelect.value === undefined) {
+                // 如果stock-select没有被设置，尝试找到保存的选项或使用第一个选项
+                const options = Array.from(stockSelect.options).map(o => o.value);
+                if (options.includes(savedStock)) {
+                    stockSelect.value = savedStock;
+                } else if (options.length > 0) {
+                    stockSelect.value = options[0];
+                } else {
+                    stockSelect.value = '000001.SZ';
+                }
+            }
+            document.getElementById('stock-value').textContent = stockSelect.value;
+            refreshPredictSnapshotList();
+            
+            generateMockData();
+
+            window.addEventListener('resize', () => {
+                if (predictionChart) {
+                    predictionChart.resize();
+                }
+            });
+        });
+
+        // 事件监听器
+        function initializeEventListeners() {
+            // 范围输入事件
+            document.getElementById('predict-days').addEventListener('input', (e) => {
+                document.getElementById('predict-days-value').textContent = e.target.value;
+                savePredictParams();
+            });
+            document.getElementById('history-days').addEventListener('input', (e) => {
+                document.getElementById('history-days-value').textContent = e.target.value;
+                savePredictParams();
+            });
+            document.getElementById('confidence').addEventListener('input', (e) => {
+                document.getElementById('confidence-value').textContent = e.target.value;
+                savePredictParams();
+            });
+            document.getElementById('gru-hidden').addEventListener('input', (e) => {
+                document.getElementById('gru-hidden-value').textContent = e.target.value;
+                savePredictParams();
+            });
+            document.getElementById('transformer-heads').addEventListener('input', (e) => {
+                document.getElementById('transformer-heads-value').textContent = e.target.value;
+                savePredictParams();
+            });
+            document.getElementById('seasonality').addEventListener('input', (e) => {
+                document.getElementById('seasonality-value').textContent = e.target.value;
+                savePredictParams();
+            });
+            document.getElementById('ma-period').addEventListener('input', (e) => {
+                document.getElementById('ma-period-value').textContent = e.target.value;
+                savePredictParams();
+            });
+
+            // 股票选择
+            document.getElementById('stock-select').addEventListener('change', (e) => {
+                document.getElementById('stock-value').textContent = e.target.value;
+                savePredictParams();
+            });
+
+            // 模型勾选变化时，按对应模型刷新股票列表
+            document.getElementById('gru-checkbox').addEventListener('change', () => {
+                loadStocksBySelectedModels();
+                savePredictParams();
+            });
+            document.getElementById('transformer-checkbox').addEventListener('change', () => {
+                loadStocksBySelectedModels();
+                savePredictParams();
+            });
+
+            // 预测开始日期
+            document.getElementById('predict-start-date').addEventListener('change', savePredictParams);
+
+            // 按钮事件
+            document.getElementById('predict-btn').addEventListener('click', startPrediction);
+            document.getElementById('reset-btn').addEventListener('click', resetParameters);
+            document.getElementById('load-my-holdings-btn').addEventListener('click', loadMyHoldings);
+            document.getElementById('snapshot-save-predict').addEventListener('click', savePredictSnapshot);
+            document.getElementById('snapshot-apply-predict').addEventListener('click', applyPredictSnapshot);
+            document.getElementById('snapshot-delete-predict').addEventListener('click', deletePredictSnapshot);
+            document.getElementById('snapshot-select-predict').addEventListener('change', () => {
+                const val = document.getElementById('snapshot-select-predict').value;
+                if (val) {
+                    document.getElementById('snapshot-name-predict').value = val;
+                    applyPredictSnapshot();
+                }
+            });
+            document.getElementById('snapshot-quick-aggressive-predict').addEventListener('click', () => quickApplyPredictSnapshot('激进'));
+            document.getElementById('snapshot-quick-neutral-predict').addEventListener('click', () => quickApplyPredictSnapshot('中性'));
+            document.getElementById('snapshot-quick-steady-predict').addEventListener('click', () => quickApplyPredictSnapshot('稳健'));
+        }
+
+        function getTodayISO() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        function initPredictionStartDateControl() {
+            const input = document.getElementById('predict-start-date');
+            const status = document.getElementById('predict-start-date-status');
+
+            const updateState = () => {
+                const loggedIn = window.ETF.userManager.isLoggedIn();
+                if (!loggedIn) {
+                    input.disabled = true;
+                    input.value = getTodayISO();
+                    status.textContent = '未登录';
+                    return;
+                }
+                input.disabled = false;
+                if (!input.value) {
+                    input.value = getTodayISO();
+                }
+                status.textContent = '可选择';
+            };
+
+            updateState();
+            window.ETF.userManager.onChange(updateState);
+        }
+
+        function getSelectedModels() {
+            const selected = [];
+            if (document.getElementById('gru-checkbox').checked) {
+                selected.push('gru');
+            }
+            if (document.getElementById('transformer-checkbox').checked) {
+                selected.push('transformer');
+            }
+            return selected;
+        }
+
+        function populateStockSelect(stocks, preferredStock = null) {
+            const select = document.getElementById('stock-select');
+            const stockValue = document.getElementById('stock-value');
+            const current = preferredStock || select.value || defaultParams.stock;
+
+            select.innerHTML = '';
+
+            if (!stocks || stocks.length === 0) {
+                const emptyOption = document.createElement('option');
+                emptyOption.value = defaultParams.stock;
+                emptyOption.textContent = `${defaultParams.stock} (无可用模型股票，使用默认)`;
+                select.appendChild(emptyOption);
+                select.value = defaultParams.stock;
+                stockValue.textContent = defaultParams.stock;
+                return;
+            }
+
+            stocks.forEach(stock => {
+                const option = document.createElement('option');
+                option.value = stock;
+                option.textContent = stock;
+                select.appendChild(option);
+            });
+
+            const target = stocks.includes(current) ? current : stocks[0];
+            select.value = target;
+            stockValue.textContent = target;
+        }
+
+        async function loadStocksBySelectedModels() {
+            const selectedModels = getSelectedModels();
+            const previousSelectedStock = document.getElementById('stock-select').value;
+            const mode = selectedModels.length > 1 ? 'all' : 'any';
+
+            try {
+                const params = { mode };
+                if (selectedModels.length > 0) {
+                    params.models = selectedModels.join(',');
+                }
+
+                const response = await window.ETF.http.get('/api/predict/stocks/by-model', params);
+                if (response.code === 0 && response.data && Array.isArray(response.data.stocks)) {
+                    const stocks = response.data.stocks;
+                    populateStockSelect(stocks, previousSelectedStock);
+                    return;
+                }
+            } catch (error) {
+                console.error('按模型加载股票列表失败，使用兜底列表:', error);
+            }
+
+            populateStockSelect(fallbackStocks, previousSelectedStock);
+        }
+
+        // 生成模拟数据
+        function generateMockData() {
+            const historyDays = parseInt(document.getElementById('history-days').value);
+            const predictDays = parseInt(document.getElementById('predict-days').value);
+            const totalDays = historyDays + predictDays;
+            const seasonality = parseInt(document.getElementById('seasonality').value);
+            const maPeriod = parseInt(document.getElementById('ma-period').value);
+            const confidence = parseFloat(document.getElementById('confidence').value);
+
+            // 生成基础时间序列
+            let basePrice = 100;
+            const actualData = [];
+            const predictedData = [];
+            const futureActualData = [];
+            const upperBand = [];
+            const lowerBand = [];
+            const confidenceBandWidth = [];
+            const errorData = [];
+            const labels = [];
+
+            const uncertaintyScale = 0.8 + (1 - confidence) * 7.5;
+
+            for (let i = 0; i < totalDays; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() - (totalDays - i));
+                labels.push(date.toLocaleDateString('zh-CN'));
+
+                // 生成实际数据
+                if (i < historyDays) {
+                    const trend = Math.sin(i / seasonality) * 8;
+                    const noise = (Math.random() - 0.5) * 2.5;
+                    const change = (Math.random() - 0.5) * 0.8 + trend * 0.1;
+                    basePrice = basePrice + change + noise;
+                    // 设置更合理的价格范围，允许更大的波动
+                    basePrice = Math.max(75, Math.min(200, basePrice));
+                    actualData.push(parseFloat(basePrice.toFixed(2)));
+                    predictedData.push(null);
+                    futureActualData.push(null);
+                    upperBand.push(null);
+                    lowerBand.push(null);
+                    confidenceBandWidth.push(null);
+                    errorData.push(null);
+                } else {
+                    actualData.push(null);
+
+                    // 生成未来真实值（模拟）
+                    const trend = Math.sin(i / seasonality) * 8;
+                    const trueNoise = (Math.random() - 0.5) * 1.5;
+                    const change = (Math.random() - 0.5) * 1.0 + trend * 0.1;
+                    basePrice = basePrice + change + trueNoise;
+                    basePrice = Math.max(75, Math.min(200, basePrice));
+                    const trueFuturePrice = parseFloat(basePrice.toFixed(2));
+                    futureActualData.push(trueFuturePrice);
+
+                    // 生成预测值及置信区间
+                    const predNoise = (Math.random() - 0.5) * uncertaintyScale;
+                    const predBias = (Math.random() - 0.5) * 0.6;
+                    const predictedPrice = Math.max(70, Math.min(130, trueFuturePrice + predNoise + predBias));
+                    const roundedPred = parseFloat(predictedPrice.toFixed(2));
+                    predictedData.push(roundedPred);
+
+                    const bandHalfWidth = Math.max(
+                        uncertaintyScale * (0.6 + (1 - confidence) * 0.8),
+                        Math.abs(predNoise) * 1.1 + 0.4
+                    );
+                    const lower = parseFloat((roundedPred - bandHalfWidth).toFixed(2));
+                    const upper = parseFloat((roundedPred + bandHalfWidth).toFixed(2));
+
+                    lowerBand.push(lower);
+                    upperBand.push(upper);
+                    confidenceBandWidth.push(parseFloat((upper - lower).toFixed(2)));
+
+                    errorData.push(parseFloat((roundedPred - trueFuturePrice).toFixed(2)));
+                }
+            }
+
+            // 初始化图表
+            initializeChart(labels, actualData, predictedData, lowerBand, confidenceBandWidth, errorData, historyDays - 1);
+            updateMetricsFromSeries(predictedData, futureActualData, errorData);
+        }
+
+        // 初始化图表
+        function initializeChart(labels, actualData, predictedData, lowerBand, confidenceBandWidth, errorData, splitIndex) {
+            const yAxisBounds = calculateYAxisBounds(actualData, predictedData, lowerBand, confidenceBandWidth);
+            const sigma = calculateStdDev(errorData);
+            const errorBounds = calculateErrorBounds(errorData, sigma);
+            const errorMa7 = calculateMovingAverage(errorData, 7);
+            const errorMa14 = calculateMovingAverage(errorData, 14);
+            const sigmaLowerBand = errorData.map(value => (typeof value === 'number' ? -sigma : null));
+            const sigmaBandWidth = errorData.map(value => (typeof value === 'number' ? sigma * 2 : null));
+            const chartElement = document.getElementById('prediction-chart');
+
+            if (predictionChart) {
+                predictionChart.dispose();
+            }
+
+            predictionChart = echarts.init(chartElement);
+
+            // 使用smoothMonotone处理null值，确保线条在数据缺失处断开，而非连接
+            predictionChart.setOption({
+                backgroundColor: 'transparent',
+                animationDuration: 600,
+                animationDurationUpdate: 400,
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        lineStyle: {
+                            color: 'rgba(184,184,209,0.5)'
+                        }
+                    },
+                    backgroundColor: 'rgba(15, 23, 42, 0.92)',
+                    borderColor: 'rgba(102,126,234,0.35)',
+                    borderWidth: 1,
+                    textStyle: {
+                        color: '#e2e8f0'
+                    },
+                    formatter: (params) => {
+                        const dateText = params[0] ? params[0].axisValue : '';
+                        const rows = params
+                            .filter(item => item.value !== null && item.value !== undefined)
+                            .filter(item => !item.seriesName.startsWith('_'))
+                            .map(item => `${item.marker}${item.seriesName}: <b>${Number(item.value).toFixed(2)}</b>`)
+                            .join('<br/>');
+                        return `${dateText}<br/>${rows}`;
+                    }
+                },
+                legend: {
+                    top: 6,
+                    textStyle: {
+                        color: '#b8b8d1'
+                    },
+                    itemWidth: 20,
+                    itemHeight: 10,
+                    data: ['真实历史数据', '模型预测结果', '置信区间', '±1σ阈值带', '预测误差', '误差MA7', '误差MA14']
+                },
+                grid: [
+                    {
+                        left: '4%',
+                        right: '3%',
+                        top: 58,
+                        height: '61%',
+                        containLabel: true
+                    },
+                    {
+                        left: '4%',
+                        right: '3%',
+                        top: '77%',
+                        height: '15%',
+                        containLabel: true
+                    }
+                ],
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: labels,
+                        axisLabel: {
+                            color: 'rgba(184, 184, 209, 0.75)',
+                            hideOverlap: true,
+                            interval: Math.max(0, Math.ceil(labels.length / 10) - 1)
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: 'rgba(102,126,234,0.25)'
+                            }
+                        },
+                        axisTick: { show: false }
+                    },
+                    {
+                        type: 'category',
+                        gridIndex: 1,
+                        boundaryGap: false,
+                        data: labels,
+                        axisLabel: {
+                            color: 'rgba(184, 184, 209, 0.75)',
+                            hideOverlap: true,
+                            interval: Math.max(0, Math.ceil(labels.length / 10) - 1)
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: 'rgba(102,126,234,0.25)'
+                            }
+                        },
+                        axisTick: { show: false }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        min: yAxisBounds.min,
+                        max: yAxisBounds.max,
+                        scale: true,
+                        axisLabel: {
+                            color: 'rgba(184, 184, 209, 0.75)',
+                            formatter: (value) => Number(value).toFixed(2)
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                color: 'rgba(102,126,234,0.12)',
+                                type: 'dashed'
+                            }
+                        }
+                    },
+                    {
+                        type: 'value',
+                        gridIndex: 1,
+                        min: errorBounds.min,
+                        max: errorBounds.max,
+                        axisLabel: {
+                            color: 'rgba(184, 184, 209, 0.75)',
+                            formatter: (value) => Number(value).toFixed(2)
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                color: 'rgba(102,126,234,0.10)',
+                                type: 'dashed'
+                            }
+                        }
+                    }
+                ],
+                dataZoom: [
+                    {
+                        type: 'inside',
+                        xAxisIndex: [0, 1],
+                        zoomOnMouseWheel: 'shift',
+                        moveOnMouseMove: true,
+                        moveOnMouseWheel: true
+                    },
+                    {
+                        type: 'slider',
+                        xAxisIndex: [0, 1],
+                        height: 24,
+                        bottom: 18,
+                        borderColor: 'rgba(102,126,234,0.2)',
+                        backgroundColor: 'rgba(17,24,39,0.35)',
+                        fillerColor: 'rgba(102,126,234,0.25)',
+                        handleStyle: {
+                            color: '#667eea'
+                        },
+                        textStyle: {
+                            color: '#b8b8d1'
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        name: '_置信区间下沿',
+                        type: 'line',
+                        data: lowerBand,
+                        smooth: 'monotone',
+                        showSymbol: false,
+                        stack: 'confidence-band',
+                        lineStyle: { opacity: 0 },
+                        emphasis: { disabled: true },
+                        tooltip: { show: false }
+                    },
+                    {
+                        name: '置信区间',
+                        type: 'line',
+                        data: confidenceBandWidth,
+                        smooth: 'monotone',
+                        showSymbol: false,
+                        stack: 'confidence-band',
+                        lineStyle: { opacity: 0 },
+                        areaStyle: { color: 'rgba(239, 68, 68, 0.16)' },
+                        emphasis: { disabled: true }
+                    },
+                    {
+                        name: '真实历史数据',
+                        type: 'line',
+                        data: actualData,
+                        smooth: 'monotone',
+                        showSymbol: true,
+                        symbol: 'circle',
+                        symbolSize: 4,
+                        symbolBorder: false,
+                        lineStyle: {
+                            width: 2.2,
+                            color: '#3b82f6'
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: 'rgba(59,130,246,0.30)' },
+                                { offset: 1, color: 'rgba(59,130,246,0.02)' }
+                            ])
+                        },
+                        markLine: splitIndex >= 0 ? {
+                            symbol: 'none',
+                            label: {
+                                show: true,
+                                formatter: '预测起点',
+                                color: '#fca5a5',
+                                backgroundColor: 'rgba(127,29,29,0.35)',
+                                padding: [3, 6],
+                                borderRadius: 4
+                            },
+                            lineStyle: {
+                                color: 'rgba(239,68,68,0.55)',
+                                width: 1.2,
+                                type: 'dashed'
+                            },
+                            data: [{ xAxis: splitIndex }]
+                        } : undefined
+                    },
+                    {
+                        name: '模型预测结果',
+                        type: 'line',
+                        data: predictedData,
+                        smooth: 'monotone',
+                        showSymbol: true,
+                        symbol: 'diamond',
+                        symbolSize: 5,
+                        symbolBorder: true,
+                        itemStyle: {
+                            borderColor: '#ef4444',
+                            borderWidth: 1.2
+                        },
+                        lineStyle: {
+                            width: 2.2,
+                            color: '#ef4444',
+                            type: 'dashed'
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: 'rgba(239,68,68,0.28)' },
+                                { offset: 1, color: 'rgba(239,68,68,0.02)' }
+                            ])
+                        },
+                        markArea: splitIndex >= 0 ? {
+                            silent: true,
+                            itemStyle: {
+                                color: 'rgba(239,68,68,0.08)'
+                            },
+                            data: [[{ xAxis: splitIndex }, { xAxis: labels.length - 1 }]]
+                        } : undefined
+                    },
+                    {
+                        name: '_误差阈值下沿',
+                        type: 'line',
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data: sigmaLowerBand,
+                        smooth: 'monotone',
+                        showSymbol: false,
+                        stack: 'error-sigma-band',
+                        lineStyle: { opacity: 0 },
+                        emphasis: { disabled: true },
+                        tooltip: { show: false }
+                    },
+                    {
+                        name: '±1σ阈值带',
+                        type: 'line',
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data: sigmaBandWidth,
+                        smooth: 'monotone',
+                        showSymbol: false,
+                        stack: 'error-sigma-band',
+                        lineStyle: { opacity: 0 },
+                        areaStyle: { color: 'rgba(59,130,246,0.16)' },
+                        emphasis: { disabled: true }
+                    },
+                    {
+                        name: '预测误差',
+                        type: 'bar',
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data: errorData,
+                        barWidth: '62%',
+                        itemStyle: {
+                            color: (params) => {
+                                if (params.value === null || params.value === undefined) return 'rgba(0,0,0,0)';
+                                return params.value >= 0 ? 'rgba(239,68,68,0.72)' : 'rgba(16,185,129,0.72)';
+                            }
+                        },
+                        markLine: {
+                            symbol: 'none',
+                            lineStyle: {
+                                color: 'rgba(148, 163, 184, 0.65)',
+                                type: 'dashed'
+                            },
+                            data: [{ yAxis: 0 }]
+                        }
+                    },
+                    {
+                        name: '误差MA7',
+                        type: 'line',
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data: errorMa7,
+                        smooth: 'monotone',
+                        showSymbol: false,
+                        lineStyle: {
+                            width: 2.2,
+                            color: '#f59e0b'
+                        },
+                        z: 10
+                    },
+                    {
+                        name: '误差MA14',
+                        type: 'line',
+                        xAxisIndex: 1,
+                        yAxisIndex: 1,
+                        data: errorMa14,
+                        smooth: 'monotone',
+                        showSymbol: false,
+                        lineStyle: {
+                            width: 2,
+                            color: '#a855f7'
+                        },
+                        z: 10
+                    }
+                ]
+            }, true);
+        }
+
+        function calculateMovingAverage(data, windowSize) {
+            const result = new Array(data.length).fill(null);
+
+            for (let i = 0; i < data.length; i++) {
+                if (i < windowSize - 1) {
+                    continue;
+                }
+
+                const windowData = data.slice(i - windowSize + 1, i + 1)
+                    .filter(value => typeof value === 'number' && Number.isFinite(value));
+
+                if (windowData.length === windowSize) {
+                    const avg = windowData.reduce((sum, value) => sum + value, 0) / windowSize;
+                    result[i] = parseFloat(avg.toFixed(4));
+                }
+            }
+
+            return result;
+        }
+
+        function calculateYAxisBounds(actualData, predictedData, lowerBand, confidenceBandWidth) {
+            const upperBand = lowerBand.map((lower, idx) => {
+                if (lower === null || confidenceBandWidth[idx] === null) return null;
+                return lower + confidenceBandWidth[idx];
+            });
+
+            const values = [...actualData, ...predictedData, ...lowerBand, ...upperBand]
+                .filter(v => typeof v === 'number' && Number.isFinite(v));
+
+            if (values.length === 0) {
+                return { min: 0, max: 1 };
+            }
+
+            const minValue = Math.min(...values);
+            const maxValue = Math.max(...values);
+            const range = Math.max(maxValue - minValue, 1);
+            const padding = Math.max(range * 0.12, 0.5);
+
+            return {
+                min: minValue - padding,
+                max: maxValue + padding
+            };
+        }
+
+        function calculateErrorBounds(errorData, sigma = 0) {
+            const values = errorData.filter(v => typeof v === 'number' && Number.isFinite(v));
+            if (values.length === 0) {
+                return { min: -1, max: 1 };
+            }
+
+            const absMax = Math.max(...values.map(v => Math.abs(v)), sigma * 1.2, 0.5);
+            return {
+                min: -(absMax * 1.2),
+                max: absMax * 1.2
+            };
+        }
+
+        function calculateStdDev(data) {
+            const values = data.filter(v => typeof v === 'number' && Number.isFinite(v));
+            if (values.length === 0) {
+                return 0;
+            }
+
+            const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
+            const variance = values.reduce((sum, value) => sum + Math.pow(value - mean, 2), 0) / values.length;
+            return Math.sqrt(variance);
+        }
+
+        // 加载用户持股列表
+        async function loadMyHoldings() {
+            try {
+                if (!window.ETF.userManager.isLoggedIn()) {
+                    alert('请先登录以加载您的持股列表');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const username = resolveCurrentUsername();
+
+                let response = null;
+                let holdings = [];
+
+                // 0) 直读数据库 holdings 字段（推荐）
+                if (username) {
+                    try {
+                        response = await window.ETF.http.get('/api/users/holdings/raw', { username });
+                        if (response && response.code === 0 && response.data) {
+                            holdings = Array.isArray(response.data.holdings) ? response.data.holdings : [];
+                        }
+                    } catch (err) {
+                        console.warn('raw holdings 接口失败，继续尝试兼容接口:', err);
+                    }
+                }
+
+                // 1) 主接口（依赖请求头 X-Current-User）
+                if (holdings.length === 0) {
+                    try {
+                    response = await window.ETF.http.get('/api/users/holdings');
+                    holdings = extractHoldingsFromResponse(response);
+                    } catch (err) {
+                        console.warn('主接口获取持股失败，尝试兼容接口:', err);
+                    }
+                }
+
+                // 2) 兼容接口：query 参数传 username
+                if (holdings.length === 0 && username) {
+                    try {
+                        response = await window.ETF.http.get('/api/users/holdings', { username });
+                        holdings = extractHoldingsFromResponse(response);
+                    } catch (err) {
+                        console.warn('query 参数接口获取持股失败，尝试路径接口:', err);
+                    }
+                }
+
+                // 3) 兼容接口：路径传 username
+                if (holdings.length === 0 && username) {
+                    try {
+                        response = await window.ETF.http.get(`/api/users/${encodeURIComponent(username)}/holdings`);
+                        holdings = extractHoldingsFromResponse(response);
+                    } catch (err) {
+                        console.warn('路径接口获取持股失败:', err);
+                    }
+                }
+
+                console.log('持股列表最终响应:', response, '解析后持股:', holdings);
+
+                if (holdings.length === 0) {
+                    const backendMessage = response && response.message ? response.message : '';
+                    if (backendMessage) {
+                        alert(`未找到您的持股列表：${backendMessage}`);
+                    } else {
+                        alert('未找到您的持股列表，请先在持股管理中添加股票');
+                    }
+                    return;
+                }
+
+                const uniqueHoldings = Array.from(new Set(holdings.map(code => code.trim().toUpperCase())));
+                populateStockSelect(uniqueHoldings, uniqueHoldings[0]);
+                defaultParams.stock = uniqueHoldings[0];
+                document.getElementById('stock-value').textContent = uniqueHoldings.join(', ');
+            } catch (error) {
+                console.error('加载持股列表失败:', error);
+                alert('加载持股列表失败: ' + error.message);
+            }
+        }
+
+        function extractHoldingsFromResponse(response) {
+            if (!response || response.code !== 0) {
+                return [];
+            }
+
+            if (Array.isArray(response.data)) {
+                return response.data
+                    .map(item => typeof item === 'string' ? item : item?.code)
+                    .filter(code => typeof code === 'string' && code.trim().length > 0);
+            }
+
+            if (response.data && Array.isArray(response.data.holdings)) {
+                return response.data.holdings
+                    .map(item => typeof item === 'string' ? item : item?.code)
+                    .filter(code => typeof code === 'string' && code.trim().length > 0);
+            }
+
+            return [];
+        }
+
+        function resolveCurrentUsername() {
+            try {
+                const currentUser = window.ETF.userManager.getUserData();
+                if (currentUser && currentUser.username) {
+                    return String(currentUser.username).trim();
+                }
+
+                const rawUserData = localStorage.getItem('userData');
+                if (rawUserData) {
+                    const parsed = JSON.parse(rawUserData);
+                    if (parsed && parsed.username) {
+                        return String(parsed.username).trim();
+                    }
+                    if (parsed && parsed.data && parsed.data.username) {
+                        return String(parsed.data.username).trim();
+                    }
+                }
+
+                const remembered = window.ETF.Storage.get('rememberedUsername');
+                if (remembered) {
+                    return String(remembered).trim();
+                }
+            } catch (error) {
+                console.warn('解析当前用户名失败:', error);
+            }
+            return '';
+        }
+
+        // 显示持股选择弹框
+        function showHoldingsModal(holdings) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+            `;
+
+            const content = document.createElement('div');
+            content.style.cssText = `
+                background: var(--bg-card);
+                border: 1px solid var(--primary);
+                border-radius: 12px;
+                padding: 2rem;
+                max-width: 400px;
+                max-height: 600px;
+                overflow-y: auto;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            `;
+
+            content.innerHTML = `
+                <h3 style="margin: 0 0 1.5rem 0; color: var(--text-primary); font-size: 1.3rem;">选择要分析的股票</h3>
+                <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                    ${holdings.map(stock => `
+                        <button 
+                            class="holding-option"
+                            data-stock="${stock}"
+                            style="
+                                padding: 1rem;
+                                background: rgba(102, 126, 234, 0.1);
+                                border: 1px solid rgba(102, 126, 234, 0.3);
+                                border-radius: 8px;
+                                color: var(--text-primary);
+                                cursor: pointer;
+                                text-align: left;
+                                transition: all 0.3s;
+                                font-size: 1rem;
+                                font-weight: 500;
+                            "
+                            onmouseover="this.style.background='rgba(102, 126, 234, 0.2)'; this.style.borderColor='var(--primary)';"
+                            onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'; this.style.borderColor='rgba(102, 126, 234, 0.3)';"
+                        >
+                            ${stock}
+                        </button>
+                    `).join('')}
+                </div>
+                <button id="close-modal-btn" style="
+                    margin-top: 1.5rem;
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: rgba(100, 100, 100, 0.2);
+                    border: 1px solid rgba(100, 100, 100, 0.3);
+                    border-radius: 8px;
+                    color: var(--text-secondary);
+                    cursor: pointer;
+                    transition: all 0.3s;
+                ">取消</button>
+            `;
+
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+
+            // 添加选择事件监听
+            content.querySelectorAll('.holding-option').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const stock = e.target.getAttribute('data-stock');
+                    const select = document.getElementById('stock-select');
+                    if (!Array.from(select.options).some(option => option.value === stock)) {
+                        const option = document.createElement('option');
+                        option.value = stock;
+                        option.textContent = stock;
+                        select.appendChild(option);
+                    }
+                    document.getElementById('stock-select').value = stock;
+                    document.getElementById('stock-value').textContent = stock;
+                    document.body.removeChild(modal);
+                });
+            });
+
+            // 关闭按钮
+            document.getElementById('close-modal-btn').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+
+            // 点击模态框外部关闭
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+
+        function updateMetricsFromSeries(predictedData, futureActualData, errorData) {
+            const paired = predictedData
+                .map((pred, idx) => ({ pred, actual: futureActualData[idx], err: errorData[idx] }))
+                .filter(item => typeof item.pred === 'number' && typeof item.actual === 'number' && typeof item.err === 'number');
+
+            if (paired.length === 0) {
+                updateMetrics();
+                return;
+            }
+
+            // 基础误差计算
+            const absErrors = paired.map(item => Math.abs(item.err));
+            const sqErrors = paired.map(item => item.err * item.err);
+            const mae = absErrors.reduce((sum, value) => sum + value, 0) / paired.length;
+            const rmse = Math.sqrt(sqErrors.reduce((sum, value) => sum + value, 0) / paired.length);
+
+            const mape = paired.reduce((sum, item) => {
+                const denom = Math.max(Math.abs(item.actual), 1e-6);
+                return sum + Math.abs(item.err) / denom;
+            }, 0) / paired.length;
+
+            const actualMean = paired.reduce((sum, item) => sum + item.actual, 0) / paired.length;
+            const ssTot = paired.reduce((sum, item) => sum + Math.pow(item.actual - actualMean, 2), 0);
+            const ssRes = sqErrors.reduce((sum, value) => sum + value, 0);
+            const r2 = ssTot > 1e-12 ? 1 - (ssRes / ssTot) : 0;
+
+            // 计算预测稳定性（预测序列方差的倒数）
+            const predMean = paired.reduce((sum, item) => sum + item.pred, 0) / paired.length;
+            const predVariance = paired.reduce((sum, item) => sum + Math.pow(item.pred - predMean, 2), 0) / paired.length;
+            const stability = 1 / (1 + Math.sqrt(predVariance));
+
+            // 计算预测鲁棒性（误差分布的集中程度）
+            const errorMean = paired.reduce((sum, item) => sum + item.err, 0) / paired.length;
+            const errorVariance = paired.reduce((sum, item) => sum + Math.pow(item.err - errorMean, 2), 0) / paired.length;
+            const robustness = Math.max(0, 1 - Math.sqrt(errorVariance) / (mae + 1e-6));
+
+            // 准确度等级
+            let accuracyLevel = '优秀';
+            if (r2 < 0.5) accuracyLevel = '较差';
+            else if (r2 < 0.7) accuracyLevel = '一般';
+            else if (r2 < 0.85) accuracyLevel = '良好';
+            else if (r2 < 0.95) accuracyLevel = '优秀';
+            else accuracyLevel = '卓越';
+
+            // 计算误差方差
+            const errorVarianceValue = errorVariance;
+
+            // 更新显示
+            document.getElementById('mae-value').textContent = mae.toFixed(4);
+            document.getElementById('rmse-value').textContent = rmse.toFixed(4);
+            document.getElementById('mape-value').textContent = (mape * 100).toFixed(2) + '%';
+            document.getElementById('r2-value').textContent = r2.toFixed(4);
+            document.getElementById('stability-value').textContent = (stability * 100).toFixed(1) + '%';
+            document.getElementById('robustness-value').textContent = (robustness * 100).toFixed(1) + '%';
+            document.getElementById('accuracy-level').textContent = accuracyLevel;
+            document.getElementById('error-variance').textContent = errorVarianceValue.toFixed(4);
+        }
+
+        // 开始预测
+        async function startPrediction() {
+            // 检查是否至少选择了一个模型
+            const gruEnabled = document.getElementById('gru-checkbox').checked;
+            const transformerEnabled = document.getElementById('transformer-checkbox').checked;
+
+            if (!gruEnabled && !transformerEnabled) {
+                alert('请至少选择一个模型！');
+                return;
+            }
+
+            // 在执行预测前同步保存当前参数与共享上下文
+            savePredictParams();
+
+            showLoading();
+
+            const btn = document.getElementById('predict-btn');
+            const oldText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = '预测中...';
+
+            try {
+                const selectedModels = getSelectedModels();
+                const stockValue = document.getElementById('stock-select').value;
+                const predictDaysValue = parseInt(document.getElementById('predict-days').value, 10);
+                const historyDaysValue = parseInt(document.getElementById('history-days').value, 10);
+                
+                // 参数验证
+                if (!stockValue || stockValue.trim() === '') {
+                    throw new Error('请选择股票');
+                }
+                if (!predictDaysValue || predictDaysValue <= 0) {
+                    throw new Error('预测天数必须大于0');
+                }
+                if (!historyDaysValue || historyDaysValue <= 0) {
+                    throw new Error('历史天数必须大于0');
+                }
+                if (!selectedModels || selectedModels.length === 0) {
+                    throw new Error('请选择至少一个模型');
+                }
+
+                const payload = {
+                    stock: stockValue,
+                    predict_days: predictDaysValue,
+                    history_days: historyDaysValue,
+                    confidence: parseFloat(document.getElementById('confidence').value),
+                    gru_hidden: parseInt(document.getElementById('gru-hidden').value, 10),
+                    transformer_heads: parseInt(document.getElementById('transformer-heads').value, 10),
+                    seasonality: parseInt(document.getElementById('seasonality').value, 10),
+                    ma_period: parseInt(document.getElementById('ma-period').value, 10),
+                    models: selectedModels
+                };
+
+                if (window.ETF.userManager.isLoggedIn()) {
+                    payload.predict_start_date = document.getElementById('predict-start-date').value || getTodayISO();
+                }
+
+                console.log('发送预测请求:', JSON.stringify(payload, null, 2));
+                const response = await window.ETF.http.post('/api/predict', payload);
+                if (response.error) {
+                    throw new Error(response.error);
+                }
+
+                const labels = Array.isArray(response.labels) ? response.labels : [];
+                let actualData = Array.isArray(response.actual) ? response.actual : [];
+                let predictedData = Array.isArray(response.predicted) ? response.predicted : [];
+                const futureActual = Array.isArray(response.future_actual) ? response.future_actual : [];
+
+                // 数据验证和长度对齐：所有数组应该与 labels 等长
+                const targetLen = labels.length;
+                
+                // 补充缺失的数据到目标长度
+                while (actualData.length < targetLen) {
+                    actualData.push(null);
+                }
+                while (predictedData.length < targetLen) {
+                    predictedData.push(null);
+                }
+                
+                // 截断超长数据
+                actualData = actualData.slice(0, targetLen);
+                predictedData = predictedData.slice(0, targetLen);
+
+                // 使用 forward fill 和 backward fill 来处理实际数据中的缺失值
+                actualData = forwardBackwardFill(actualData);
+
+                const predictDays = parseInt(document.getElementById('predict-days').value, 10);
+                const historyLen = Math.max(labels.length - predictDays, 0);
+                const confidence = parseFloat(document.getElementById('confidence').value);
+                const baseBand = 1.2 + (1 - confidence) * 5.0;
+
+                const lowerBand = predictedData.map(v => (typeof v === 'number' ? v - baseBand : null));
+                const confidenceBandWidth = predictedData.map(v => (typeof v === 'number' ? baseBand * 2 : null));
+                const futureActualSeries = new Array(historyLen).fill(null).concat(futureActual);
+                const errorData = predictedData.map((pred, idx) => {
+                    const actual = futureActualSeries[idx];
+                    if (typeof pred !== 'number' || typeof actual !== 'number') {
+                        return null;
+                    }
+                    return parseFloat((pred - actual).toFixed(4));
+                });
+
+                initializeChart(labels, actualData, predictedData, lowerBand, confidenceBandWidth, errorData, historyLen - 1);
+                updateMetricsFromSeries(predictedData, futureActualSeries, errorData);
+            } catch (error) {
+                console.error('预测失败:', error);
+                alert(`预测失败：${error.message}`);
+            } finally {
+                hideLoading();
+                btn.disabled = false;
+                btn.textContent = oldText;
+            }
+        }
+
+        // 数据填充函数：forward fill 和 backward fill
+        function forwardBackwardFill(data) {
+            if (!Array.isArray(data) || data.length === 0) {
+                return data;
+            }
+
+            const result = [...data];
+
+            // Forward fill：从左往右填充
+            for (let i = 1; i < result.length; i++) {
+                if (result[i] === null || result[i] === undefined) {
+                    if (typeof result[i - 1] === 'number') {
+                        result[i] = result[i - 1];
+                    }
+                } else {
+                    // 重置：当遇到非空值时，重新开始寻找
+                }
+            }
+
+            // Backward fill：从右往左填充剩余的 null
+            for (let i = result.length - 2; i >= 0; i--) {
+                if (result[i] === null || result[i] === undefined) {
+                    if (typeof result[i + 1] === 'number') {
+                        result[i] = result[i + 1];
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        // 保存预测页面参数到localStorage
+        function savePredictParams() {
+            try {
+                const params = {
+                    stock: document.getElementById('stock-select').value,
+                    predictDays: parseInt(document.getElementById('predict-days').value),
+                    historyDays: parseInt(document.getElementById('history-days').value),
+                    confidence: parseFloat(document.getElementById('confidence').value),
+                    gruHidden: parseInt(document.getElementById('gru-hidden').value),
+                    transformerHeads: parseInt(document.getElementById('transformer-heads').value),
+                    seasonality: parseInt(document.getElementById('seasonality').value),
+                    maPeriod: parseInt(document.getElementById('ma-period').value),
+                    gruEnabled: document.getElementById('gru-checkbox').checked,
+                    transformerEnabled: document.getElementById('transformer-checkbox').checked,
+                    predictStartDate: document.getElementById('predict-start-date').value
+                };
+                window.ETF.StrategyState.setPage('predict', params);
+                window.ETF.StrategyState.mergeShared({
+                    predict: {
+                        stock: params.stock,
+                        models: [
+                            params.gruEnabled ? 'gru' : null,
+                            params.transformerEnabled ? 'transformer' : null
+                        ].filter(Boolean),
+                        predict_start_date: params.predictStartDate || '',
+                        history_days: params.historyDays,
+                        predict_days: params.predictDays
+                    }
+                });
+                console.log('预测参数已保存到本地');
+            } catch (e) {
+                console.warn('保存预测参数失败:', e);
+            }
+        }
+
+        function collectPredictParams() {
+            return {
+                stock: document.getElementById('stock-select').value,
+                predictDays: parseInt(document.getElementById('predict-days').value),
+                historyDays: parseInt(document.getElementById('history-days').value),
+                confidence: parseFloat(document.getElementById('confidence').value),
+                gruHidden: parseInt(document.getElementById('gru-hidden').value),
+                transformerHeads: parseInt(document.getElementById('transformer-heads').value),
+                seasonality: parseInt(document.getElementById('seasonality').value),
+                maPeriod: parseInt(document.getElementById('ma-period').value),
+                gruEnabled: document.getElementById('gru-checkbox').checked,
+                transformerEnabled: document.getElementById('transformer-checkbox').checked,
+                predictStartDate: document.getElementById('predict-start-date').value
+            };
+        }
+
+        function applyPredictParams(params) {
+            if (!params || typeof params !== 'object') return;
+            if (params.predictDays) document.getElementById('predict-days').value = params.predictDays;
+            if (params.historyDays) document.getElementById('history-days').value = params.historyDays;
+            if (params.confidence) document.getElementById('confidence').value = params.confidence;
+            if (params.gruHidden) document.getElementById('gru-hidden').value = params.gruHidden;
+            if (params.transformerHeads) document.getElementById('transformer-heads').value = params.transformerHeads;
+            if (params.seasonality) document.getElementById('seasonality').value = params.seasonality;
+            if (params.maPeriod) document.getElementById('ma-period').value = params.maPeriod;
+            if (params.predictStartDate) document.getElementById('predict-start-date').value = params.predictStartDate;
+            document.getElementById('gru-checkbox').checked = params.gruEnabled !== false;
+            document.getElementById('transformer-checkbox').checked = params.transformerEnabled === true;
+
+            document.getElementById('predict-days-value').textContent = document.getElementById('predict-days').value;
+            document.getElementById('history-days-value').textContent = document.getElementById('history-days').value;
+            document.getElementById('confidence-value').textContent = document.getElementById('confidence').value;
+            document.getElementById('gru-hidden-value').textContent = document.getElementById('gru-hidden').value;
+            document.getElementById('transformer-heads-value').textContent = document.getElementById('transformer-heads').value;
+            document.getElementById('seasonality-value').textContent = document.getElementById('seasonality').value;
+            document.getElementById('ma-period-value').textContent = document.getElementById('ma-period').value;
+
+            if (params.stock) {
+                defaultParams.stock = params.stock;
+            }
+        }
+
+        function buildSnapshotPayloadForPredict() {
+            const currentPredict = collectPredictParams();
+            const shared = window.ETF.StrategyState.getShared({});
+            return {
+                pages: {
+                    predict: currentPredict,
+                    risk: window.ETF.StrategyState.getPage('risk', {}),
+                    backtest: window.ETF.StrategyState.getPage('backtest', {})
+                },
+                shared: {
+                    ...shared,
+                    predict: {
+                        stock: currentPredict.stock,
+                        models: [
+                            currentPredict.gruEnabled ? 'gru' : null,
+                            currentPredict.transformerEnabled ? 'transformer' : null
+                        ].filter(Boolean),
+                        predict_start_date: currentPredict.predictStartDate || '',
+                        history_days: currentPredict.historyDays,
+                        predict_days: currentPredict.predictDays
+                    }
+                }
+            };
+        }
+
+        function refreshPredictSnapshotList(selectedName = '') {
+            const select = document.getElementById('snapshot-select-predict');
+            if (!select) return;
+            const snapshots = window.ETF.StrategyState.listSnapshots();
+            select.innerHTML = '<option value="">选择快照</option>';
+            snapshots.forEach((item) => {
+                const option = document.createElement('option');
+                option.value = item.name;
+                option.textContent = item.name;
+                select.appendChild(option);
+            });
+            if (selectedName && snapshots.some((item) => item.name === selectedName)) {
+                select.value = selectedName;
+            }
+        }
+
+        function savePredictSnapshot() {
+            savePredictParams();
+            const name = String(document.getElementById('snapshot-name-predict').value || '').trim();
+            if (!name) {
+                alert('请先输入快照名称');
+                return;
+            }
+            try {
+                window.ETF.StrategyState.saveSnapshot(name, buildSnapshotPayloadForPredict());
+                refreshPredictSnapshotList(name);
+                alert(`快照已保存：${name}`);
+            } catch (error) {
+                alert(`保存快照失败：${error.message}`);
+            }
+        }
+
+        async function applyPredictSnapshot() {
+            const chosen = document.getElementById('snapshot-select-predict').value || document.getElementById('snapshot-name-predict').value;
+            const name = String(chosen || '').trim();
+            if (!name) {
+                alert('请先选择快照');
+                return;
+            }
+            try {
+                const snapshot = window.ETF.StrategyState.applySnapshot(name);
+                const params = snapshot?.payload?.pages?.predict;
+                if (params) {
+                    applyPredictParams(params);
+                    await loadStocksBySelectedModels();
+                    savePredictParams();
+                    generateMockData();
+                }
+                document.getElementById('snapshot-name-predict').value = name;
+                refreshPredictSnapshotList(name);
+            } catch (error) {
+                alert(`应用快照失败：${error.message}`);
+            }
+        }
+
+        function deletePredictSnapshot() {
+            const chosen = document.getElementById('snapshot-select-predict').value || document.getElementById('snapshot-name-predict').value;
+            const name = String(chosen || '').trim();
+            if (!name) {
+                alert('请先选择快照');
+                return;
+            }
+            const ok = window.ETF.StrategyState.deleteSnapshot(name);
+            if (!ok) {
+                alert('删除失败：未找到该快照');
+                return;
+            }
+            document.getElementById('snapshot-name-predict').value = '';
+            refreshPredictSnapshotList();
+        }
+
+        async function quickApplyPredictSnapshot(name) {
+            if (!window.ETF.StrategyState.getSnapshot(name)) {
+                alert(`未找到快照：${name}`);
+                return;
+            }
+            document.getElementById('snapshot-select-predict').value = name;
+            document.getElementById('snapshot-name-predict').value = name;
+            await applyPredictSnapshot();
+        }
+
+        // 从localStorage恢复预测页面参数
+        function restorePredictParams() {
+            try {
+                const params = window.ETF.StrategyState.getPage('predict', null);
+                if (!params) return;
+                
+                // 恢复各个参数
+                if (params.stock) {
+                    const stockSelect = document.getElementById('stock-select');
+                    // 等待stock-select被填充后再设置（这里在初始化阶段，后面会处理）
+                    defaultParams.stock = params.stock;
+                }
+                if (params.predictDays) document.getElementById('predict-days').value = params.predictDays;
+                if (params.historyDays) document.getElementById('history-days').value = params.historyDays;
+                if (params.confidence) document.getElementById('confidence').value = params.confidence;
+                if (params.gruHidden) document.getElementById('gru-hidden').value = params.gruHidden;
+                if (params.transformerHeads) document.getElementById('transformer-heads').value = params.transformerHeads;
+                if (params.seasonality) document.getElementById('seasonality').value = params.seasonality;
+                if (params.maPeriod) document.getElementById('ma-period').value = params.maPeriod;
+                
+                // 恢复模型选择
+                document.getElementById('gru-checkbox').checked = params.gruEnabled !== false;
+                document.getElementById('transformer-checkbox').checked = params.transformerEnabled === true;
+                
+                // 更新显示值
+                document.getElementById('predict-days-value').textContent = params.predictDays || defaultParams.predictDays;
+                document.getElementById('history-days-value').textContent = params.historyDays || defaultParams.historyDays;
+                document.getElementById('confidence-value').textContent = params.confidence || defaultParams.confidence;
+                document.getElementById('gru-hidden-value').textContent = params.gruHidden || defaultParams.gruHidden;
+                document.getElementById('transformer-heads-value').textContent = params.transformerHeads || defaultParams.transformerHeads;
+                document.getElementById('seasonality-value').textContent = params.seasonality || defaultParams.seasonality;
+                document.getElementById('ma-period-value').textContent = params.maPeriod || defaultParams.maPeriod;
+                
+                console.log('预测参数已从本地恢复:', params);
+            } catch (e) {
+                console.warn('恢复预测参数失败:', e);
+            }
+        }
+
+        // 重置参数
+        function resetParameters() {
+            document.getElementById('stock-select').value = defaultParams.stock;
+            document.getElementById('predict-days').value = defaultParams.predictDays;
+            document.getElementById('history-days').value = defaultParams.historyDays;
+            document.getElementById('confidence').value = defaultParams.confidence;
+            document.getElementById('gru-hidden').value = defaultParams.gruHidden;
+            document.getElementById('transformer-heads').value = defaultParams.transformerHeads;
+            document.getElementById('seasonality').value = defaultParams.seasonality;
+            document.getElementById('ma-period').value = defaultParams.maPeriod;
+            document.getElementById('predict-start-date').value = defaultParams.predictStartDate || getTodayISO();
+            document.getElementById('gru-checkbox').checked = true;
+            document.getElementById('transformer-checkbox').checked = false;
+
+            // 更新显示值
+            document.getElementById('stock-value').textContent = defaultParams.stock;
+            document.getElementById('predict-days-value').textContent = defaultParams.predictDays;
+            document.getElementById('history-days-value').textContent = defaultParams.historyDays;
+            document.getElementById('confidence-value').textContent = defaultParams.confidence;
+            document.getElementById('gru-hidden-value').textContent = defaultParams.gruHidden;
+            document.getElementById('transformer-heads-value').textContent = defaultParams.transformerHeads;
+            document.getElementById('seasonality-value').textContent = defaultParams.seasonality;
+            document.getElementById('ma-period-value').textContent = defaultParams.maPeriod;
+
+            // 清除本地存储的参数
+            window.ETF.StrategyState.clearPage('predict');
+            window.ETF.StrategyState.mergeShared({
+                predict: {
+                    stock: defaultParams.stock,
+                    models: ['gru'],
+                    predict_start_date: defaultParams.predictStartDate || '',
+                    history_days: defaultParams.historyDays,
+                    predict_days: defaultParams.predictDays
+                }
+            });
+            
+            loadStocksBySelectedModels();
+            generateMockData();
+        }
+
+        // 更新性能指标
+        function updateMetrics() {
+            // 生成随机指标值（实际应从模型输出获取）
+            const mae = (Math.random() * 2 + 0.5).toFixed(4);
+            const rmse = (Math.random() * 2.5 + 0.8).toFixed(4);
+            const mape = (Math.random() * 10 + 2).toFixed(2);
+            const r2 = (Math.random() * 0.2 + 0.8).toFixed(4);
+
+            document.getElementById('mae-value').textContent = mae;
+            document.getElementById('rmse-value').textContent = rmse;
+            document.getElementById('mape-value').textContent = mape + '%';
+            document.getElementById('r2-value').textContent = r2;
+        }
+
+        // 显示加载动画
+        function showLoading() {
+            document.getElementById('loading-overlay').classList.add('active');
+        }
+
+        // 隐藏加载动画
+        function hideLoading() {
+            document.getElementById('loading-overlay').classList.remove('active');
+        }
+
+        // 初始加载
+        // 初始加载由 DOMContentLoaded 触发
+    </script>
+</body>
+</html>

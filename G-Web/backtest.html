@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回测分析系统</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/components.js"></script>
+    <style>
+        .backtest-container {
+            max-width: 1800px;
+            margin: 120px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .panel-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-item label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-item input,
+        .form-item select,
+        .form-item textarea {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            padding: 0.65rem 0.8rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .form-item textarea {
+            min-height: 72px;
+            resize: vertical;
+        }
+
+        .form-item input:focus,
+        .form-item select:focus,
+        .form-item textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-backtest {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0.9rem 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-backtest:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-ghost {
+            background: rgba(102, 126, 234, 0.12);
+            color: var(--primary-light);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-md);
+            padding: 0.9rem 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .metric {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        .metric .label {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric .value {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .chart-grid-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chart-grid-sub {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1rem;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .chart-box {
+            width: 100%;
+            height: 420px;
+        }
+
+        .chart-box.small {
+            height: 360px;
+        }
+
+        @media (max-width: 1200px) {
+            .chart-grid-main,
+            .chart-grid-sub {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-box,
+            .chart-box.small {
+                height: 320px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .backtest-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- 导航栏将由组件自动生成 -->
+
+<div class="backtest-container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+            预测-风控联动回测
+        </h1>
+        <p class="page-subtitle">基于预测收益与风险矩阵进行动态调仓，生成净值、回撤、仓位与风险收益画像</p>
+    </div>
+
+    <div class="panel">
+        <div class="panel-title">回测参数</div>
+        
+        <!-- 模型选择面板 -->
+        <div style="background: rgba(102, 126, 234, 0.1); border: 1px solid var(--primary); border-radius: 8px; padding: 1.2rem; margin-bottom: 1.5rem;">
+            <div style="font-size: 0.95rem; font-weight: 600; color: var(--primary-light); margin-bottom: 0.8rem;">📊 预测模型选择</div>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer; color: var(--text-primary);">
+                    <input type="checkbox" id="gru-checkbox-backtest" checked style="width: 18px; height: 18px; cursor: pointer;">
+                    <span>GRU模型</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer; color: var(--text-primary);">
+                    <input type="checkbox" id="transformer-checkbox-backtest" style="width: 18px; height: 18px; cursor: pointer;">
+                    <span>Transformer模型</span>
+                </label>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.8rem; margin-bottom: 0;">💡 提示：选择要用于回测的预测模型。支持单选或组合使用。</p>
+        </div>
+
+        <div class="form-grid">
+            <div class="form-item" style="grid-column: 1 / -1;">
+                <label for="holdings">持仓股票（逗号分隔） <button id="load-holdings-backtest" style="background: rgba(102, 126, 234, 0.3); border: 1px solid var(--primary); color: var(--primary-light); padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 1rem;">📋 我的持股</button></label>
+                <textarea id="holdings">000001.SZ,000002.SZ,000063.SZ,000100.SZ,000157.SZ</textarea>
+            </div>
+            <div class="form-item">
+                <label for="lookback">历史回看窗口 (天)</label>
+                <input id="lookback" type="number" min="120" max="2000" value="520">
+            </div>
+            <div class="form-item">
+                <label for="rolling-window">风险估计窗口 (天)</label>
+                <input id="rolling-window" type="number" min="20" max="240" value="60">
+            </div>
+            <div class="form-item">
+                <label for="predict-start-date">开始预测日期（仅登录用户可选）</label>
+                <input id="predict-start-date" type="date" disabled>
+            </div>
+            <div class="form-item">
+                <label for="rebalance-freq">调仓频率 (天)</label>
+                <input id="rebalance-freq" type="number" min="1" max="60" value="5">
+            </div>
+            <div class="form-item">
+                <label for="gamma">风险厌恶系数 γ</label>
+                <input id="gamma" type="number" min="0.1" max="10" step="0.1" value="1.0">
+            </div>
+            <div class="form-item">
+                <label for="risk-model">风险融合模式</label>
+                <select id="risk-model">
+                    <option value="coefficient">Coefficient</option>
+                    <option value="gcn">GCN</option>
+                    <option value="convex">Convex</option>
+                </select>
+            </div>
+            <div class="form-item">
+                <label for="initial-capital">初始净值</label>
+                <input id="initial-capital" type="number" min="0.0001" step="0.1" value="1.0">
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn-backtest" id="run-btn">运行回测</button>
+            <button class="btn-ghost" id="reset-btn">重置参数</button>
+        </div>
+
+        <div style="margin-top: 1rem; padding: 1rem; border: 1px solid var(--border-color); border-radius: 10px; background: rgba(102, 126, 234, 0.08);">
+            <div style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.7rem;">策略快照（保存当前回测配置，支持一键切换）</div>
+            <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                <select id="snapshot-select-backtest" class="param-select" style="min-width: 220px; flex: 1;"></select>
+                <input id="snapshot-name-backtest" class="param-input" placeholder="输入快照名称，例如：中性" style="min-width: 220px; flex: 1;" />
+                <button id="snapshot-save-backtest" class="btn-ghost">保存快照</button>
+                <button id="snapshot-apply-backtest" class="btn-ghost">应用快照</button>
+                <button id="snapshot-delete-backtest" class="btn-ghost">删除快照</button>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.7rem; flex-wrap: wrap;">
+                <button id="snapshot-quick-aggressive-backtest" class="btn-ghost" style="padding: 0.45rem 0.8rem; font-size: 0.85rem;">激进</button>
+                <button id="snapshot-quick-neutral-backtest" class="btn-ghost" style="padding: 0.45rem 0.8rem; font-size: 0.85rem;">中性</button>
+                <button id="snapshot-quick-steady-backtest" class="btn-ghost" style="padding: 0.45rem 0.8rem; font-size: 0.85rem;">稳健</button>
+            </div>
+        </div>
+
+        <div class="metric-row">
+            <div class="metric"><div class="label">累计收益</div><div class="value" id="metric-cumret">--</div></div>
+            <div class="metric"><div class="label">年化收益</div><div class="value" id="metric-annret">--</div></div>
+            <div class="metric"><div class="label">年化波动</div><div class="value" id="metric-annvol">--</div></div>
+            <div class="metric"><div class="label">夏普比率</div><div class="value" id="metric-sharpe">--</div></div>
+            <div class="metric"><div class="label">最大回撤</div><div class="value" id="metric-mdd">--</div></div>
+            <div class="metric"><div class="label">胜率</div><div class="value" id="metric-winrate">--</div></div>
+            <div class="metric"><div class="label">平均换手</div><div class="value" id="metric-turnover">--</div></div>
+            <div class="metric"><div class="label">Sortino</div><div class="value" id="metric-sortino">--</div></div>
+        </div>
+    </div>
+
+    <!-- 调仓建议 -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; margin-top: 2rem; margin-bottom: 2rem;">
+        <div style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-primary);">📈 下一日调仓建议</div>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">基于预测收益、预期风险和风险偏好系数，以下是建议的股票配置比例（假设总持仓为100%）</p>
+        <div id="rebalance-suggestions" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div style="padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 8px; border-left: 4px solid var(--primary); text-align: center;">
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">加载中...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-grid-main">
+        <div class="chart-card">
+            <div class="chart-title">组合净值 vs 等权基准</div>
+            <div id="nav-chart" class="chart-box"></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">回撤曲线</div>
+            <div id="drawdown-chart" class="chart-box"></div>
+        </div>
+    </div>
+
+    <div class="chart-grid-sub">
+        <div class="chart-card">
+            <div class="chart-title">动态仓位（堆叠面积）</div>
+            <div id="weights-chart" class="chart-box small"></div>
+        </div>
+        <div class="chart-card">
+            <div class="chart-title">风险-收益散点与组合前沿</div>
+            <div id="rr-chart" class="chart-box small"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 初始化导航栏
+    document.addEventListener('DOMContentLoaded', () => {
+        new ETF.Navbar({ currentPage: 'backtest' });
+        
+        // 恢复参数
+        initPredictStartDateControl();
+        restoreBacktestParams();
+        
+        // 添加事件监听器：当参数改变时保存到localStorage
+        const inputElements = ['holdings', 'lookback', 'rolling-window', 'rebalance-freq', 'gamma', 'risk-model', 'initial-capital', 'predict-start-date'];
+        inputElements.forEach(id => {
+            const elem = document.getElementById(id);
+            if (elem) {
+                elem.addEventListener('change', saveBacktestParams);
+                elem.addEventListener('input', saveBacktestParams);
+            }
+        });
+        
+        // 模型选择事件
+        document.getElementById('gru-checkbox-backtest').addEventListener('change', saveBacktestParams);
+        document.getElementById('transformer-checkbox-backtest').addEventListener('change', saveBacktestParams);
+        
+        // 按钮事件
+        document.getElementById('run-btn').addEventListener('click', runBacktest);
+        document.getElementById('reset-btn').addEventListener('click', resetForm);
+        document.getElementById('snapshot-save-backtest').addEventListener('click', saveBacktestSnapshot);
+        document.getElementById('snapshot-apply-backtest').addEventListener('click', applyBacktestSnapshot);
+        document.getElementById('snapshot-delete-backtest').addEventListener('click', deleteBacktestSnapshot);
+        document.getElementById('snapshot-select-backtest').addEventListener('change', () => {
+            const val = document.getElementById('snapshot-select-backtest').value;
+            if (val) {
+                document.getElementById('snapshot-name-backtest').value = val;
+                applyBacktestSnapshot();
+            }
+        });
+        document.getElementById('snapshot-quick-aggressive-backtest').addEventListener('click', () => quickApplyBacktestSnapshot('激进'));
+        document.getElementById('snapshot-quick-neutral-backtest').addEventListener('click', () => quickApplyBacktestSnapshot('中性'));
+        document.getElementById('snapshot-quick-steady-backtest').addEventListener('click', () => quickApplyBacktestSnapshot('稳健'));
+
+        refreshBacktestSnapshotList();
+
+        runBacktest();
+    });
+    
+    const defaults = {
+        holdings: '000001.SZ,000002.SZ,000063.SZ,000100.SZ,000157.SZ',
+        lookback: 520,
+        predict_start_date: '',
+        rolling_window: 60,
+        rebalance_freq: 5,
+        gamma: 1.0,
+        risk_model: 'coefficient',
+        initial_capital: 1.0
+    };
+
+    let navChart = null;
+    let ddChart = null;
+    let weightsChart = null;
+    let rrChart = null;
+
+    function formatPercent(v, digits = 2) {
+        if (v === null || v === undefined || Number.isNaN(v)) return '--';
+        return (v * 100).toFixed(digits) + '%';
+    }
+
+    function formatNum(v, digits = 3) {
+        if (v === null || v === undefined || Number.isNaN(v)) return '--';
+        return Number(v).toFixed(digits);
+    }
+
+    function getTodayISO() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        const d = String(now.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }
+
+    // 保存回测参数到localStorage
+    function saveBacktestParams() {
+        try {
+            const params = {
+                holdings: document.getElementById('holdings').value,
+                lookback: parseInt(document.getElementById('lookback').value),
+                rolling_window: parseInt(document.getElementById('rolling-window').value),
+                rebalance_freq: parseInt(document.getElementById('rebalance-freq').value),
+                gamma: parseFloat(document.getElementById('gamma').value),
+                risk_model: document.getElementById('risk-model').value,
+                initial_capital: parseFloat(document.getElementById('initial-capital').value),
+                gruEnabled: document.getElementById('gru-checkbox-backtest').checked,
+                transformerEnabled: document.getElementById('transformer-checkbox-backtest').checked,
+                predictStartDate: document.getElementById('predict-start-date').value
+            };
+            window.ETF.StrategyState.setPage('backtest', params);
+            window.ETF.StrategyState.mergeShared({
+                backtest: {
+                    holdings: params.holdings,
+                    lookback: params.lookback,
+                    predict_start_date: params.predictStartDate || '',
+                    risk_model: params.risk_model,
+                    models: [
+                        params.gruEnabled ? 'gru' : null,
+                        params.transformerEnabled ? 'transformer' : null
+                    ].filter(Boolean)
+                }
+            });
+            console.log('回测参数已保存到本地');
+        } catch (e) {
+            console.warn('保存回测参数失败:', e);
+        }
+    }
+
+    function collectBacktestParams() {
+        return {
+            holdings: document.getElementById('holdings').value,
+            lookback: parseInt(document.getElementById('lookback').value),
+            rolling_window: parseInt(document.getElementById('rolling-window').value),
+            rebalance_freq: parseInt(document.getElementById('rebalance-freq').value),
+            gamma: parseFloat(document.getElementById('gamma').value),
+            risk_model: document.getElementById('risk-model').value,
+            initial_capital: parseFloat(document.getElementById('initial-capital').value),
+            gruEnabled: document.getElementById('gru-checkbox-backtest').checked,
+            transformerEnabled: document.getElementById('transformer-checkbox-backtest').checked,
+            predictStartDate: document.getElementById('predict-start-date').value
+        };
+    }
+
+    function applyBacktestParams(params) {
+        if (!params || typeof params !== 'object') return;
+        if (params.holdings) document.getElementById('holdings').value = params.holdings;
+        if (params.lookback) document.getElementById('lookback').value = params.lookback;
+        if (params.rolling_window) document.getElementById('rolling-window').value = params.rolling_window;
+        if (params.rebalance_freq) document.getElementById('rebalance-freq').value = params.rebalance_freq;
+        if (params.gamma) document.getElementById('gamma').value = params.gamma;
+        if (params.risk_model) document.getElementById('risk-model').value = params.risk_model;
+        if (params.initial_capital) document.getElementById('initial-capital').value = params.initial_capital;
+        if (params.predictStartDate) document.getElementById('predict-start-date').value = params.predictStartDate;
+        document.getElementById('gru-checkbox-backtest').checked = params.gruEnabled !== false;
+        document.getElementById('transformer-checkbox-backtest').checked = params.transformerEnabled === true;
+    }
+
+    function buildSnapshotPayloadForBacktest() {
+        const currentBacktest = collectBacktestParams();
+        const shared = window.ETF.StrategyState.getShared({});
+        return {
+            pages: {
+                predict: window.ETF.StrategyState.getPage('predict', {}),
+                risk: window.ETF.StrategyState.getPage('risk', {}),
+                backtest: currentBacktest
+            },
+            shared: {
+                ...shared,
+                backtest: {
+                    holdings: currentBacktest.holdings,
+                    lookback: currentBacktest.lookback,
+                    predict_start_date: currentBacktest.predictStartDate || '',
+                    risk_model: currentBacktest.risk_model,
+                    models: [
+                        currentBacktest.gruEnabled ? 'gru' : null,
+                        currentBacktest.transformerEnabled ? 'transformer' : null
+                    ].filter(Boolean)
+                }
+            }
+        };
+    }
+
+    function refreshBacktestSnapshotList(selectedName = '') {
+        const select = document.getElementById('snapshot-select-backtest');
+        if (!select) return;
+        const snapshots = window.ETF.StrategyState.listSnapshots();
+        select.innerHTML = '<option value="">选择快照</option>';
+        snapshots.forEach((item) => {
+            const option = document.createElement('option');
+            option.value = item.name;
+            option.textContent = item.name;
+            select.appendChild(option);
+        });
+        if (selectedName && snapshots.some((item) => item.name === selectedName)) {
+            select.value = selectedName;
+        }
+    }
+
+    function saveBacktestSnapshot() {
+        saveBacktestParams();
+        const name = String(document.getElementById('snapshot-name-backtest').value || '').trim();
+        if (!name) {
+            alert('请先输入快照名称');
+            return;
+        }
+        try {
+            window.ETF.StrategyState.saveSnapshot(name, buildSnapshotPayloadForBacktest());
+            refreshBacktestSnapshotList(name);
+            alert(`快照已保存：${name}`);
+        } catch (error) {
+            alert(`保存快照失败：${error.message}`);
+        }
+    }
+
+    async function applyBacktestSnapshot() {
+        const chosen = document.getElementById('snapshot-select-backtest').value || document.getElementById('snapshot-name-backtest').value;
+        const name = String(chosen || '').trim();
+        if (!name) {
+            alert('请先选择快照');
+            return;
+        }
+        try {
+            const snapshot = window.ETF.StrategyState.applySnapshot(name);
+            const params = snapshot?.payload?.pages?.backtest;
+            if (params) {
+                applyBacktestParams(params);
+                saveBacktestParams();
+                await runBacktest();
+            }
+            document.getElementById('snapshot-name-backtest').value = name;
+            refreshBacktestSnapshotList(name);
+        } catch (error) {
+            alert(`应用快照失败：${error.message}`);
+        }
+    }
+
+    function deleteBacktestSnapshot() {
+        const chosen = document.getElementById('snapshot-select-backtest').value || document.getElementById('snapshot-name-backtest').value;
+        const name = String(chosen || '').trim();
+        if (!name) {
+            alert('请先选择快照');
+            return;
+        }
+        const ok = window.ETF.StrategyState.deleteSnapshot(name);
+        if (!ok) {
+            alert('删除失败：未找到该快照');
+            return;
+        }
+        document.getElementById('snapshot-name-backtest').value = '';
+        refreshBacktestSnapshotList();
+    }
+
+    async function quickApplyBacktestSnapshot(name) {
+        if (!window.ETF.StrategyState.getSnapshot(name)) {
+            alert(`未找到快照：${name}`);
+            return;
+        }
+        document.getElementById('snapshot-select-backtest').value = name;
+        document.getElementById('snapshot-name-backtest').value = name;
+        await applyBacktestSnapshot();
+    }
+
+    // 从localStorage恢复回测参数
+    function restoreBacktestParams() {
+        try {
+            // 首先尝试从回测参数恢复
+            const params = window.ETF.StrategyState.getPage('backtest', null);
+            if (params) {
+                
+                if (params.holdings) document.getElementById('holdings').value = params.holdings;
+                if (params.lookback) document.getElementById('lookback').value = params.lookback;
+                if (params.rolling_window) document.getElementById('rolling-window').value = params.rolling_window;
+                if (params.rebalance_freq) document.getElementById('rebalance-freq').value = params.rebalance_freq;
+                if (params.gamma) document.getElementById('gamma').value = params.gamma;
+                if (params.risk_model) document.getElementById('risk-model').value = params.risk_model;
+                if (params.initial_capital) document.getElementById('initial-capital').value = params.initial_capital;
+                
+                document.getElementById('gru-checkbox-backtest').checked = params.gruEnabled !== false;
+                document.getElementById('transformer-checkbox-backtest').checked = params.transformerEnabled === true;
+                
+                if (params.predictStartDate) document.getElementById('predict-start-date').value = params.predictStartDate;
+                
+                console.log('回测参数已从本地恢复');
+                return;
+            }
+
+            // 否则从共享上下文继承预测/风险设置
+            const shared = window.ETF.StrategyState.getShared({});
+
+            if (shared.risk && typeof shared.risk === 'object') {
+                if (shared.risk.holdings) {
+                    document.getElementById('holdings').value = shared.risk.holdings;
+                }
+                if (shared.risk.lookback) {
+                    document.getElementById('lookback').value = shared.risk.lookback;
+                }
+                if (shared.risk.predict_start_date) {
+                    document.getElementById('predict-start-date').value = shared.risk.predict_start_date;
+                }
+                if (Array.isArray(shared.risk.methods) && shared.risk.methods.length > 0) {
+                    document.getElementById('risk-model').value = shared.risk.methods[0];
+                }
+            }
+
+            if (shared.predict && typeof shared.predict === 'object') {
+                if (shared.predict.stock && !document.getElementById('holdings').value.trim()) {
+                    document.getElementById('holdings').value = shared.predict.stock;
+                }
+                if (shared.predict.predict_start_date && !document.getElementById('predict-start-date').value) {
+                    document.getElementById('predict-start-date').value = shared.predict.predict_start_date;
+                }
+                const models = Array.isArray(shared.predict.models) ? shared.predict.models : [];
+                if (models.length > 0) {
+                    document.getElementById('gru-checkbox-backtest').checked = models.includes('gru');
+                    document.getElementById('transformer-checkbox-backtest').checked = models.includes('transformer');
+                }
+            }
+        } catch (e) {
+            console.warn('恢复回测参数失败:', e);
+        }
+    }
+
+    function initPredictStartDateControl() {
+        defaults.predict_start_date = getTodayISO();
+        const input = document.getElementById('predict-start-date');
+
+        const update = () => {
+            const loggedIn = window.ETF.userManager.isLoggedIn();
+            if (!loggedIn) {
+                input.disabled = true;
+                input.value = getTodayISO();
+                return;
+            }
+            input.disabled = false;
+            if (!input.value) {
+                input.value = getTodayISO();
+            }
+        };
+
+        update();
+        window.ETF.userManager.onChange(update);
+    }
+
+    function collectPayload() {
+        const payload = {
+            holdings: document.getElementById('holdings').value,
+            lookback: Number(document.getElementById('lookback').value),
+            rolling_window: Number(document.getElementById('rolling-window').value),
+            rebalance_freq: Number(document.getElementById('rebalance-freq').value),
+            gamma: Number(document.getElementById('gamma').value),
+            risk_model: document.getElementById('risk-model').value,
+            initial_capital: Number(document.getElementById('initial-capital').value),
+            // 模型选择
+            gru_enabled: document.getElementById('gru-checkbox-backtest').checked,
+            transformer_enabled: document.getElementById('transformer-checkbox-backtest').checked
+        };
+
+        if (window.ETF.userManager.isLoggedIn()) {
+            payload.predict_start_date = document.getElementById('predict-start-date').value || getTodayISO();
+        }
+
+        return payload;
+    }
+
+    function resetForm() {
+        document.getElementById('holdings').value = defaults.holdings;
+        document.getElementById('lookback').value = defaults.lookback;
+        document.getElementById('predict-start-date').value = defaults.predict_start_date || getTodayISO();
+        document.getElementById('rolling-window').value = defaults.rolling_window;
+        document.getElementById('rebalance-freq').value = defaults.rebalance_freq;
+        document.getElementById('gamma').value = defaults.gamma;
+        document.getElementById('risk-model').value = defaults.risk_model;
+        document.getElementById('initial-capital').value = defaults.initial_capital;
+        
+        // 重置模型选择为默认值（仅GRU）
+        document.getElementById('gru-checkbox-backtest').checked = true;
+        document.getElementById('transformer-checkbox-backtest').checked = false;
+        
+        // 清除本地存储
+        window.ETF.StrategyState.clearPage('backtest');
+        window.ETF.StrategyState.mergeShared({
+            backtest: {
+                holdings: defaults.holdings,
+                lookback: defaults.lookback,
+                predict_start_date: defaults.predict_start_date || '',
+                risk_model: defaults.risk_model,
+                models: ['gru']
+            }
+        });
+    }
+
+    function renderMetrics(metrics) {
+        document.getElementById('metric-cumret').textContent = formatPercent(metrics.cumulative_return, 2);
+        document.getElementById('metric-annret').textContent = formatPercent(metrics.annual_return, 2);
+        document.getElementById('metric-annvol').textContent = formatPercent(metrics.annual_volatility, 2);
+        document.getElementById('metric-sharpe').textContent = formatNum(metrics.sharpe_ratio, 3);
+        document.getElementById('metric-mdd').textContent = formatPercent(metrics.max_drawdown, 2);
+        document.getElementById('metric-winrate').textContent = formatPercent(metrics.win_rate, 2);
+        document.getElementById('metric-turnover').textContent = formatNum(metrics.avg_turnover, 3);
+        document.getElementById('metric-sortino').textContent = formatNum(metrics.sortino_ratio, 3);
+    }
+
+    function renderRebalanceSuggestions(data) {
+        const holdings = document.getElementById('holdings').value.split(',').map(h => h.trim()).filter(h => h);
+        const gamma = parseFloat(document.getElementById('gamma').value) || 1.0;
+        
+        // 根据数据中的个股数据计算建议权重
+        let suggestions = [];
+        
+        if (data.stocks && Array.isArray(data.stocks)) {
+            // 从返回的数据中获取个股信息
+            suggestions = data.stocks.map(stock => {
+                const expectedReturn = stock.ann_ret || 0.1;
+                const risk = stock.ann_vol || 0.2;
+                
+                // 使用夏普比率的概念来计算权重（收益/风险）
+                const sharpeMetric = risk > 0 ? expectedReturn / risk : 0;
+                return {
+                    code: stock.stock,
+                    expectedReturn,
+                    risk,
+                    score: sharpeMetric
+                };
+            });
+        } else {
+            // 如果没有数据，基于持仓列表生成随机建议
+            suggestions = holdings.map(code => ({
+                code,
+                expectedReturn: 0.08 + Math.random() * 0.12,
+                risk: 0.15 + Math.random() * 0.10,
+                score: Math.random() * 1.0
+            }));
+        }
+        
+        // 归一化权重
+        const totalScore = Math.max(suggestions.reduce((sum, s) => sum + Math.max(0, s.score), 0), 0.001);
+        suggestions = suggestions.map(s => ({
+            ...s,
+            weight: Math.max(0, s.score) / totalScore
+        })).sort((a, b) => b.weight - a.weight);
+        
+        // 渲染UI
+        const container = document.getElementById('rebalance-suggestions');
+        container.innerHTML = suggestions.map(s => `
+            <div style="padding: 1.5rem; background: rgba(102, 126, 234, 0.08); border-radius: 8px; border-left: 4px solid var(--primary); transition: all 0.3s;">
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">${s.code}</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.9rem;">
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.8rem;">建议配置</div>
+                        <div style="color: var(--primary); font-weight: 700; font-size: 1.1rem;">${(s.weight * 100).toFixed(1)}%</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.8rem;">预期收益</div>
+                        <div style="color: #10b981; font-weight: 600;">${(s.expectedReturn * 100).toFixed(2)}%</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.8rem;">风险(波动)</div>
+                        <div style="color: #f59e0b; font-weight: 600;">${(s.risk * 100).toFixed(2)}%</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--text-secondary); font-size: 0.8rem;">夏普评分</div>
+                        <div style="color: #8b5cf6; font-weight: 600;">${s.score.toFixed(3)}</div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderNavChart(series) {
+        if (!navChart) navChart = echarts.init(document.getElementById('nav-chart'));
+        navChart.setOption({
+            backgroundColor: 'transparent',
+            tooltip: { trigger: 'axis' },
+            legend: {
+                data: ['策略净值', '等权基准'],
+                top: 0,
+                textStyle: { color: '#b8b8d1' }
+            },
+            grid: { left: '4%', right: '4%', bottom: '3%', top: 45, containLabel: true },
+            xAxis: {
+                type: 'category',
+                data: series.dates,
+                axisLabel: { color: '#b8b8d1', hideOverlap: true }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: { color: '#b8b8d1' },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            series: [
+                {
+                    name: '策略净值',
+                    type: 'line',
+                    smooth: true,
+                    data: series.strategy_nav,
+                    showSymbol: false,
+                    lineStyle: { width: 2.4, color: '#667eea' },
+                    areaStyle: { color: 'rgba(102,126,234,0.15)' }
+                },
+                {
+                    name: '等权基准',
+                    type: 'line',
+                    smooth: true,
+                    data: series.benchmark_nav,
+                    showSymbol: false,
+                    lineStyle: { width: 2, color: '#f59e0b', type: 'dashed' }
+                }
+            ]
+        }, true);
+    }
+
+    function renderDrawdownChart(series) {
+        if (!ddChart) ddChart = echarts.init(document.getElementById('drawdown-chart'));
+        ddChart.setOption({
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'axis',
+                valueFormatter: (value) => (value * 100).toFixed(2) + '%'
+            },
+            grid: { left: '5%', right: '5%', bottom: '4%', top: 20, containLabel: true },
+            xAxis: {
+                type: 'category',
+                data: series.dates,
+                axisLabel: { color: '#b8b8d1', hideOverlap: true }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    color: '#b8b8d1',
+                    formatter: (v) => (v * 100).toFixed(0) + '%'
+                },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            series: [
+                {
+                    type: 'line',
+                    data: series.drawdown,
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: { color: '#ef4444', width: 2 },
+                    areaStyle: { color: 'rgba(239,68,68,0.18)' }
+                }
+            ]
+        }, true);
+    }
+
+    function renderWeightsChart(weights) {
+        if (!weightsChart) weightsChart = echarts.init(document.getElementById('weights-chart'));
+
+        const palette = ['#667eea', '#8b9aff', '#10b981', '#f59e0b', '#ef4444', '#14b8a6', '#a855f7'];
+        const series = weights.stocks.map((stock, idx) => ({
+            name: stock,
+            type: 'line',
+            stack: 'weight',
+            areaStyle: { opacity: 0.75 },
+            showSymbol: false,
+            lineStyle: { width: 0.6, color: palette[idx % palette.length] },
+            itemStyle: { color: palette[idx % palette.length] },
+            emphasis: { focus: 'series' },
+            data: weights.matrix.map((row) => row[idx])
+        }));
+
+        weightsChart.setOption({
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'axis',
+                valueFormatter: (value) => (value * 100).toFixed(2) + '%'
+            },
+            legend: {
+                type: 'scroll',
+                top: 0,
+                textStyle: { color: '#b8b8d1' }
+            },
+            grid: { left: '5%', right: '5%', bottom: '4%', top: 50, containLabel: true },
+            xAxis: {
+                type: 'category',
+                data: weights.dates,
+                axisLabel: { color: '#b8b8d1', hideOverlap: true }
+            },
+            yAxis: {
+                type: 'value',
+                max: 1,
+                axisLabel: {
+                    color: '#b8b8d1',
+                    formatter: (v) => (v * 100).toFixed(0) + '%'
+                },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            series
+        }, true);
+    }
+
+    function renderRiskReturnChart(riskReturn) {
+        if (!rrChart) rrChart = echarts.init(document.getElementById('rr-chart'));
+
+        const points = riskReturn.points || [];
+        const frontier = (riskReturn.frontier || []).map((item) => [item[0], item[1]]);
+
+        rrChart.setOption({
+            backgroundColor: 'transparent',
+            tooltip: {
+                trigger: 'item',
+                formatter: (params) => {
+                    if (params.seriesName === '资产点') {
+                        const p = points[params.dataIndex];
+                        return `${p.stock}<br/>年化波动: ${(p.ann_vol * 100).toFixed(2)}%<br/>年化收益: ${(p.ann_ret * 100).toFixed(2)}%<br/>当前权重: ${(p.weight * 100).toFixed(2)}%`;
+                    }
+                    return `组合点<br/>年化波动: ${(params.value[0] * 100).toFixed(2)}%<br/>年化收益: ${(params.value[1] * 100).toFixed(2)}%`;
+                }
+            },
+            legend: {
+                data: ['资产点', '组合路径'],
+                top: 0,
+                textStyle: { color: '#b8b8d1' }
+            },
+            grid: { left: '8%', right: '5%', bottom: '8%', top: 50, containLabel: true },
+            xAxis: {
+                type: 'value',
+                name: '年化波动',
+                nameTextStyle: { color: '#b8b8d1' },
+                axisLabel: { color: '#b8b8d1', formatter: (v) => (v * 100).toFixed(0) + '%' },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            yAxis: {
+                type: 'value',
+                name: '年化收益',
+                nameTextStyle: { color: '#b8b8d1' },
+                axisLabel: { color: '#b8b8d1', formatter: (v) => (v * 100).toFixed(0) + '%' },
+                splitLine: { lineStyle: { color: 'rgba(102,126,234,0.12)' } }
+            },
+            series: [
+                {
+                    name: '资产点',
+                    type: 'scatter',
+                    data: points.map((p) => [p.ann_vol, p.ann_ret]),
+                    symbolSize: (value, params) => {
+                        const w = points[params.dataIndex] ? points[params.dataIndex].weight : 0.1;
+                        return 12 + w * 80;
+                    },
+                    itemStyle: {
+                        color: '#10b981',
+                        opacity: 0.85,
+                        borderColor: '#b8ffea',
+                        borderWidth: 1
+                    }
+                },
+                {
+                    name: '组合路径',
+                    type: 'line',
+                    data: frontier,
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: { color: '#667eea', width: 2.2, opacity: 0.8 }
+                }
+            ]
+        }, true);
+    }
+
+    async function runBacktest() {
+        saveBacktestParams();
+        const payload = collectPayload();
+        const btn = document.getElementById('run-btn');
+        const oldText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = '回测中...';
+
+        try {
+            const response = await fetch('/api/backtest/run', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', ...window.ETF.http.getAuthHeaders() },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || `接口错误: ${response.status}`);
+            }
+
+            renderMetrics(data.metrics);
+            renderRebalanceSuggestions(data);
+            renderNavChart(data.series);
+            renderDrawdownChart(data.series);
+            renderWeightsChart(data.weights);
+            renderRiskReturnChart(data.risk_return);
+        } catch (error) {
+            alert('回测失败：' + error.message);
+        } finally {
+            btn.disabled = false;
+            btn.textContent = oldText;
+        }
+    }
+
+    document.getElementById('load-holdings-backtest').addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            if (!window.ETF.userManager.isLoggedIn()) {
+                alert('请先登录以加载您的持股列表');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const username = resolveCurrentUsername();
+            let response = null;
+            let holdings = [];
+
+            if (username) {
+                try {
+                    response = await window.ETF.http.get('/api/users/holdings/raw', { username });
+                    if (response && response.code === 0 && response.data && Array.isArray(response.data.holdings)) {
+                        holdings = response.data.holdings;
+                    }
+                } catch (err) {
+                    console.warn('raw holdings 接口失败，尝试兼容接口:', err);
+                }
+            }
+
+            if (holdings.length === 0) {
+                try {
+                    response = await window.ETF.http.get('/api/users/holdings');
+                    holdings = extractHoldingsFromResponse(response);
+                } catch (err) {
+                    console.warn('主接口获取持股失败，尝试兼容接口:', err);
+                }
+            }
+
+            if (holdings.length === 0 && username) {
+                try {
+                    response = await window.ETF.http.get('/api/users/holdings', { username });
+                    holdings = extractHoldingsFromResponse(response);
+                } catch (err) {
+                    console.warn('query 参数接口获取持股失败，尝试路径接口:', err);
+                }
+            }
+
+            if (holdings.length === 0 && username) {
+                try {
+                    response = await window.ETF.http.get(`/api/users/${encodeURIComponent(username)}/holdings`);
+                    holdings = extractHoldingsFromResponse(response);
+                } catch (err) {
+                    console.warn('路径接口获取持股失败:', err);
+                }
+            }
+
+            if (holdings.length > 0) {
+                const uniqueHoldings = Array.from(new Set(
+                    holdings
+                        .map(code => String(code || '').trim().toUpperCase())
+                        .filter(code => code.length > 0)
+                ));
+                document.getElementById('holdings').value = uniqueHoldings.join(',');
+                saveBacktestParams();
+            } else {
+                const backendMessage = response && response.message ? response.message : '';
+                if (backendMessage) {
+                    alert(`未找到您的持股列表：${backendMessage}`);
+                } else {
+                    alert('未找到您的持股列表，请先在持股管理中添加股票');
+                }
+            }
+        } catch (error) {
+            console.error('加载持股列表失败:', error);
+            alert('加载持股列表失败: ' + error.message);
+        }
+    });
+
+    function extractHoldingsFromResponse(response) {
+        if (!response || response.code !== 0) {
+            return [];
+        }
+
+        if (Array.isArray(response.data)) {
+            return response.data
+                .map(item => typeof item === 'string' ? item : item?.code)
+                .filter(code => typeof code === 'string' && code.trim().length > 0);
+        }
+
+        if (response.data && Array.isArray(response.data.holdings)) {
+            return response.data.holdings
+                .map(item => typeof item === 'string' ? item : item?.code)
+                .filter(code => typeof code === 'string' && code.trim().length > 0);
+        }
+
+        return [];
+    }
+
+    function resolveCurrentUsername() {
+        try {
+            const currentUser = window.ETF.userManager.getUserData();
+            if (currentUser && currentUser.username) {
+                return String(currentUser.username).trim();
+            }
+
+            const rawUserData = localStorage.getItem('userData');
+            if (rawUserData) {
+                const parsed = JSON.parse(rawUserData);
+                if (parsed && parsed.username) {
+                    return String(parsed.username).trim();
+                }
+                if (parsed && parsed.data && parsed.data.username) {
+                    return String(parsed.data.username).trim();
+                }
+            }
+
+            const remembered = window.ETF.Storage.get('rememberedUsername');
+            if (remembered) {
+                return String(remembered).trim();
+            }
+        } catch (error) {
+            console.warn('解析当前用户名失败:', error);
+        }
+        return '';
+    }
+
+    window.addEventListener('resize', () => {
+        if (navChart) navChart.resize();
+        if (ddChart) ddChart.resize();
+        if (weightsChart) weightsChart.resize();
+        if (rrChart) rrChart.resize();
+    });
+</script>
+</body>
+</html>
